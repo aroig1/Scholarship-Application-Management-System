@@ -1,4 +1,4 @@
-<a href="/">home</a>
+<a href="/">Home</a>
 <section>
     <h1>Create New Scholarship</h1>
     <div>
@@ -16,11 +16,11 @@
     </div>
     <div>
         <h3>Enter donor phone number</h3>
-        <input type="text" placeholder="(999) 999-999">
+        <input type="text" placeholder="(999) 999-9999">
     </div>
     <div>
         <h3>Enter donor email address</h3>
-        <input type="email" placeholder="arizonaID@arizona.edu">
+        <input type="email" placeholder="netID@arizona.edu">
     </div>
     <div>
         <h3>Enter number of scholarships available</h3>
@@ -46,13 +46,12 @@
         <h3>Enter any additional scholarship requirements (optional)</h3>
         <input class="other" type="text" placeholder="ex: Must be black if applying during february">
     </div>
+    <button>Create Scholarship</button>
 </section>
 
 <style>
     section {
         margin: 0 50px 0 50px;
-        border-color: orange;
-        border-style:dashed;
     }
     h1 {
         width: 100%;
@@ -65,6 +64,11 @@
     div {
         padding: 0;
         margin: 20px;
+    }
+    button { /* figure out how to center */
+        margin: 0 35%;
+        padding: 10px;
+        width: 150px;
     }
     .other {
         width: 100%;
