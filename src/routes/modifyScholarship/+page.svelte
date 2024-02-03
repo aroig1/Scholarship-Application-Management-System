@@ -172,7 +172,7 @@
         </div>
         {/if}
     </div>
-    
+
     <div class="info-container">
         <div on:click={() => areaClicked.other = !areaClicked.other} class="preview">
             <h3>Other Scholarship Requirements:</h3>

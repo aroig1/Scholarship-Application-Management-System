@@ -60,9 +60,15 @@
 
 <style>
     section {
+<<<<<<< HEAD
         margin: 0 auto;
         width: 90%;
         max-width: 700px;
+=======
+        margin: 0 50px 0 50px;
+        border-color: orange;
+        border-style:dashed;
+>>>>>>> 4cfac78 (simple create new scholarship GUI)
     }
     h1 {
         width: 100%;
