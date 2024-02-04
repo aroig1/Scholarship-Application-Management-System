@@ -41,7 +41,9 @@
 
 <style>
     section {
-        margin: 0 50px 0 50px;
+        margin: 0 auto;
+        width: 90%;
+        max-width: 700px;
     }
     h1 {
         width: 100%;
@@ -56,7 +58,7 @@
         margin: 20px;
     }
     button { /* figure out how to center */
-        margin: 0 35%;
+        margin: 0 auto;
         padding: 10px;
         width: 150px;
     }
