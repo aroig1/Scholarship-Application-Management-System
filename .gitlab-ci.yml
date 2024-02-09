@@ -32,6 +32,8 @@ default:
     - npm ci --cache .npm --prefer-offline
   image:
     node
+  tags:
+    - linux-docker
 
 build-job: # This job runs in the build stage, which runs first.
   stage: build
