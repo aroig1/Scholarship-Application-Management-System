@@ -30,6 +30,8 @@ default:
       - .npm/
   before_script:
     - npm ci --cache .npm --prefer-offline
+  image:
+    node
 
 build-job: # This job runs in the build stage, which runs first.
   stage: build
@@ -53,7 +55,7 @@ check-job:
 
 deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
+  environment: development
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
