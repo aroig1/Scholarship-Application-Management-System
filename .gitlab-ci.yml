@@ -30,8 +30,7 @@ default:
       - .npm/
   before_script:
     - npm ci --cache .npm --prefer-offline
-  image:
-    node
+  image: node
   tags:
     - linux-docker
 
