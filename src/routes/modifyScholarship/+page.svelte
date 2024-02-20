@@ -71,7 +71,10 @@
         </div>
         {#if areaClicked.name}
             <div class="input">
-                <input type="text" placeholder="Enter scholarship name here" />
+                <input
+                    type="text"
+                    placeholder="Enter scholarship name here"
+                    maxlength="25" />
                 <div>
                     <button>Confirm</button>
                     <button
@@ -94,7 +97,8 @@
             <div class="input">
                 <input
                     type="number"
-                    placeholder="Enter scholarship amount here" />
+                    placeholder="Enter scholarship amount here"
+                    min="0" />
                 <div>
                     <button>Confirm</button>
                     <button
@@ -111,14 +115,15 @@
             on:click={() => (areaClicked.donor = !areaClicked.donor)}
             class="preview">
             <h3>Scholarship Donor:</h3>
-            <h4>XXXX@arizona.edu</h4>
+            <h4>XXXX</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.donor}
             <div class="input">
                 <input
                     type="text"
-                    placeholder="Enter scholarship donor name here" />
+                    placeholder="Enter scholarship donor name here"
+                    maxlength="25" />
                 <div>
                     <button>Confirm</button>
                     <button
@@ -142,7 +147,8 @@
             <div class="input">
                 <input
                     type="text"
-                    placeholder="Enter scholarship donor's phone number here" />
+                    placeholder="Enter scholarship donor's phone number here"
+                    maxlength="20" />
                 <div>
                     <button>Confirm</button>
                     <button
@@ -159,14 +165,15 @@
             on:click={() => (areaClicked.email = !areaClicked.email)}
             class="preview">
             <h3>Donor Email Address:</h3>
-            <h4>XXXX</h4>
+            <h4>XXXX@arizona.edu</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.email}
             <div class="input">
                 <input
                     type="text"
-                    placeholder="Enter scholarship donor's email here" />
+                    placeholder="Enter scholarship donor's email here"
+                    maxlength="25" />
                 <div>
                     <button>Confirm</button>
                     <button
@@ -190,8 +197,9 @@
         {#if areaClicked.numAvailable}
             <div class="input">
                 <input
-                    type="text"
-                    placeholder="Enter number of scholarships available here" />
+                    type="number"
+                    placeholder="Enter number of scholarships available here"
+                    min="0" />
                 <div>
                     <button>Confirm</button>
                     <button
@@ -268,8 +276,9 @@
         {#if areaClicked.gpa}
             <div class="input">
                 <input
-                    type="text"
-                    placeholder="Enter minimum required GPA here" />
+                    type="number"
+                    placeholder="Enter minimum required GPA here"
+                    min="0" />
                 <div>
                     <button>Confirm</button>
                     <button

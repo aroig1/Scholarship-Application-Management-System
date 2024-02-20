@@ -15,14 +15,19 @@
     <h1>Create Account</h1>
     <div>
         <h3>Username</h3>
-        <input class="username" type="text" placeholder="netID" />
+        <input
+            class="username"
+            type="text"
+            placeholder="netID"
+            maxlength="15" />
     </div>
     <div>
         <h3>Password</h3>
         <input
             class="password"
             type="text"
-            placeholder="must include number and special character" />
+            placeholder="must include number and special character"
+            maxlength="20" />
     </div>
     <div>
         <h3>Security Question 1</h3>
@@ -48,20 +53,20 @@
     </div>
     <div>
         <h3>Full Name</h3>
-        <input type="text" placeholder="first name" />
-        <input type="text" placeholder="last name" />
+        <input type="text" placeholder="first name" maxlength="15" />
+        <input type="text" placeholder="last name" maxlength="15" />
     </div>
     <div>
         <h3>Net ID (if applicable)</h3>
-        <input type="text" placeholder="netID" />
+        <input type="text" placeholder="netID" maxlength="15" />
     </div>
     <div>
         <h3>Phone Number</h3>
-        <input type="text" placeholder="(999) 999-9999" />
+        <input type="text" placeholder="(999) 999-9999" maxlength="20" />
     </div>
     <div>
         <h3>Email address</h3>
-        <input type="emai" placeholder="netID@arizona.edu" />
+        <input type="emai" placeholder="netID@arizona.edu" maxlength="25" />
     </div>
     <button>Create Account</button>
 </section>
