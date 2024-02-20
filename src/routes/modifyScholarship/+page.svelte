@@ -1,6 +1,6 @@
 <script>
     import {MultiSelect} from "svelte-multiselect";
-``
+    ``;
     let majors = [
         "Aerospace Engineering",
         "Architectural Engineering",
