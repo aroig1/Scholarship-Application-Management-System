@@ -1,4 +1,45 @@
 <script>
+    import {MultiSelect} from "svelte-multiselect";
+
+    let majors = [
+        "Aerospace Engineering",
+        "Architectural Engineering",
+        "Biomedical Engineering",
+        "Biosystems Engineering",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Computer Science and Engineering",
+        "Electrical and Computer Engineering",
+        "Engineering Management",
+        "Environmental Engineering",
+        "Industrial Engineering",
+        "Materials Science and Engineering",
+        "Mechanical Engineering",
+        "Mining Engineering",
+        "Optical Sciences and Engineering",
+        "Software Engineering",
+        "Systems Engineering"
+    ];
+    let majorsSelected = [""];
+
+    let minors = [
+        "Aerospace Engineering",
+        "Biosystems Engineering",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Electrical and Computer Engineering",
+        "Engineering Management",
+        "Environmental Engineering",
+        "Industrial Engineering",
+        "Materials Science and Engineering",
+        "Mechanical Engineering",
+        "Mining Engineering",
+        "Optical Sciences and Engineering",
+        "Software Engineering",
+        "Sustainable Mineral Resources",
+        "Systems Engineering"
+    ];
+    let minorsSelected = [""];
     let areaClicked = {
         name: false,
         amount: false,
@@ -172,7 +213,12 @@
         </div>
         {#if areaClicked.major}
             <div class="input">
-                <input type="text" placeholder="Enter required majors here" />
+                <MultiSelect
+                    bind:value={majorsSelected}
+                    options={majors}
+                    placeholder="Pick required majors"
+                    closeDropdownOnSelect={false}>
+                </MultiSelect>
                 <div>
                     <button>Confirm</button>
                     <button
@@ -194,7 +240,12 @@
         </div>
         {#if areaClicked.minor}
             <div class="input">
-                <input type="text" placeholder="Enter required minors here" />
+                <MultiSelect
+                    bind:value={majorsSelected}
+                    options={majors}
+                    placeholder="Pick required majors"
+                    closeDropdownOnSelect={false}>
+                </MultiSelect>
                 <div>
                     <button>Confirm</button>
                     <button
@@ -264,6 +315,7 @@
         margin: 0 auto;
         width: 90%;
         max-width: 700px;
+        --sms-options-max-height: 200px;
     }
     h1 {
         width: 100%;

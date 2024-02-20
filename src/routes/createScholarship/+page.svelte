@@ -1,3 +1,47 @@
+<script>
+    import {MultiSelect} from "svelte-multiselect";
+
+    let majors = [
+        "Aerospace Engineering",
+        "Architectural Engineering",
+        "Biomedical Engineering",
+        "Biosystems Engineering",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Computer Science and Engineering",
+        "Electrical and Computer Engineering",
+        "Engineering Management",
+        "Environmental Engineering",
+        "Industrial Engineering",
+        "Materials Science and Engineering",
+        "Mechanical Engineering",
+        "Mining Engineering",
+        "Optical Sciences and Engineering",
+        "Software Engineering",
+        "Systems Engineering"
+    ];
+    let majorsSelected = [""];
+
+    let minors = [
+        "Aerospace Engineering",
+        "Biosystems Engineering",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Electrical and Computer Engineering",
+        "Engineering Management",
+        "Environmental Engineering",
+        "Industrial Engineering",
+        "Materials Science and Engineering",
+        "Mechanical Engineering",
+        "Mining Engineering",
+        "Optical Sciences and Engineering",
+        "Software Engineering",
+        "Sustainable Mineral Resources",
+        "Systems Engineering"
+    ];
+    let minorsSelected = [""];
+</script>
+
 <a href="/">Home</a>
 <section>
     <h1>Create New Scholarship</h1>
@@ -28,17 +72,21 @@
     </div>
     <div>
         <h3>Enter required majors (optional)</h3>
-        <input
-            class="major_minor"
-            type="text"
-            placeholder="software engineering, aerospace engineering" />
+        <MultiSelect
+            bind:value={majorsSelected}
+            options={majors}
+            placeholder="Pick required majors"
+            closeDropdownOnSelect={false}>
+        </MultiSelect>
     </div>
     <div>
         <h3>Enter required minor (optional)</h3>
-        <input
-            class="major_minor"
-            type="text"
-            placeholder="sports management, entrepreneurship" />
+        <MultiSelect
+            bind:value={minorsSelected}
+            options={minors}
+            placeholder="Pick required minors"
+            closeDropdownOnSelect={false}>
+        </MultiSelect>
     </div>
     <div>
         <h3>Enter minimum required GPA (optional)</h3>
@@ -63,6 +111,8 @@
         margin: 0 auto;
         width: 90%;
         max-width: 700px;
+        /* Styling for MultiSelect */
+        --sms-options-max-height: 200px;
     }
     h1 {
         width: 100%;
@@ -85,8 +135,5 @@
     .other {
         width: 100%;
         height: 50px;
-    }
-    .major_minor {
-        width: 50%;
     }
 </style>

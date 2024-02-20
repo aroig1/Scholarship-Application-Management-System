@@ -1,3 +1,15 @@
+<script>
+    let secQuestions = [
+        "What high school did you go to?",
+        "What was the name of your first pet?",
+        "What is your father's middle name?",
+        "What was your first car?"
+    ];
+
+    let secQuestion1 = "Choose a question";
+    let secQuestion2 = "Choose a question";
+</script>
+
 <a href="/">Home</a>
 <section>
     <h1>Create Account</h1>
@@ -14,12 +26,24 @@
     </div>
     <div>
         <h3>Security Question 1</h3>
-        <input class="question_answer" type="text" placeholder="question" />
+        <select bind:value={secQuestion1} class="question_answer">
+            {#each secQuestions as question}
+                <option value={question}>
+                    {question}
+                </option>
+            {/each}
+        </select>
         <input class="question_answer" type="text" placeholder="answer" />
     </div>
     <div>
         <h3>Security Question 2</h3>
-        <input class="question_answer" type="text" placeholder="question" />
+        <select bind:value={secQuestion2} class="question_answer">
+            {#each secQuestions as question}
+                <option value={question}>
+                    {question}
+                </option>
+            {/each}
+        </select>
         <input class="question_answer" type="text" placeholder="answer" />
     </div>
     <div>
