@@ -325,6 +325,8 @@
         width: 90%;
         max-width: 700px;
         --sms-options-max-height: 200px;
+        /* Styling for MultiSelect */
+        --sms-options-max-height: 200px;
     }
     h1 {
         width: 100%;
