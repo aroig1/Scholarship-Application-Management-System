@@ -1,6 +1,7 @@
 {
     "bracketSpacing": false,
     "bracketSameLine": true,
+    "endOfLine": "lf",
     "tabWidth": 4,
     "trailingComma": "none",
     "plugins": ["prettier-plugin-svelte"],
