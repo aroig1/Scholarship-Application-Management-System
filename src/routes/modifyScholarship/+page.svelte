@@ -1,6 +1,6 @@
 <script>
     import {MultiSelect} from "svelte-multiselect";
-
+``
     let majors = [
         "Aerospace Engineering",
         "Architectural Engineering",
@@ -249,8 +249,8 @@
         {#if areaClicked.minor}
             <div class="input">
                 <MultiSelect
-                    bind:value={majorsSelected}
-                    options={majors}
+                    bind:value={minorsSelected}
+                    options={minors}
                     placeholder="Pick required majors"
                     closeDropdownOnSelect={false}>
                 </MultiSelect>
