@@ -9,3 +9,6 @@
 <li>
     <a href="/loginPage">Login Page</a>
 </li>
+<li>
+    <a href="/studentApplication">Student Application</a>
+</li>
