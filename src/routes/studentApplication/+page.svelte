@@ -1,5 +1,5 @@
 <script>
-    import { MultiSelect } from 'svelte-multiselect';
+    import {MultiSelect} from "svelte-multiselect";
 
     let Pronouns = [
         "He/Him",
@@ -8,8 +8,8 @@
         "Ze/Zir/Hir",
         "Xe/Xem/Xyrs"
     ];
-    let pronounsSelected = [""];  
-    
+    let pronounsSelected = [""];
+
     let majors = [
         "Aerospace Engineering",
         "Architectural Engineering",
@@ -50,13 +50,7 @@
     ];
     let minorsSelected = [""];
 
-    let years = [
-        "Freshman",
-        "Sophomore",
-        "Junior",
-        "Senior",
-        "Graduate"
-    ];
+    let years = ["Freshman", "Sophomore", "Junior", "Senior", "Graduate"];
     let yearsSelected = [""];
 
     let ethnicity = [
@@ -71,7 +65,6 @@
         "Other"
     ];
     let ethnicitySelected = [""];
-
 </script>
 
 <a href="/">Home</a>
@@ -80,21 +73,9 @@
     <h1>Student Application</h1>
     <div>
         <h3>Full Name</h3>
-        <input 
-            type = "text"
-            placeholder="First Name(required)"
-            maxlength="20"
-        />
-        <input 
-            type="text"
-            placeholder="Middle Name(optional)"
-            maxlength="20"
-        />
-        <input 
-            type="text"
-            placeholder="Last Name(required)"
-            maxlength="20"
-        />
+        <input type="text" placeholder="First Name(required)" maxlength="20" />
+        <input type="text" placeholder="Middle Name(optional)" maxlength="20" />
+        <input type="text" placeholder="Last Name(required)" maxlength="20" />
     </div>
     <div>
         <h3>Preferred Pronouns</h3>
@@ -107,11 +88,7 @@
     </div>
     <div>
         <h3>Student ID</h3>
-        <input 
-            type="text"
-            placeholder="Student ID"
-            maxlength="20"
-        />
+        <input type="text" placeholder="Student ID" maxlength="20" />
     </div>
     <div>
         <h3>Select Majors</h3>
@@ -133,10 +110,7 @@
     </div>
     <div>
         <h3>Cumulative GPA</h3>
-        <input 
-            type="number" 
-            placeholder="3.0" 
-            min="0" />
+        <input type="number" placeholder="3.0" min="0" />
     </div>
     <div>
         <h3>Current Year</h3>
@@ -158,19 +132,14 @@
     </div>
     <div>
         <h3>Personal Statement</h3>
-        <input 
-            type="text" 
-            placeholder="Personal Statement"
-            maxlength="5000" />
+        <input type="text" placeholder="Personal Statement" maxlength="5000" />
     </div>
     <div>
         <h3>Work Experience</h3>
-        <input 
-            type="text" 
-            placeholder="Work Experience"
-            maxlength="1000" />
+        <input type="text" placeholder="Work Experience" maxlength="1000" />
     </div>
 </section>
+
 <style>
     section {
         margin: 0 auto;
