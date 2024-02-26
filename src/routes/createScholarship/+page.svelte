@@ -104,7 +104,7 @@
         <input
             class="other"
             type="text"
-            placeholder="ex: Must be black if applying during february" />
+            placeholder="ex: Must be interested in IoT" />
     </div>
     <button>Create Scholarship</button>
 </section>
