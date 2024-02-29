@@ -36,6 +36,9 @@ default:
 
 build-job: # This job runs in the build stage, which runs first.
     stage: build
+    artifacts:
+        paths:
+            - .svelte-kit/cloudflare/
     script:
         - npm run build
 
@@ -58,5 +61,5 @@ deploy-job: # This job runs in the deploy stage.
     stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
     environment: development
     script:
-        - echo "Deploying application..."
-        - echo "Application successfully deployed."
+        - npm install wrangler
+        - npx wrangler pages deploy .svelte-kit/cloudflare/ --project-name "uasams" --branch  "$CI_COMMIT_BRANCH"
