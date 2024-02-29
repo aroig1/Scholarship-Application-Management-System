@@ -73,9 +73,23 @@
     <h1>Student Application</h1>
     <div>
         <h3>Full Name</h3>
-        <input type="text" placeholder="First Name(required)" maxlength="20" pattern="[A-Za-z]+" required/>
-        <input type="text" placeholder="Middle Name(optional)" maxlength="20" pattern="[A-Za-z]+"/>
-        <input type="text" placeholder="Last Name(required)" maxlength="20" pattern="[A-Za-z]+" required/>
+        <input
+            type="text"
+            placeholder="First Name(required)"
+            maxlength="20"
+            pattern="[A-Za-z]+"
+            required />
+        <input
+            type="text"
+            placeholder="Middle Name(optional)"
+            maxlength="20"
+            pattern="[A-Za-z]+" />
+        <input
+            type="text"
+            placeholder="Last Name(required)"
+            maxlength="20"
+            pattern="[A-Za-z]+"
+            required />
     </div>
     <div>
         <h3>Preferred Pronouns</h3>
@@ -132,11 +146,19 @@
     </div>
     <div>
         <h3>Personal Statement</h3>
-        <input class="BigBox" type="text" placeholder="Personal Statement" maxlength="5000" >
+        <input
+            class="BigBox"
+            type="text"
+            placeholder="Personal Statement"
+            maxlength="5000" />
     </div>
     <div>
         <h3>Work Experience</h3>
-        <input class="BigBox" type="text" placeholder="Work Experience" maxlength="1000" />
+        <input
+            class="BigBox"
+            type="text"
+            placeholder="Work Experience"
+            maxlength="1000" />
     </div>
 </section>
 
