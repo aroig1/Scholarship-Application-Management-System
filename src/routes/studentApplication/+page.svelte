@@ -56,7 +56,7 @@
     let ethnicity = [
         "Caucasian",
         "Hispanic",
-        "Black✊🏿✊🏿",
+        "Black",
         "European",
         "Asian",
         "Indian",
@@ -173,5 +173,10 @@
     div {
         padding: 0;
         margin: 20px;
+    }
+    .BigBox {
+        width: 100%;
+        height: 50px;
+        word-wrap: break-word;
     }
 </style>
