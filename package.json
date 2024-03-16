@@ -34,6 +34,7 @@
     },
     "type": "module",
     "dependencies": {
+        "esbuild": "^0.20.1",
         "node": "^21.6.2",
         "svelte-multiselect": "^10.2.0"
     }
