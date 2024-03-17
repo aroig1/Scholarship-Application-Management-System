@@ -45,68 +45,70 @@
 <a href="/">Home</a>
 <section>
     <h1>Create New Scholarship</h1>
-    <div>
-        <h3>Enter scholarship name</h3>
-        <input
-            type="text"
-            placeholder="super special scholarship"
-            maxlength="25" />
-    </div>
-    <div>
-        <h3>Enter scholarship amount</h3>
-        <input type="number" placeholder="1000" min="0" />
-    </div>
-    <div>
-        <h3>Enter scholarship donor/sponsor full name</h3>
-        <input type="text" placeholder="first name" maxlength="15" />
-        <input type="text" placeholder="last name" maxlength="15" />
-    </div>
-    <div>
-        <h3>Enter donor phone number</h3>
-        <input type="text" placeholder="(999) 999-9999" maxlength="20" />
-    </div>
-    <div>
-        <h3>Enter donor email address</h3>
-        <input type="email" placeholder="netID@arizona.edu" maxlength="25" />
-    </div>
-    <div>
-        <h3>Enter number of scholarships available</h3>
-        <input type="number" placeholder="3" min="0" />
-    </div>
-    <div>
-        <h3>Enter required majors (optional)</h3>
-        <MultiSelect
-            bind:value={majorsSelected}
-            options={majors}
-            placeholder="Pick required majors"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-    </div>
-    <div>
-        <h3>Enter required minor (optional)</h3>
-        <MultiSelect
-            bind:value={minorsSelected}
-            options={minors}
-            placeholder="Pick required minors"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-    </div>
-    <div>
-        <h3>Enter minimum required GPA (optional)</h3>
-        <input type="number" placeholder="3.0" min="0" />
-    </div>
-    <div>
-        <h3>Enter application deadline</h3>
-        <input type="date" />
-    </div>
-    <div>
-        <h3>Enter any additional scholarship requirements (optional)</h3>
-        <input
-            class="other"
-            type="text"
-            placeholder="ex: Must be interested in IoT" />
-    </div>
-    <button>Create Scholarship</button>
+    <form method="POST">
+        <div>
+            <h3>Enter scholarship name</h3>
+            <input
+                type="text"
+                placeholder="super special scholarship"
+                maxlength="25" />
+        </div>
+        <div>
+            <h3>Enter scholarship amount</h3>
+            <input type="number" placeholder="1000" min="0" />
+        </div>
+        <div>
+            <h3>Enter scholarship donor/sponsor full name</h3>
+            <input type="text" placeholder="first name" maxlength="15" />
+            <input type="text" placeholder="last name" maxlength="15" />
+        </div>
+        <div>
+            <h3>Enter donor phone number</h3>
+            <input type="text" placeholder="(999) 999-9999" maxlength="20" />
+        </div>
+        <div>
+            <h3>Enter donor email address</h3>
+            <input type="email" placeholder="netID@arizona.edu" maxlength="25" />
+        </div>
+        <div>
+            <h3>Enter number of scholarships available</h3>
+            <input type="number" placeholder="3" min="0" />
+        </div>
+        <div>
+            <h3>Enter required majors (optional)</h3>
+            <MultiSelect
+                bind:value={majorsSelected}
+                options={majors}
+                placeholder="Pick required majors"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+        </div>
+        <div>
+            <h3>Enter required minor (optional)</h3>
+            <MultiSelect
+                bind:value={minorsSelected}
+                options={minors}
+                placeholder="Pick required minors"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+        </div>
+        <div>
+            <h3>Enter minimum required GPA (optional)</h3>
+            <input type="number" placeholder="3.0" min="0" />
+        </div>
+        <div>
+            <h3>Enter application deadline</h3>
+            <input type="date" />
+        </div>
+        <div>
+            <h3>Enter any additional scholarship requirements (optional)</h3>
+            <input
+                class="other"
+                type="text"
+                placeholder="ex: Must be interested in IoT" />
+        </div>
+        <button>Create Scholarship</button>
+    </form>
 </section>
 
 <style>
