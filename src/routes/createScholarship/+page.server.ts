@@ -19,6 +19,8 @@ export const actions: Actions = {
         const data = await request.formData();
         const db = platform?.env.DB as D1Database;
 
+        console.log([...data]);
+
         const scholarship: Scholarship = {
             id: uuidv4(),
             name: data.get("name") as string,
