@@ -12,8 +12,8 @@ export const actions: Actions = {
             applicant: data.get('applicant') as string,
             scholarship: data.get('scholarship') as string,
             statement: data.get('statement') as string
-        }
+        };
 
-        saveApplication(db, application) // utils function
+        saveApplication(db, application); // utils function
 	}
 };
