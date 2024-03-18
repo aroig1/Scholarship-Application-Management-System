@@ -1,27 +1,29 @@
-import {saveScholarship} from '$lib/util.ts'
-import type {Scholarship} from '$lib/types.js'
+// import {saveScholarship} from '$lib/util.ts'
+import type {Major, Minor, Scholarship} from '$lib/types.js'
 
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
     default: async ({ cookies, request, platform }) => {
+        console.log("submitted");
 		const data = await request.formData();
-        /** @type {import('$lib/types').Scholarship} */
         const db = platform?.env.DB;
+
+        console.log([...data]);
 
         const scholarship : Scholarship = {
             id: data.get('id') as string,
             name: data.get('name') as string,
-            amount: data.get('amount'),
+            amount: Number(data.get('amount') as string),
             donorID: data.get('donorID') as string,
-            numAvailable: data.get('numAvailable'),
-            requiredMajors: data.get('requiredMajors'),
-            requiredMinors: data.get('requiredMinors'),
-            requiredGPA: data.get('requiredGPA'),
-            deadline: data.get('deadline'),
+            numAvailable: Number(data.get('numAvailable') as string),
+            requiredMajors: [data.get('requiredMajors') as Major],
+            requiredMinors: [data.get('requiredMinors') as Minor],
+            requiredGPA: Number(data.get('requiredGPA') as string),
+            deadline: new Date(data.get('deadline') as string),
             other: data.get('other') as string
         }
 
-        saveScholarship(db, scholarship) // utils function
+        //saveScholarship(db, scholarship) // utils function
 	}
 };
