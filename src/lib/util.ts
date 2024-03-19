@@ -145,7 +145,7 @@ export async function saveApplicantInfo(
         .run();
 }
 
-export async function loadApplicantInfo(db: D1Database, user: UserID) {
+export async function loadApplicantInfo(db: D1Database, user: UserID): Promise<ApplicantInfo> {
     await checkApplicantInfoTableExists(db);
     const result = await db
         .prepare("SELECT * FROM applicantInfo WHERE user = ?")
@@ -202,7 +202,7 @@ export async function saveScholarship(
         .run();
 }
 
-export async function loadScholarship(db: D1Database, name: string) {
+export async function loadScholarship(db: D1Database, name: string): Promise<Scholarship> {
     await checkScholarshipTableExists(db);
     const result = await db
         .prepare('SELECT * FROM scholarships WHERE name LIKE "?%"')
@@ -257,7 +257,7 @@ export async function loadApplication(
     db: D1Database,
     applicant: UserID,
     scholarship: ScholarshipID
-) {
+): Promise<Application> {
     await checkApplicationTableExists(db);
     const result = await db
         .prepare(
