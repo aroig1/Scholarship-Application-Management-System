@@ -14,8 +14,8 @@ export const actions: Actions = {
             amount: Number(data.get("amount") as string),
             donorID: data.get("donorID") as string,
             numAvailable: Number(data.get("numAvailable") as string),
-            requiredMajors: [data.get("requiredMajors") as Major],
-            requiredMinors: [data.get("requiredMinors") as Minor],
+            requiredMajors: JSON.parse(data.get("requiredMajors") as string).map((s: string) => s as Major),
+            requiredMinors: JSON.parse(data.get("requiredMinors") as string).map((s: string) => s as Minor),
             requiredGPA: Number(data.get("requiredGPA") as string),
             deadline: new Date(data.get("deadline") as string),
             other: data.get("other") as string
