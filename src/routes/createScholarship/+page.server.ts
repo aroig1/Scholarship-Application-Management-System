@@ -36,6 +36,8 @@ export const actions: Actions = {
             other: data.get("other") as string
         };
 
+        console.log(scholarship);
+
         saveScholarship(db, scholarship);
 
         return {
