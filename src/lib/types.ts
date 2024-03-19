@@ -40,6 +40,7 @@ export type Minor = (typeof minors)[number];
 
 export type UserID = string;
 export type ScholarshipID = string;
+export type ApplicationID = string;
 
 // Taken from requirements
 export const ethnicities = [
@@ -69,7 +70,6 @@ export enum StudentYear {
 }
 
 export type Password = {
-    user: UserID;
     hash: string;
     salt: string;
 };
@@ -111,6 +111,7 @@ export type Scholarship = {
 };
 
 export type Application = {
+    id: ApplicationID;
     applicant: UserID;
     scholarship: ScholarshipID;
     statement: string;
