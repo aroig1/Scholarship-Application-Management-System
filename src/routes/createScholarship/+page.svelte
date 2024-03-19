@@ -74,7 +74,7 @@
         <div>
             <h3>Enter donor phone number</h3>
             <input
-                name="id"
+                name="phoneNumber"
                 type="text"
                 placeholder="(999) 999-9999"
                 maxlength="20" />

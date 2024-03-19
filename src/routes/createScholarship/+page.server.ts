@@ -8,10 +8,8 @@ export const actions: Actions = {
         const data = await request.formData();
         const db = platform?.env.DB;
 
-        console.log(data);
-
         const scholarship: Scholarship = {
-            id: data.get("id") as string,
+            id: data.get("id") as string, // Not in form, should be uniquely generated
             name: data.get("name") as string,
             amount: Number(data.get("amount") as string),
             donorID: data.get("donorID") as string,
@@ -22,6 +20,8 @@ export const actions: Actions = {
             deadline: new Date(data.get("deadline") as string),
             other: data.get("other") as string
         };
+
+        console.log(scholarship);
 
         //saveScholarship(db, scholarship) // utils function
 
