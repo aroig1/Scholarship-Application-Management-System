@@ -1,6 +1,6 @@
 <script>
     import {MultiSelect} from "svelte-multiselect";
-    ``;
+
     let majors = [
         "Aerospace Engineering",
         "Architectural Engineering",
@@ -50,6 +50,7 @@
         major: false,
         minor: false,
         gpa: false,
+        deadline: false,
         other: false
     };
 </script>
@@ -72,6 +73,7 @@
         {#if areaClicked.name}
             <div class="input">
                 <input
+                    name="name"
                     type="text"
                     placeholder="Enter scholarship name here"
                     maxlength="25" />
@@ -96,6 +98,7 @@
         {#if areaClicked.amount}
             <div class="input">
                 <input
+                    name="amount"
                     type="number"
                     placeholder="Enter scholarship amount here"
                     min="0" />
@@ -121,6 +124,7 @@
         {#if areaClicked.donor}
             <div class="input">
                 <input
+                    name="donorName"
                     type="text"
                     placeholder="Enter scholarship donor name here"
                     maxlength="25" />
@@ -146,6 +150,7 @@
         {#if areaClicked.phone}
             <div class="input">
                 <input
+                    name="phoneNumber"
                     type="text"
                     placeholder="Enter scholarship donor's phone number here"
                     maxlength="20" />
@@ -171,6 +176,7 @@
         {#if areaClicked.email}
             <div class="input">
                 <input
+                    name="email"
                     type="text"
                     placeholder="Enter scholarship donor's email here"
                     maxlength="25" />
@@ -197,6 +203,7 @@
         {#if areaClicked.numAvailable}
             <div class="input">
                 <input
+                    name="numAvailable"
                     type="number"
                     placeholder="Enter number of scholarships available here"
                     min="0" />
@@ -222,6 +229,7 @@
         {#if areaClicked.major}
             <div class="input">
                 <MultiSelect
+                    name="requiredMajors"
                     bind:value={majorsSelected}
                     options={majors}
                     placeholder="Pick required majors"
@@ -249,6 +257,7 @@
         {#if areaClicked.minor}
             <div class="input">
                 <MultiSelect
+                    name="requiredMinors"
                     bind:value={minorsSelected}
                     options={minors}
                     placeholder="Pick required majors"
@@ -276,6 +285,7 @@
         {#if areaClicked.gpa}
             <div class="input">
                 <input
+                    name="requiredGPA"
                     type="number"
                     placeholder="Enter minimum required GPA here"
                     min="0" />
@@ -283,6 +293,30 @@
                     <button>Confirm</button>
                     <button
                         on:click={() => (areaClicked.gpa = !areaClicked.gpa)}
+                        >Cancel</button>
+                </div>
+            </div>
+        {/if}
+    </div>
+
+    <div class="info-container">
+        <div
+            on:click={() => (areaClicked.deadline = !areaClicked.deadline)}
+            class="preview">
+            <h3>Deadline:</h3>
+            <h4>MM/DD/YYYY</h4>
+            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
+        </div>
+        {#if areaClicked.deadline}
+            <div class="input">
+                <input
+                    name="deadline"
+                    type="date" />
+                <div>
+                    <button>Confirm</button>
+                    <button
+                        on:click={() =>
+                            (areaClicked.deadline = !areaClicked.deadline)}
                         >Cancel</button>
                 </div>
             </div>
@@ -300,6 +334,7 @@
         {#if areaClicked.other}
             <div class="input">
                 <input
+                    name="other"
                     type="text"
                     placeholder="Enter any other scholarship requirements here" />
                 <div>
