@@ -4,7 +4,10 @@ import type {
     Scholarship,
     Application,
     ApplicantInfo,
-    UserID
+    UserID,
+    Password,
+    ApplicationID,
+    ScholarshipID
 } from "$lib/types";
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE
@@ -13,8 +16,8 @@ async function checkUserTableExists(db: D1Database) {
     await db.exec(`CREATE TABLE IF NOT EXISTS users (
         id VARCHAR PRIMARY KEY, 
         username VARCHAR, 
-        hash TEXT, 
-        salt TEXT, 
+        hash VARCHAR, 
+        salt VARCHAR, 
         firstName VARCHAR, 
         lastName VARCHAR, 
         netID VARCHAR, 
@@ -27,8 +30,8 @@ async function checkUserTableExists(db: D1Database) {
 async function checkApplicantInfoTableExists(db: D1Database) {
     await db.exec(`CREATE TABLE IF NOT EXISTS applicationInfo (
         user VARCHAR PRIMARY KEY, 
-        majors TEXT, 
-        minors TEXT, 
+        majors VARCHAR, 
+        minors VARCHAR, 
         GPA FLOAT, 
         year VARCHAR, 
         ethnicity VARCHAR, 
@@ -44,8 +47,8 @@ async function checkScholarshipTableExists(db: D1Database) {
         amount INTEGER, 
         donorID VARCHAR, 
         numAvailable INTEGER, 
-        requiredMajors TEXT, 
-        requiredMinors TEXT, 
+        requiredMajors VARCHAR, 
+        requiredMinors VARCHAR, 
         requiredGPA FLOAT, 
         deadline DATE, 
         other TEXT
@@ -54,6 +57,7 @@ async function checkScholarshipTableExists(db: D1Database) {
 
 async function checkApplicationTableExists(db: D1Database) {
     await db.exec(`CREATE TABLE IF NOT EXISTS applications (
+        id VARCHAR PRIMARY KEY,
         applicant VARCHAR, 
         scholarship VARCHAR, 
         statement TEXT
@@ -79,14 +83,26 @@ export async function saveUser(db: D1Database, user: User) {
         .run();
 }
 
-export async function loadUser(db: D1Database, username: string) {
+export async function loadUser(
+    db: D1Database,
+    username: string
+): Promise<User> {
     await checkUserTableExists(db);
     const result = await db
         .prepare("SELECT * FROM users WHERE username = ?")
         .bind(username)
         .all();
 
-    return new Response(JSON.stringify(result.results));
+    const user: User = result.results as unknown as User;
+
+    if ("hash" in result.results && "salt" in result.results) {
+        user.password = {
+            hash: result.results.hash as string,
+            salt: result.results.salt as string
+        };
+    }
+
+    return user;
 }
 
 export async function updateUser(db: D1Database, user: User) {
@@ -136,7 +152,10 @@ export async function loadApplicantInfo(db: D1Database, user: UserID) {
         .bind(user)
         .all();
 
-    return new Response(JSON.stringify(result.results));
+    const applicantInfo: ApplicantInfo =
+        result.results as unknown as ApplicantInfo;
+
+    return applicantInfo;
 }
 
 export async function updateApplicantInfo(
@@ -190,7 +209,9 @@ export async function loadScholarship(db: D1Database, name: string) {
         .bind(name)
         .all();
 
-    return new Response(JSON.stringify(result.results));
+    const scholarship: Scholarship = result.results as unknown as Scholarship;
+
+    return scholarship;
 }
 
 export async function updateScholarship(
@@ -222,8 +243,9 @@ export async function saveApplication(
     application: Application
 ) {
     await checkApplicationTableExists(db);
-    db.prepare("INSERT INTO applications VALUES (?, ?, ?)")
+    db.prepare("INSERT INTO applications VALUES (?, ?, ?, ?)")
         .bind(
+            application.id,
             application.applicant,
             application.scholarship,
             application.statement
@@ -231,25 +253,36 @@ export async function saveApplication(
         .run();
 }
 
-export async function loadApplication(db: D1Database) {
+export async function loadApplication(
+    db: D1Database,
+    applicant: UserID,
+    scholarship: ScholarshipID
+) {
     await checkApplicationTableExists(db);
-    const result = await db.prepare("SELECT * FROM applications").all();
+    const result = await db
+        .prepare(
+            "SELECT * FROM applications WHERE applicant = ? AND scholarship = ?"
+        )
+        .bind(applicant, scholarship)
+        .all();
 
-    return new Response(JSON.stringify(result.results));
+    const application: Application = result.results as unknown as Application;
+
+    return application;
 }
 
-// WILL UPDATE ALL APPLICATIONS UNDER APPLICANT, should probably add another identifier for each application
 export async function updateApplication(
     db: D1Database,
     application: Application
 ) {
     await checkApplicationTableExists(db);
     db.prepare(
-        "UPDATE applications SET applicant = ?, scholarship = ?, statement = ? WHERE applicant = ?"
+        "UPDATE applications SET id = ?, applicant = ?, scholarship = ?, statement = ? WHERE id = ?"
     ).bind(
+        application.id,
         application.applicant,
         application.scholarship,
         application.statement,
-        application.applicant
+        application.id
     );
 }
