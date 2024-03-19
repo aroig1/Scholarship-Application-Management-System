@@ -60,16 +60,32 @@
         </div>
         <div>
             <h3>Enter scholarship donor/sponsor full name</h3>
-            <input name="firstName" type="text" placeholder="first name" maxlength="15" />
-            <input name="lastName" type="text" placeholder="last name" maxlength="15" />
+            <input
+                name="firstName"
+                type="text"
+                placeholder="first name"
+                maxlength="15" />
+            <input
+                name="lastName"
+                type="text"
+                placeholder="last name"
+                maxlength="15" />
         </div>
         <div>
             <h3>Enter donor phone number</h3>
-            <input name="id" type="text" placeholder="(999) 999-9999" maxlength="20" />
+            <input
+                name="id"
+                type="text"
+                placeholder="(999) 999-9999"
+                maxlength="20" />
         </div>
         <div>
             <h3>Enter donor email address</h3>
-            <input name="email" type="email" placeholder="netID@arizona.edu" maxlength="25" />
+            <input
+                name="email"
+                type="email"
+                placeholder="netID@arizona.edu"
+                maxlength="25" />
         </div>
         <div>
             <h3>Enter number of scholarships available</h3>
