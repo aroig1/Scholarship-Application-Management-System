@@ -82,7 +82,7 @@ export async function saveUser(db: D1Database, user: User) {
 export async function loadUser(db: D1Database, username: string) {
     await checkUserTableExists(db);
     const result = await db
-        .prepare("SELECT * FROM users WHERE id = ?")
+        .prepare("SELECT * FROM users WHERE username = ?")
         .bind(username)
         .all();
 
@@ -129,11 +129,11 @@ export async function saveApplicantInfo(
         .run();
 }
 
-export async function loadApplicantInfo(db: D1Database, id: UserID) {
+export async function loadApplicantInfo(db: D1Database, user: UserID) {
     await checkApplicantInfoTableExists(db);
     const result = await db
-        .prepare("SELECT * FROM applicantInfo WHERE id = ?")
-        .bind(id)
+        .prepare("SELECT * FROM applicantInfo WHERE user = ?")
+        .bind(user)
         .all();
 
     return new Response(JSON.stringify(result.results));
@@ -249,6 +249,7 @@ export async function updateApplication(
     ).bind(
         application.applicant,
         application.scholarship,
-        application.statement
+        application.statement,
+        application.applicant
     );
 }
