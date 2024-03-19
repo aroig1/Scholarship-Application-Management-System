@@ -7,7 +7,61 @@ import type {
     UserID
 } from "$lib/types";
 
-export function saveUser(db: D1Database, user: User) {
+// INTEGER, FLOAT, VARCHAR, TEXT, DATE
+
+async function checkUserTableExists(db: D1Database) {
+    await db.exec(`CREATE TABLE IF NOT EXISTS users (
+        id VARCHAR PRIMARY KEY, 
+        username VARCHAR, 
+        hash TEXT, 
+        salt TEXT, 
+        firstName VARCHAR, 
+        lastName VARCHAR, 
+        netID VARCHAR, 
+        phone VARCHAR, 
+        email VARCHAR, 
+        type VARCHAR 
+    );`);
+}
+
+async function checkApplicantInfoTableExists(db: D1Database) {
+    await db.exec(`CREATE TABLE IF NOT EXISTS applicationInfo (
+        user VARCHAR PRIMARY KEY, 
+        majors TEXT, 
+        minors TEXT, 
+        GPA FLOAT, 
+        year VARCHAR, 
+        ethnicity VARCHAR, 
+        prefferedPronouns VARCHAR, 
+        workExperience TEXT
+    );`);
+}
+
+async function checkScholarshipTableExists(db: D1Database) {
+    await db.exec(`CREATE TABLE IF NOT EXISTS scholarships (
+        id VARCHAR PRIMARY KEY, 
+        name VARCHAR, 
+        amount INTEGER, 
+        donorID VARCHAR, 
+        numAvailable INTEGER, 
+        requiredMajors TEXT, 
+        requiredMinors TEXT, 
+        requiredGPA FLOAT, 
+        deadline DATE, 
+        other TEXT
+    );`);
+}
+
+async function checkApplicationTableExists(db: D1Database) {
+    await db.exec(`CREATE TABLE IF NOT EXISTS applications (
+        applicant VARCHAR, 
+        scholarship VARCHAR, 
+        statement TEXT
+    );`);
+}
+
+export async function saveUser(db: D1Database, user: User) {
+    await checkUserTableExists(db);
     // password, id, and type have special types
     db.prepare("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
         .bind(
@@ -26,6 +80,7 @@ export function saveUser(db: D1Database, user: User) {
 }
 
 export async function loadUser(db: D1Database, username: string) {
+    await checkUserTableExists(db);
     const result = await db
         .prepare("SELECT * FROM users WHERE id = ?")
         .bind(username)
@@ -34,7 +89,8 @@ export async function loadUser(db: D1Database, username: string) {
     return new Response(JSON.stringify(result.results));
 }
 
-export function updateUser(db: D1Database, user: User) {
+export async function updateUser(db: D1Database, user: User) {
+    await checkUserTableExists(db);
     db.prepare(
         "UPDATE users SET id = ?, username = ?, hash = ?, salt = ?, firstName = ?, lastName = ?, netID = ?, phone = ?, email = ?, type = ? WHERE id = ?"
     )
@@ -54,7 +110,11 @@ export function updateUser(db: D1Database, user: User) {
         .run();
 }
 
-export function saveApplicantInfo(db: D1Database, applicant: ApplicantInfo) {
+export async function saveApplicantInfo(
+    db: D1Database,
+    applicant: ApplicantInfo
+) {
+    await checkApplicantInfoTableExists(db);
     db.prepare("INSERT INTO applicantInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
         .bind(
             applicant.user,
@@ -70,6 +130,7 @@ export function saveApplicantInfo(db: D1Database, applicant: ApplicantInfo) {
 }
 
 export async function loadApplicantInfo(db: D1Database, id: UserID) {
+    await checkApplicantInfoTableExists(db);
     const result = await db
         .prepare("SELECT * FROM applicantInfo WHERE id = ?")
         .bind(id)
@@ -78,10 +139,11 @@ export async function loadApplicantInfo(db: D1Database, id: UserID) {
     return new Response(JSON.stringify(result.results));
 }
 
-export function updateApplicationInfo(
+export async function updateApplicantInfo(
     db: D1Database,
     applicant: ApplicantInfo
 ) {
+    await checkApplicantInfoTableExists(db);
     db.prepare(
         "UPDATE applicantInfo SET user = ?, majors = ?, minors = ?, GPA = ?, year = ?, ethnicity = ?, prefferedPronouns = ?, workExperience = ? WHERE user = ?"
     )
@@ -99,7 +161,11 @@ export function updateApplicationInfo(
         .run();
 }
 
-export function saveScholarship(db: D1Database, scholarship: Scholarship) {
+export async function saveScholarship(
+    db: D1Database,
+    scholarship: Scholarship
+) {
+    await checkScholarshipTableExists(db);
     // id, donorID, major, minor, date have special types
     db.prepare("INSERT INTO sholarships VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
         .bind(
@@ -118,6 +184,7 @@ export function saveScholarship(db: D1Database, scholarship: Scholarship) {
 }
 
 export async function loadScholarship(db: D1Database, name: string) {
+    await checkScholarshipTableExists(db);
     const result = await db
         .prepare('SELECT * FROM scholarships WHERE name LIKE "?%"')
         .bind(name)
@@ -126,7 +193,11 @@ export async function loadScholarship(db: D1Database, name: string) {
     return new Response(JSON.stringify(result.results));
 }
 
-export function updateScholarship(db: D1Database, scholarship: Scholarship) {
+export async function updateScholarship(
+    db: D1Database,
+    scholarship: Scholarship
+) {
+    await checkScholarshipTableExists(db);
     db.prepare(
         "UPDATE scholarships SET id = ?, name = ?, amount = ?, donorID = ?, numAvailable = ?, requiredMajors = ?, requiredMinors = ?, requiredGPA = ?, deadline = ?, other = ? WHERE id = ?"
     )
@@ -146,7 +217,11 @@ export function updateScholarship(db: D1Database, scholarship: Scholarship) {
         .run();
 }
 
-export function saveApplication(db: D1Database, application: Application) {
+export async function saveApplication(
+    db: D1Database,
+    application: Application
+) {
+    await checkApplicationTableExists(db);
     db.prepare("INSERT INTO applications VALUES (?, ?, ?)")
         .bind(
             application.applicant,
@@ -157,13 +232,18 @@ export function saveApplication(db: D1Database, application: Application) {
 }
 
 export async function loadApplication(db: D1Database) {
+    await checkApplicationTableExists(db);
     const result = await db.prepare("SELECT * FROM applications").all();
 
     return new Response(JSON.stringify(result.results));
 }
 
 // WILL UPDATE ALL APPLICATIONS UNDER APPLICANT, should probably add another identifier for each application
-export function updateApplication(db: D1Database, application: Application) {
+export async function updateApplication(
+    db: D1Database,
+    application: Application
+) {
+    await checkApplicationTableExists(db);
     db.prepare(
         "UPDATE applications SET applicant = ?, scholarship = ?, statement = ? WHERE applicant = ?"
     ).bind(
