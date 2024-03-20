@@ -12,7 +12,7 @@ export const actions: Actions = {
             id: data.get("id") as string, // Not in form, should be uniquely generated
             name: data.get("name") as string,
             amount: Number(data.get("amount") as string),
-            donorID: data.get("donorID") as string,
+            donorID: data.get("donorID") as string, 
             numAvailable: Number(data.get("numAvailable") as string),
             requiredMajors: JSON.parse(data.get("requiredMajors") as string).map((s: string) => s as Major),
             requiredMinors: JSON.parse(data.get("requiredMinors") as string).map((s: string) => s as Minor),
