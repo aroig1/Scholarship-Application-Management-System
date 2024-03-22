@@ -8,7 +8,8 @@ import type {
     Password,
     ApplicationID,
     ScholarshipID,
-    Major
+    Major,
+    Minor
 } from "$lib/types";
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE
@@ -131,7 +132,6 @@ export async function loadUser(
         .all();
 
     if (result.results.length > 0) {
-
         const user: User = result.results[0] as unknown as User;
 
         if ("hash" in result.results[0] && "salt" in result.results[0]) {
@@ -211,7 +211,7 @@ export async function loadApplicantInfo(
         if ("minors" in result.results[0]) {
             applicantInfo.minors = JSON.parse(
                 result.results[0].minors as string
-            ).map((s: string) => s as Major);
+            ).map((s: string) => s as Minor);
         }
 
         if ("workExperience" in result.results[0]) {
