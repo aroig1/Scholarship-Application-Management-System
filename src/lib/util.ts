@@ -241,12 +241,12 @@ export async function saveScholarship(
 
 export async function loadScholarship(
     db: D1Database,
-    name: string
+    id: ScholarshipID
 ): Promise<Scholarship | null> {
     await checkScholarshipTableExists(db);
     const result = await db
-        .prepare('SELECT * FROM scholarships WHERE name == ? LIMIT 1')
-        .bind(name)
+        .prepare('SELECT * FROM scholarships WHERE id == ? LIMIT 1')
+        .bind(id)
         .all();
 
     if (result.results.length > 0) {
