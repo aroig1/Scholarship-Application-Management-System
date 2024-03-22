@@ -38,7 +38,7 @@ export const actions: Actions = {
 
         console.log(scholarship);
 
-        saveScholarship(db, scholarship);
+        await saveScholarship(db, scholarship);
 
         return {
             success: true

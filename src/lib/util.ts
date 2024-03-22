@@ -131,6 +131,7 @@ export async function loadUser(
         .all();
 
     if (result.results.length > 0) {
+
         const user: User = result.results[0] as unknown as User;
 
         if ("hash" in result.results[0] && "salt" in result.results[0]) {
