@@ -22,8 +22,6 @@ export const actions: Actions = {
             other: data.get("other") as string
         };
 
-        console.log(scholarship);
-
         await saveScholarship(db, scholarship);
 
         return {
