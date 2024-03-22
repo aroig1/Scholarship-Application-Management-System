@@ -42,6 +42,7 @@
         "@lucia-auth/adapter-sqlite": "^3.0.0",
         "node": "^21.6.2",
         "oslo": "^1.1.2",
-        "svelte-multiselect": "^10.2.0"
+        "svelte-multiselect": "^10.2.0",
+        "uuid": "^9.0.1"
     }
 }

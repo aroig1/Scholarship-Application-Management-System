@@ -1,15 +1,28 @@
-// import {updateScholarship} from '$lib/util.ts'
+import {updateScholarship, loadScholarship} from '$lib/util'
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 
 import type {Actions} from "@sveltejs/kit";
+import type { PageServerLoad } from './$types';
+
+export const load: PageServerLoad = async ({ platform }) => {
+    const db = platform?.env.DB;
+    const scholarship = await loadScholarship(db, "test") as Scholarship;
+
+    return {
+        scholarship: scholarship
+    };
+}
 
 export const actions: Actions = {
     default: async ({cookies, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
 
+        console.log("SUBMITTED FORM");
+        console.log(data);
+
         const scholarship: Scholarship = {
-            id: data.get("id") as string, // Not in form, should be uniquely generated
+            id: "GET ID DYNAMICALLY", // Not in form, grabbed based on scholarship chosen to modify
             name: data.get("name") as string,
             amount: Number(data.get("amount") as string),
             donorID: data.get("donorID") as string, // needs to be loaded from user data
@@ -21,9 +34,11 @@ export const actions: Actions = {
             other: data.get("other") as string
         };
 
-        console.log(scholarship);
+        console.log("CREATED SCHOLARSHIP");
 
-        // updateScholarship(db, scholarship); // utils function
+        updateScholarship(db, scholarship); 
+
+        console.log("UPDATED DATABASE");
 
         return {
             success: true
