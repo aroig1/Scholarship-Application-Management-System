@@ -1,5 +1,5 @@
-import {saveApplication} from '$lib/util'
-import { v4 as uuidv4 } from 'uuid';
+import {saveApplication} from "$lib/util";
+import {v4 as uuidv4} from "uuid";
 import type {Application} from "$lib/types.js";
 
 import type {Actions} from "@sveltejs/kit";
@@ -16,7 +16,7 @@ export const actions: Actions = {
             statement: data.get("statement") as string
         };
 
-        saveApplication(db, application); 
+        saveApplication(db, application);
 
         return {
             success: true

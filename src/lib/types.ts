@@ -116,4 +116,3 @@ export type Application = {
     scholarship: ScholarshipID;
     statement: string;
 };
-

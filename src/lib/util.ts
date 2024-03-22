@@ -126,9 +126,8 @@ export async function loadUser(
         .prepare("SELECT * FROM users WHERE username = ? LIMIT 1")
         .bind(username)
         .all();
-    
-    if (result.results.length > 0) {
 
+    if (result.results.length > 0) {
         const user: User = result.results[0] as unknown as User;
 
         if ("hash" in result.results[0] && "salt" in result.results[0]) {
@@ -194,14 +193,18 @@ export async function loadApplicantInfo(
         .all();
 
     if (result.results.length > 0) {
-        const applicantInfo: ApplicantInfo =
-            result.results[0] as unknown as ApplicantInfo;
-        
+        const applicantInfo: ApplicantInfo = result
+            .results[0] as unknown as ApplicantInfo;
+
         if ("majors" in result.results[0]) {
-            applicantInfo.majors = JSON.parse(result.results[0].majors as string).map((s: string) => s as Major);
+            applicantInfo.majors = JSON.parse(
+                result.results[0].majors as string
+            ).map((s: string) => s as Major);
         }
         if ("minors" in result.results[0]) {
-            applicantInfo.minors = JSON.parse(result.results[0].minors as string).map((s: string) => s as Major);
+            applicantInfo.minors = JSON.parse(
+                result.results[0].minors as string
+            ).map((s: string) => s as Major);
         }
 
         return applicantInfo;
@@ -259,18 +262,23 @@ export async function loadScholarship(
 ): Promise<Scholarship | null> {
     await checkScholarshipTableExists(db);
     const result = await db
-        .prepare('SELECT * FROM scholarships WHERE id == ? LIMIT 1')
+        .prepare("SELECT * FROM scholarships WHERE id == ? LIMIT 1")
         .bind(id)
         .all();
 
     if (result.results.length > 0) {
-        const scholarship: Scholarship = result.results[0] as unknown as Scholarship;
+        const scholarship: Scholarship = result
+            .results[0] as unknown as Scholarship;
 
         if ("requiredMajors" in result.results[0]) {
-            scholarship.requiredMajors = JSON.parse(result.results[0].requiredMajors as string).map((s: string) => s as Major);
+            scholarship.requiredMajors = JSON.parse(
+                result.results[0].requiredMajors as string
+            ).map((s: string) => s as Major);
         }
         if ("requiredMinors" in result.results[0]) {
-            scholarship.requiredMinors = JSON.parse(result.results[0].requiredMinors as string).map((s: string) => s as Major);
+            scholarship.requiredMinors = JSON.parse(
+                result.results[0].requiredMinors as string
+            ).map((s: string) => s as Major);
         }
 
         return scholarship;
@@ -331,7 +339,8 @@ export async function loadApplication(
         .all();
 
     if (result.results.length > 0) {
-        const application: Application = result.results[0] as unknown as Application;
+        const application: Application = result
+            .results[0] as unknown as Application;
 
         return application;
     }
