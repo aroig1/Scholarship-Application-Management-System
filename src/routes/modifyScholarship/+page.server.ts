@@ -1,22 +1,25 @@
-import {updateScholarship, loadScholarship} from '$lib/util'
+import {updateScholarship, loadScholarship} from "$lib/util";
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 
 import type {Actions} from "@sveltejs/kit";
-import type { PageServerLoad } from './$types';
-import type { D1Database } from '@cloudflare/workers-types';
+import type {PageServerLoad} from "./$types";
+import type {D1Database} from "@cloudflare/workers-types";
 
-async function loadDBScholarship (db: D1Database) {
-    return await loadScholarship(db, "6edf1e4c-2178-40a2-8825-7faadbb9f072") as Scholarship; // MUST BE UPDATED BASED ON SCHOLARSHIP SELECTED
+async function loadDBScholarship(db: D1Database) {
+    return (await loadScholarship(
+        db,
+        "6edf1e4c-2178-40a2-8825-7faadbb9f072"
+    )) as Scholarship; // MUST BE UPDATED BASED ON SCHOLARSHIP SELECTED
 }
 
-export const load: PageServerLoad = async ({ platform }) => {
+export const load: PageServerLoad = async ({platform}) => {
     const db = platform?.env.DB;
     const scholarship = await loadDBScholarship(db);
 
     return {
         scholarship: scholarship
     };
-}
+};
 
 export const actions: Actions = {
     name: async ({request, platform}) => {
@@ -60,7 +63,9 @@ export const actions: Actions = {
         const db = platform?.env.DB;
         const scholarship = await loadDBScholarship(db);
 
-        scholarship.requiredMajors = JSON.parse(data.get("requiredMajors") as string).map((s: string) => s as Major);
+        scholarship.requiredMajors = JSON.parse(
+            data.get("requiredMajors") as string
+        ).map((s: string) => s as Major);
         updateScholarship(db, scholarship);
 
         return {
@@ -72,7 +77,9 @@ export const actions: Actions = {
         const db = platform?.env.DB;
         const scholarship = await loadDBScholarship(db);
 
-        scholarship.requiredMinors = JSON.parse(data.get("requiredMinors") as string).map((s: string) => s as Minor);
+        scholarship.requiredMinors = JSON.parse(
+            data.get("requiredMinors") as string
+        ).map((s: string) => s as Minor);
         updateScholarship(db, scholarship);
 
         return {

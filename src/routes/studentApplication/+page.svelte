@@ -74,9 +74,18 @@
     <form method="POST">
         <div>
             <h3>Full Name</h3>
-            <input type="text" placeholder="First Name(required)" maxlength="20" />
-            <input type="text" placeholder="Middle Name(optional)" maxlength="20" />
-            <input type="text" placeholder="Last Name(required)" maxlength="20" />
+            <input
+                type="text"
+                placeholder="First Name(required)"
+                maxlength="20" />
+            <input
+                type="text"
+                placeholder="Middle Name(optional)"
+                maxlength="20" />
+            <input
+                type="text"
+                placeholder="Last Name(required)"
+                maxlength="20" />
         </div>
         <div>
             <h3>Preferred Pronouns</h3>
@@ -133,7 +142,11 @@
         </div>
         <div>
             <h3>Personal Statement</h3>
-            <input name="statement" type="text" placeholder="Personal Statement" maxlength="5000" />
+            <input
+                name="statement"
+                type="text"
+                placeholder="Personal Statement"
+                maxlength="5000" />
         </div>
         <div>
             <h3>Work Experience</h3>

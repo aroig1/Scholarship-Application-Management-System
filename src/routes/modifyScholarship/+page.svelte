@@ -67,275 +67,229 @@
     <h1>Modify Scholarship</h1>
 
     <form class="info-container" method="POST" action="?/name">
-        <div
-            on:click={() => (areaClicked.name = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.name = true)} class="preview">
             <h3>Scholarship Name:</h3>
             <h4>{scholarship.name}</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.name}
-        <input
-            name="name"
-            value={scholarship.name}
-            type="text"
-            placeholder="Enter scholarship name here"
-            maxlength="25" />
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() => (areaClicked.name = false)}
-                >Cancel</button>
-        </div>
+            <input
+                name="name"
+                value={scholarship.name}
+                type="text"
+                placeholder="Enter scholarship name here"
+                maxlength="25" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.name = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </form>
 
     <form class="info-container" method="POST" action="?/amount">
-        <div
-            on:click={() => (areaClicked.amount = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.amount = true)} class="preview">
             <h3>Scholarship Amount:</h3>
             <h4>{scholarship.amount}</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.amount}
-        <input
-            name="amount"
-            value={scholarship.amount}
-            type="number"
-            placeholder="Enter scholarship amount here"
-            min="0" />
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() =>
-                    (areaClicked.amount = false)}
-                >Cancel</button>
-        </div>
+            <input
+                name="amount"
+                value={scholarship.amount}
+                type="number"
+                placeholder="Enter scholarship amount here"
+                min="0" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.amount = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </form>
 
     <div class="info-container">
-        <div
-            on:click={() => (areaClicked.donor = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.donor = true)} class="preview">
             <h3>Scholarship Donor:</h3>
-            <h4>"COOKIES? (DOES THIS NEED TO BE HERE?)"</h4> 
+            <h4>"COOKIES? (DOES THIS NEED TO BE HERE?)"</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.donor}
-        <input
-            name="donorName"
-            value="COOKIES? (DOES THIS NEED TO BE HERE?)"
-            type="text"
-            placeholder="Enter scholarship donor name here"
-            maxlength="25" />
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() =>
-                    (areaClicked.donor = false)}
-                >Cancel</button>
-        </div>
+            <input
+                name="donorName"
+                value="COOKIES? (DOES THIS NEED TO BE HERE?)"
+                type="text"
+                placeholder="Enter scholarship donor name here"
+                maxlength="25" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.donor = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </div>
 
     <div class="info-container">
-        <div
-            on:click={() => (areaClicked.phone = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.phone = true)} class="preview">
             <h3>Donor Phone Number:</h3>
             <h4>"COOKIES? (DOES THIS NEED TO BE HERE?)"</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.phone}
-        <input
-            name="phoneNumber"
-            value="COOKIES? (DOES THIS NEED TO BE HERE?)"
-            type="text"
-            placeholder="Enter scholarship donor's phone number here"
-            maxlength="20" />
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() =>
-                    (areaClicked.phone = false)}
-                >Cancel</button>
-        </div>
+            <input
+                name="phoneNumber"
+                value="COOKIES? (DOES THIS NEED TO BE HERE?)"
+                type="text"
+                placeholder="Enter scholarship donor's phone number here"
+                maxlength="20" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.phone = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </div>
 
     <div class="info-container">
-        <div
-            on:click={() => (areaClicked.email = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.email = true)} class="preview">
             <h3>Donor Email Address:</h3>
             <h4>"COOKIES? (DOES THIS NEED TO BE HERE?)"</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.email}
-        <input
-            name="email"
-            value="COOKIES? (DOES THIS NEED TO BE HERE?)"
-            type="text"
-            placeholder="Enter scholarship donor's email here"
-            maxlength="25" />
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() =>
-                    (areaClicked.email = false)}
-                >Cancel</button>
-        </div>
+            <input
+                name="email"
+                value="COOKIES? (DOES THIS NEED TO BE HERE?)"
+                type="text"
+                placeholder="Enter scholarship donor's email here"
+                maxlength="25" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.email = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </div>
 
     <form class="info-container" method="POST" action="?/numAvailable">
-        <div
-            on:click={() =>
-                (areaClicked.numAvailable = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.numAvailable = true)} class="preview">
             <h3>Number of Scholarships Available:</h3>
             <h4>{scholarship.numAvailable}</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.numAvailable}
-        <input
-            name="numAvailable"
-            value={scholarship.numAvailable}
-            type="number"
-            placeholder="Enter number of scholarships available here"
-            min="0" />
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() =>
-                    (areaClicked.numAvailable =
-                        false)}>Cancel</button>
-        </div>
+            <input
+                name="numAvailable"
+                value={scholarship.numAvailable}
+                type="number"
+                placeholder="Enter number of scholarships available here"
+                min="0" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.numAvailable = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </form>
 
     <form class="info-container" method="POST" action="?/requiredMajors">
-        <div
-            on:click={() => (areaClicked.major = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.major = true)} class="preview">
             <h3>Required Majors:</h3>
             <h4>{scholarship.requiredMajors}</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.major}
-        <MultiSelect
-            name="requiredMajors"
-            value={scholarship.requiredMajors}
-            options={majors}
-            placeholder="Pick required majors"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() =>
-                    (areaClicked.major = false)}
-                >Cancel</button>
-        </div>
+            <MultiSelect
+                name="requiredMajors"
+                value={scholarship.requiredMajors}
+                options={majors}
+                placeholder="Pick required majors"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.major = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </form>
 
     <form class="info-container" method="POST" action="?/requiredMinors">
-        <div
-            on:click={() => (areaClicked.minor = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.minor = true)} class="preview">
             <h3>Required Minors:</h3>
             <h4>{scholarship.requiredMinors}</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.minor}
-        <MultiSelect
-            name="requiredMinors"
-            value={scholarship.requiredMinors}
-            options={minors}
-            placeholder="Pick required majors"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() =>
-                    (areaClicked.minor = false)}
-                >Cancel</button>
-        </div>
+            <MultiSelect
+                name="requiredMinors"
+                value={scholarship.requiredMinors}
+                options={minors}
+                placeholder="Pick required majors"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.minor = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </form>
 
     <form class="info-container" method="POST" action="?/requiredGPA">
-        <div
-            on:click={() => (areaClicked.gpa = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.gpa = true)} class="preview">
             <h3>Required GPA:</h3>
             <h4>{scholarship.requiredGPA}</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.gpa}
-        <input
-            name="requiredGPA"
-            value={scholarship.requiredGPA}
-            type="number"
-            placeholder="Enter minimum required GPA here"
-            min="0" />
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() => (areaClicked.gpa = false)}
-                >Cancel</button>
-        </div>
+            <input
+                name="requiredGPA"
+                value={scholarship.requiredGPA}
+                type="number"
+                placeholder="Enter minimum required GPA here"
+                min="0" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.gpa = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </form>
 
     <form class="info-container" method="POST" action="?/deadline">
-        <div
-            on:click={() => (areaClicked.deadline = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.deadline = true)} class="preview">
             <h3>Deadline:</h3>
             <h4>{scholarship.deadline}</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.deadline}
-        <input
-            name="deadline"
-            value={scholarship.deadline}
-            type="date" />
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() =>
-                    (areaClicked.deadline = false)}
-                >Cancel</button>
-        </div>
+            <input name="deadline" value={scholarship.deadline} type="date" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.deadline = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </form>
 
     <form class="info-container" method="POST" action="?/other">
-        <div
-            on:click={() => (areaClicked.other = true)}
-            class="preview">
+        <div on:click={() => (areaClicked.other = true)} class="preview">
             <h3>Other Scholarship Requirements:</h3>
             <h4>{scholarship.other}</h4>
             <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
         </div>
         {#if areaClicked.other}
-        <input
-            name="other"
-            value={scholarship.other}
-            type="text"
-            placeholder="Enter any other scholarship requirements here" />
-        <div class="buttons">
-            <button>Confirm</button>
-            <button
-                on:click={() =>
-                    (areaClicked.other = false)}
-                >Cancel</button>
-        </div>
+            <input
+                name="other"
+                value={scholarship.other}
+                type="text"
+                placeholder="Enter any other scholarship requirements here" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.other = false)}
+                    >Cancel</button>
+            </div>
         {/if}
     </form>
 </section>
