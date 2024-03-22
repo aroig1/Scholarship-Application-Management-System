@@ -19,9 +19,7 @@ export const actions: Actions = {
 
         console.log(application)
 
-        console.log(application)
-
-        saveApplication(db, application);
+        saveApplication(db, application); 
 
         return {
             success: true
