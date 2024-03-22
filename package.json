@@ -35,6 +35,7 @@
     "type": "module",
     "dependencies": {
         "node": "^21.6.2",
-        "svelte-multiselect": "^10.2.0"
+        "svelte-multiselect": "^10.2.0",
+        "uuid": "^9.0.1"
     }
 }

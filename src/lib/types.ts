@@ -80,7 +80,6 @@ export type User = {
     password: Password;
     firstName: string;
     lastName: string;
-    netID: string;
     phone: string;
     email: string;
     type: UserType;
@@ -95,6 +94,7 @@ export type ApplicantInfo = {
     ethnicity: Ethnicity;
     preferredPronouns: string;
     workExperience: string[];
+    netID: string;
 };
 
 export type Scholarship = {
@@ -116,3 +116,4 @@ export type Application = {
     scholarship: ScholarshipID;
     statement: string;
 };
+
