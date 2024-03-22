@@ -17,7 +17,7 @@ export const actions: Actions = {
             statement: data.get("statement") as string
         };
 
-        saveApplication(db, application); 
+        saveApplication(db, application);
 
         return {
             success: true
