@@ -17,8 +17,6 @@ export const actions: Actions = {
             statement: data.get("statement") as string
         };
 
-        console.log(application)
-
         saveApplication(db, application);
 
         return {
