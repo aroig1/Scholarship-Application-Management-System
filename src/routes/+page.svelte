@@ -12,3 +12,9 @@
 <li>
     <a href="/studentApplication">Student Application</a>
 </li>
+<li>
+    <a href="/studentViewScholarship">View Scholarships</a>
+</li>
+<li>
+    <a href="/openScholarshipDetails">Scholarship Details</a>
+</li>
