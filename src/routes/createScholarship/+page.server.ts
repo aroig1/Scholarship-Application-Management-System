@@ -5,7 +5,7 @@ import type {Major, Minor, Scholarship} from "$lib/types.js";
 import type {Actions} from "@sveltejs/kit";
 
 export const actions: Actions = {
-    default: async ({cookies, request, platform}) => {
+    default: async ({locals, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
 
@@ -13,7 +13,7 @@ export const actions: Actions = {
             id: uuidv4(),
             name: data.get("name") as string,
             amount: Number(data.get("amount") as string),
-            donorID: "TEMP DONOR ID", // needs to be loaded from user data (DORIAN'S COOKIES)
+            donorID: locals.user.id, // needs to be loaded from user data (DORIAN'S COOKIES)
             numAvailable: Number(data.get("numAvailable") as string),
             requiredMajors: JSON.parse(
                 data.get("requiredMajors") as string
