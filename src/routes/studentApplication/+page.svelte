@@ -67,8 +67,6 @@
     let ethnicitySelected = [""];
 </script>
 
-<a href="/">Home</a>
-
 <section>
     <h1>Student Application</h1>
     <form method="POST">

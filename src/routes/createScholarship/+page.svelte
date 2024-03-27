@@ -42,7 +42,6 @@
     let minorsSelected = [""];
 </script>
 
-<a href="/">Home</a>
 <section>
     <h1>Create New Scholarship</h1>
     <form method="POST">

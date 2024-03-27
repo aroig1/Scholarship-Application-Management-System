@@ -3,17 +3,18 @@ import {v4 as uuidv4} from "uuid";
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 
 import type {Actions} from "@sveltejs/kit";
+import type { D1Database } from "@cloudflare/workers-types";
 
 export const actions: Actions = {
     default: async ({locals, request, platform}) => {
         const data = await request.formData();
-        const db = platform?.env.DB;
+        const db = platform?.env.DB as D1Database;
 
         const scholarship: Scholarship = {
             id: uuidv4(),
             name: data.get("name") as string,
             amount: Number(data.get("amount") as string),
-            donorID: locals.user.id, // needs to be loaded from user data (DORIAN'S COOKIES)
+            donorID: locals.user?.id as string,
             numAvailable: Number(data.get("numAvailable") as string),
             requiredMajors: JSON.parse(
                 data.get("requiredMajors") as string

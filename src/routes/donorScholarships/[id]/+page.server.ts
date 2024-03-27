@@ -13,7 +13,7 @@ async function loadDBScholarship(id: string | undefined, db: D1Database) {
 }
 
 export const load: PageServerLoad = async ({params, platform}) => {
-    const db = platform?.env.DB;
+    const db = platform?.env.DB as D1Database;
     const scholarship = await loadDBScholarship(params.id, db);
 
     return {
@@ -24,7 +24,7 @@ export const load: PageServerLoad = async ({params, platform}) => {
 export const actions: Actions = {
     name: async ({params, request, platform}) => {
         const data = await request.formData();
-        const db = platform?.env.DB;
+        const db = platform?.env.DB as D1Database;
         const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.name = data.get("name") as string;
@@ -36,7 +36,7 @@ export const actions: Actions = {
     },
     amount: async ({params, request, platform}) => {
         const data = await request.formData();
-        const db = platform?.env.DB;
+        const db = platform?.env.DB as D1Database;
         const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.amount = Number(data.get("amount") as string);
@@ -48,7 +48,7 @@ export const actions: Actions = {
     },
     numAvailable: async ({params, request, platform}) => {
         const data = await request.formData();
-        const db = platform?.env.DB;
+        const db = platform?.env.DB as D1Database;
         const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.numAvailable = Number(data.get("numAvailable") as string);
@@ -60,7 +60,7 @@ export const actions: Actions = {
     },
     requiredMajors: async ({params, request, platform}) => {
         const data = await request.formData();
-        const db = platform?.env.DB;
+        const db = platform?.env.DB as D1Database;
         const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.requiredMajors = JSON.parse(
@@ -74,7 +74,7 @@ export const actions: Actions = {
     },
     requiredMinors: async ({params, request, platform}) => {
         const data = await request.formData();
-        const db = platform?.env.DB;
+        const db = platform?.env.DB as D1Database;
         const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.requiredMinors = JSON.parse(
@@ -88,7 +88,7 @@ export const actions: Actions = {
     },
     requiredGPA: async ({params, request, platform}) => {
         const data = await request.formData();
-        const db = platform?.env.DB;
+        const db = platform?.env.DB as D1Database;
         const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.requiredGPA = Number(data.get("requiredGPA") as string);
@@ -100,7 +100,7 @@ export const actions: Actions = {
     },
     deadline: async ({params, request, platform}) => {
         const data = await request.formData();
-        const db = platform?.env.DB;
+        const db = platform?.env.DB as D1Database;
         const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.deadline = new Date(data.get("deadline") as string);
@@ -112,7 +112,7 @@ export const actions: Actions = {
     },
     other: async ({params, request, platform}) => {
         const data = await request.formData();
-        const db = platform?.env.DB;
+        const db = platform?.env.DB as D1Database;
         const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.other = data.get("other") as string;

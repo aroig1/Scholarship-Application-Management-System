@@ -11,7 +11,6 @@
     const form2 = useForm();
 </script>
 
-<a href="/">Home</a>
 <form use:form2 method="post" action="?/login">
     <div class="info-container">
         <h1>Login</h1>

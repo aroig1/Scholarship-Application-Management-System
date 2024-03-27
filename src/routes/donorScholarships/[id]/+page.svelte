@@ -60,8 +60,6 @@
     };
 </script>
 
-<a href="/">Home</a>
-
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <section>
@@ -71,7 +69,7 @@
         <div on:click={() => (areaClicked.name = true)} class="preview">
             <h3>Scholarship Name:</h3>
             <h4>{scholarship.name}</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.name}
             <input
@@ -92,7 +90,7 @@
         <div on:click={() => (areaClicked.amount = true)} class="preview">
             <h3>Scholarship Amount:</h3>
             <h4>{scholarship.amount}</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.amount}
             <input
@@ -113,7 +111,7 @@
         <div on:click={() => (areaClicked.numAvailable = true)} class="preview">
             <h3>Number of Scholarships Available:</h3>
             <h4>{scholarship.numAvailable}</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.numAvailable}
             <input
@@ -134,7 +132,7 @@
         <div on:click={() => (areaClicked.major = true)} class="preview">
             <h3>Required Majors:</h3>
             <h4>{scholarship.requiredMajors}</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.major}
             <MultiSelect
@@ -156,7 +154,7 @@
         <div on:click={() => (areaClicked.minor = true)} class="preview">
             <h3>Required Minors:</h3>
             <h4>{scholarship.requiredMinors}</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.minor}
             <MultiSelect
@@ -178,7 +176,7 @@
         <div on:click={() => (areaClicked.gpa = true)} class="preview">
             <h3>Required GPA:</h3>
             <h4>{scholarship.requiredGPA}</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.gpa}
             <input
@@ -199,7 +197,7 @@
         <div on:click={() => (areaClicked.deadline = true)} class="preview">
             <h3>Deadline:</h3>
             <h4>{scholarship.deadline}</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.deadline}
             <input name="deadline" value={scholarship.deadline} type="date" />
@@ -215,7 +213,7 @@
         <div on:click={() => (areaClicked.other = true)} class="preview">
             <h3>Other Scholarship Requirements:</h3>
             <h4>{scholarship.other}</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.other}
             <input

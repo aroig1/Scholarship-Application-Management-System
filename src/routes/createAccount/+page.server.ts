@@ -9,7 +9,7 @@ import {
     dropSession
 } from "$lib/util";
 import type {D1Database} from "@cloudflare/workers-types";
-import type {Actions} from "./$types";
+import type {Actions} from "@sveltejs/kit";
 import type {User, UserID} from "$lib/types";
 import {UserType} from "$lib/types";
 
@@ -128,7 +128,7 @@ export const actions: Actions = {
         const tempPass = formData.get("password") as string;
         const salt = generateId(8);
         const hashedPassword = await new Argon2id().hash(salt + tempPass);
-        console.log(formData);
+        // console.log(formData);
         const userTypeString = getUserTypeFromString(
             formData.get("userType") as string
         );
@@ -158,8 +158,8 @@ export const actions: Actions = {
                     message
                 });
             }
-            console.log(user);
-            console.log(event.platform);
+            // console.log(user);
+            // console.log(event.platform);
             await checkUserTableExists(event.platform?.env.DB);
 
             if (await checkUsers(event.platform?.env.DB, user.username)) {

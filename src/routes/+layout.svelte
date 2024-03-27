@@ -7,9 +7,6 @@
             <a href="/createScholarship">Create Scholarship</a>
         </li>
         <li>
-            <a href="/donorScholarships/6edf1e4c-2178-40a2-8825-7faadbb9f072">Modify Scholarship</a>
-        </li>
-        <li>
             <a href="/studentApplication">Create Student Application</a>
         </li>
         <li>
@@ -18,6 +15,10 @@
         <li>
             <a href="/loginPage">Login Page</a>
         </li>
+        <li>
+            <a href="/logoutPage">SIGN OUT</a>
+        </li>
+        <li></li>
     </nav>
 </header>
 
@@ -55,6 +56,6 @@
     }
 
     li:hover {
-        background-color:rgb(55, 54, 54)
+        background-color:rgb(55, 54, 54);
     }
 </style>
