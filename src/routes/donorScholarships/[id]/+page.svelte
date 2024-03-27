@@ -1,9 +1,10 @@
 <script>
     import {MultiSelect} from "svelte-multiselect";
 
-    /** @type {import('./$types').PageData} */
+    /** @type {import('../$types').PageData} */
     export let data;
     /** @type {import('$lib/types').Scholarship} */
+    // @ts-ignore
     const scholarship = data.scholarship;
 
     let majors = [
@@ -107,69 +108,6 @@
             </div>
         {/if}
     </form>
-
-    <div class="info-container">
-        <div on:click={() => (areaClicked.donor = true)} class="preview">
-            <h3>Scholarship Donor:</h3>
-            <h4>"COOKIES? (DOES THIS NEED TO BE HERE?)"</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
-        </div>
-        {#if areaClicked.donor}
-            <input
-                name="donorName"
-                value="COOKIES? (DOES THIS NEED TO BE HERE?)"
-                type="text"
-                placeholder="Enter scholarship donor name here"
-                maxlength="25" />
-            <div class="buttons">
-                <button>Confirm</button>
-                <button on:click={() => (areaClicked.donor = false)}
-                    >Cancel</button>
-            </div>
-        {/if}
-    </div>
-
-    <div class="info-container">
-        <div on:click={() => (areaClicked.phone = true)} class="preview">
-            <h3>Donor Phone Number:</h3>
-            <h4>"COOKIES? (DOES THIS NEED TO BE HERE?)"</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
-        </div>
-        {#if areaClicked.phone}
-            <input
-                name="phoneNumber"
-                value="COOKIES? (DOES THIS NEED TO BE HERE?)"
-                type="text"
-                placeholder="Enter scholarship donor's phone number here"
-                maxlength="20" />
-            <div class="buttons">
-                <button>Confirm</button>
-                <button on:click={() => (areaClicked.phone = false)}
-                    >Cancel</button>
-            </div>
-        {/if}
-    </div>
-
-    <div class="info-container">
-        <div on:click={() => (areaClicked.email = true)} class="preview">
-            <h3>Donor Email Address:</h3>
-            <h4>"COOKIES? (DOES THIS NEED TO BE HERE?)"</h4>
-            <img class="down-arrow" src="/down_arrow.png" alt="down arrow" />
-        </div>
-        {#if areaClicked.email}
-            <input
-                name="email"
-                value="COOKIES? (DOES THIS NEED TO BE HERE?)"
-                type="text"
-                placeholder="Enter scholarship donor's email here"
-                maxlength="25" />
-            <div class="buttons">
-                <button>Confirm</button>
-                <button on:click={() => (areaClicked.email = false)}
-                    >Cancel</button>
-            </div>
-        {/if}
-    </div>
 
     <form class="info-container" method="POST" action="?/numAvailable">
         <div on:click={() => (areaClicked.numAvailable = true)} class="preview">

@@ -2,19 +2,19 @@ import {updateScholarship, loadScholarship} from "$lib/util";
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 
 import type {Actions} from "@sveltejs/kit";
-import type {PageServerLoad} from "./$types";
+import type {PageServerLoad} from "../../donorScholarships/$types";
 import type {D1Database} from "@cloudflare/workers-types";
 
-async function loadDBScholarship(db: D1Database) {
+async function loadDBScholarship(id: string | undefined, db: D1Database) {
     return (await loadScholarship(
         db,
-        "6edf1e4c-2178-40a2-8825-7faadbb9f072"
-    )) as Scholarship; // MUST BE UPDATED BASED ON SCHOLARSHIP SELECTED
+        id as string // id for testing: "6edf1e4c-2178-40a2-8825-7faadbb9f072"
+    )) as Scholarship;
 }
 
-export const load: PageServerLoad = async ({platform}) => {
+export const load: PageServerLoad = async ({params, platform}) => {
     const db = platform?.env.DB;
-    const scholarship = await loadDBScholarship(db);
+    const scholarship = await loadDBScholarship(params.id, db);
 
     return {
         scholarship: scholarship
@@ -22,10 +22,10 @@ export const load: PageServerLoad = async ({platform}) => {
 };
 
 export const actions: Actions = {
-    name: async ({request, platform}) => {
+    name: async ({params, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
-        const scholarship = await loadDBScholarship(db);
+        const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.name = data.get("name") as string;
         updateScholarship(db, scholarship);
@@ -34,10 +34,10 @@ export const actions: Actions = {
             success: true
         };
     },
-    amount: async ({request, platform}) => {
+    amount: async ({params, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
-        const scholarship = await loadDBScholarship(db);
+        const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.amount = Number(data.get("amount") as string);
         updateScholarship(db, scholarship);
@@ -46,10 +46,10 @@ export const actions: Actions = {
             success: true
         };
     },
-    numAvailable: async ({request, platform}) => {
+    numAvailable: async ({params, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
-        const scholarship = await loadDBScholarship(db);
+        const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.numAvailable = Number(data.get("numAvailable") as string);
         updateScholarship(db, scholarship);
@@ -58,10 +58,10 @@ export const actions: Actions = {
             success: true
         };
     },
-    requiredMajors: async ({request, platform}) => {
+    requiredMajors: async ({params, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
-        const scholarship = await loadDBScholarship(db);
+        const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.requiredMajors = JSON.parse(
             data.get("requiredMajors") as string
@@ -72,10 +72,10 @@ export const actions: Actions = {
             success: true
         };
     },
-    requiredMinors: async ({request, platform}) => {
+    requiredMinors: async ({params, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
-        const scholarship = await loadDBScholarship(db);
+        const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.requiredMinors = JSON.parse(
             data.get("requiredMinors") as string
@@ -86,10 +86,10 @@ export const actions: Actions = {
             success: true
         };
     },
-    requiredGPA: async ({request, platform}) => {
+    requiredGPA: async ({params, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
-        const scholarship = await loadDBScholarship(db);
+        const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.requiredGPA = Number(data.get("requiredGPA") as string);
         updateScholarship(db, scholarship);
@@ -98,10 +98,10 @@ export const actions: Actions = {
             success: true
         };
     },
-    deadline: async ({request, platform}) => {
+    deadline: async ({params, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
-        const scholarship = await loadDBScholarship(db);
+        const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.deadline = new Date(data.get("deadline") as string);
         updateScholarship(db, scholarship);
@@ -110,10 +110,10 @@ export const actions: Actions = {
             success: true
         };
     },
-    other: async ({request, platform}) => {
+    other: async ({params, request, platform}) => {
         const data = await request.formData();
         const db = platform?.env.DB;
-        const scholarship = await loadDBScholarship(db);
+        const scholarship = await loadDBScholarship(params.id, db);
 
         scholarship.other = data.get("other") as string;
         updateScholarship(db, scholarship);
