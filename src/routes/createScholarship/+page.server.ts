@@ -3,7 +3,7 @@ import {v4 as uuidv4} from "uuid";
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 
 import type {Actions} from "@sveltejs/kit";
-import type { D1Database } from "@cloudflare/workers-types";
+import type {D1Database} from "@cloudflare/workers-types";
 
 export const actions: Actions = {
     default: async ({locals, request, platform}) => {
@@ -27,7 +27,7 @@ export const actions: Actions = {
             other: data.get("other") as string
         };
 
-        saveScholarship(db, scholarship)
+        saveScholarship(db, scholarship);
 
         return {
             success: true

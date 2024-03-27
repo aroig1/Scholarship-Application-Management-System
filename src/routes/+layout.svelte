@@ -1,6 +1,6 @@
 <header>
     <h2>
-        <a href="/" >The University of Arizona</a>
+        <a href="/">The University of Arizona</a>
     </h2>
     <nav>
         <li>
@@ -56,6 +56,6 @@
     }
 
     li:hover {
-        background-color:rgb(55, 54, 54);
+        background-color: rgb(55, 54, 54);
     }
 </style>

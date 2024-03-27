@@ -11,13 +11,13 @@
             <div>
                 <h3>Name: {scholarship.name}</h3>
                 <h3>Total Amount: ${scholarship.amount}</h3>
-                <a href='/donorScholarships/{scholarship.id}'>
+                <a href="/donorScholarships/{scholarship.id}">
                     <button>Modify Scholarship</button>
                 </a>
             </div>
             <div class="big-box" id="description-box"></div>
         </div>
-    {/each}    
+    {/each}
 </section>
 
 <style>

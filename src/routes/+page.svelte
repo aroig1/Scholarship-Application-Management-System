@@ -4,7 +4,8 @@
     <a href="/createScholarship">Create Scholarship</a>
 </li>
 <li>
-    <a href="/donorScholarships/6edf1e4c-2178-40a2-8825-7faadbb9f072">Modify Scholarship</a>
+    <a href="/donorScholarships/6edf1e4c-2178-40a2-8825-7faadbb9f072"
+        >Modify Scholarship</a>
 </li>
 <li>
     <a href="/loginPage">Login Page</a>
