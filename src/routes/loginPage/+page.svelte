@@ -1,52 +1,54 @@
 <script>
     import {
-        useForm,
         validators,
-        HintGroup,
-        Hint,
-        email,
         required,
-        maxLength
+        maxLength,
+        useForm,
+        Hint
     } from "svelte-use-form";
 
-    const form = useForm();
+    export let form;
+    const form2 = useForm();
 </script>
 
 <a href="/">Home</a>
-
-<form use:form>
+<form use:form2 method="post" action="?/login">
     <div class="info-container">
         <h1>Login</h1>
 
         <div class="center">
             <input
-                type="email"
-                name="email"
-                maxLength="30"
-                use:validators={[required, email, maxLength(30)]} />
-            <HintGroup for="email">
-                <Hint on="required">This is a mandatory field</Hint>
-                <Hint on="maxLength">Must be less than 30 chars</Hint>
-                <Hint on="email" hideWhenRequired>Email is not valid</Hint>
-            </HintGroup>
+                class="username"
+                type="text"
+                maxLength="31"
+                name="username"
+                required
+                autocomplete="off"
+                use:validators={[required, maxLength(31)]} />
+            <Hint for="username" on="required">This is a mandatory field</Hint>
         </div>
 
         <div class="center">
             <input
                 type="password"
                 name="password"
-                maxLength="30"
-                use:validators={[required, maxLength(30)]} />
+                maxLength="255"
+                use:validators={[required, maxLength(255)]} />
             <Hint for="password" on="required">This is a mandatory field</Hint>
         </div>
 
         <div class="center">
-            <button disabled={!$form.valid}>Login</button>
+            <button disabled={!$form2.valid}>Login</button>
         </div>
 
         <div class="center">
             <a href="/createAccount"><button>Create Account</button></a>
         </div>
+        {#if form?.error}
+            <div class="center">
+                <pre class="error">{form?.message}</pre>
+            </div>
+        {/if}
     </div>
 </form>
 

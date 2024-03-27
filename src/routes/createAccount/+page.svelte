@@ -1,81 +1,120 @@
 <script>
-    let secQuestions = [
-        "What high school did you go to?",
-        "What was the name of your first pet?",
-        "What is your father's middle name?",
-        "What was your first car?"
-    ];
+    import {
+        useForm,
+        HintGroup,
+        Hint,
+        validators,
+        email,
+        required,
+        maxLength
+    } from "svelte-use-form";
 
-    let secQuestion1 = "Choose a question";
-    let secQuestion2 = "Choose a question";
+    export let form;
+    const form2 = useForm();
 </script>
 
 <a href="/">Home</a>
-<section>
-    <h1>Create Account</h1>
-    <div>
-        <h3>Username</h3>
-        <input
-            class="username"
-            type="text"
-            placeholder="netID"
-            maxlength="15" />
+<form use:form2 method="POST">
+    <div class="info-container">
+        <h1>Create Account</h1>
+        <div class="center">
+            <h3>Username</h3>
+            <input
+                class="username"
+                type="text"
+                placeholder="netID"
+                maxlength="31"
+                name="username"
+                required
+                autocomplete="off"
+                use:validators={[required, maxLength(32)]} />
+            <Hint for="username" on="required">This is a mandatory field</Hint>
+        </div>
+        <div class="center">
+            <h3>Password</h3>
+            <input
+                class="password"
+                type="text"
+                placeholder="must include number and special character"
+                maxlength="255"
+                name="password"
+                use:validators={[required, maxLength(255)]} />
+            <Hint for="password" on="required">This is a mandatory field</Hint>
+        </div>
+        <div class="center">
+            <h3>Full Name</h3>
+            <input
+                type="text"
+                placeholder="first name"
+                maxlength="15"
+                name="firstName"
+                use:validators={[required, maxLength(30)]} />
+            <Hint for="firstName" on="required">This is a mandatory field</Hint>
+            <input
+                type="text"
+                placeholder="last name"
+                maxlength="15"
+                name="lastName"
+                use:validators={[required, maxLength(30)]} />
+            <Hint for="lastName" on="required">This is a mandatory field</Hint>
+        </div>
+        <div class="center">
+            <h3>Net ID (if applicable)</h3>
+            <input
+                type="text"
+                placeholder="netID"
+                maxlength="15"
+                name="netID"
+                use:validators={[required, maxLength(30)]} />
+            <Hint for="netID" on="required">This is a mandatory field</Hint>
+        </div>
+        <div class="center">
+            <h3>Phone Number</h3>
+            <input
+                type="text"
+                placeholder="(999) 999-9999"
+                maxlength="20"
+                name="phoneNumber"
+                use:validators={[required, maxLength(30)]} />
+            <Hint for="phoneNumber" on="required"
+                >This is a mandatory field</Hint>
+        </div>
+        <div class="center">
+            <h3>Email address</h3>
+            <input
+                type="email"
+                placeholder="netID@arizona.edu"
+                maxlength="25"
+                name="email"
+                use:validators={[required, email, maxLength(30)]} />
+            <HintGroup for="email">
+                <Hint on="required">This is a mandatory field</Hint>
+                <Hint on="email" hideWhenRequired>Email is not valid</Hint>
+            </HintGroup>
+        </div>
+        <div class="center">
+            <h3>User Type</h3>
+            <input
+                type="userType"
+                placeholder="Applicant"
+                maxlength="30"
+                name="userType"
+                use:validators={[required, maxLength(30)]} />
+            <Hint for="userType" on="required">This is a mandatory field</Hint>
+        </div>
+        <div class="center">
+            <button disabled={!$form2.valid}>Create Account</button>
+        </div>
+        <div class="center">
+            {#if form?.error}<pre class="error">{form?.message}</pre>{/if}
+        </div>
     </div>
-    <div>
-        <h3>Password</h3>
-        <input
-            class="password"
-            type="text"
-            placeholder="must include number and special character"
-            maxlength="20" />
-    </div>
-    <div>
-        <h3>Security Question 1</h3>
-        <select bind:value={secQuestion1} class="question_answer">
-            {#each secQuestions as question}
-                <option value={question}>
-                    {question}
-                </option>
-            {/each}
-        </select>
-        <input class="question_answer" type="text" placeholder="answer" />
-    </div>
-    <div>
-        <h3>Security Question 2</h3>
-        <select bind:value={secQuestion2} class="question_answer">
-            {#each secQuestions as question}
-                <option value={question}>
-                    {question}
-                </option>
-            {/each}
-        </select>
-        <input class="question_answer" type="text" placeholder="answer" />
-    </div>
-    <div>
-        <h3>Full Name</h3>
-        <input type="text" placeholder="first name" maxlength="15" />
-        <input type="text" placeholder="last name" maxlength="15" />
-    </div>
-    <div>
-        <h3>Net ID (if applicable)</h3>
-        <input type="text" placeholder="netID" maxlength="15" />
-    </div>
-    <div>
-        <h3>Phone Number</h3>
-        <input type="text" placeholder="(999) 999-9999" maxlength="20" />
-    </div>
-    <div>
-        <h3>Email address</h3>
-        <input type="emai" placeholder="netID@arizona.edu" maxlength="25" />
-    </div>
-    <button>Create Account</button>
-</section>
+</form>
 
 <style>
-    section {
-        margin: 0 auto;
-        width: 90%;
-        max-width: 700px;
+    :global(.touched:invalid) {
+        border-color: red;
+        outline-color: red;
     }
     h1 {
         width: 100%;
@@ -100,8 +139,20 @@
     .password {
         width: 50%;
     }
-    .question_answer {
-        width: 100%;
-        margin: 5px 0;
+
+    .info-container {
+        background-color: lightgray;
+        border: 50px;
+        padding: 20px;
+        margin: 25px;
+        width: 600px;
+        height: 780px;
+        flex-direction: column;
+        text-align: center;
+    }
+    .center {
+        flex-direction: column;
+        text-align: center;
+        padding: 2px;
     }
 </style>

@@ -12,3 +12,6 @@
 <li>
     <a href="/studentApplication">Student Application</a>
 </li>
+<li>
+    <a href="/logoutPage">SIGN OUT</a>
+</li>

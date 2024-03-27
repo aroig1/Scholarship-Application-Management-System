@@ -1,4 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
+
+import type {D1Database} from "@cloudflare/workers-types";
+
 // for information about these interfaces
 declare global {
     namespace App {
@@ -14,6 +17,11 @@ declare global {
                 waitUntil(promise: Promise<any>): void;
             };
             caches: CacheStorage & {default: Cache};
+        }
+        interface Locals {
+            lucia: import("$lib/server/auth").Auth;
+            user: import("lucia").User | null;
+            session: import("lucia").Session | null;
         }
     }
 }
