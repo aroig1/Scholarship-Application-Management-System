@@ -2,7 +2,7 @@ import {updateScholarship, loadScholarship} from "$lib/util";
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 
 import type {Actions} from "@sveltejs/kit";
-import type {PageServerLoad} from "../../donorScholarships/$types";
+import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
 
 async function loadDBScholarship(id: string | undefined, db: D1Database) {
