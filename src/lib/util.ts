@@ -5,6 +5,8 @@ import type {
     Application,
     ApplicantInfo,
     UserID,
+    Password,
+    ApplicationID,
     ScholarshipID,
     Major
 } from "$lib/types";
