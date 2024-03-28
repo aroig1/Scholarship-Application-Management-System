@@ -1,7 +1,6 @@
 <script>
     export let data;
     const scholarships = data.scholarships;
-    console.log(data);
 </script>
 
 <section>
@@ -11,13 +10,16 @@
             <div>
                 <h3>Name: {scholarship.name}</h3>
                 <h3>Total Amount: ${scholarship.amount}</h3>
-                <a href="/donorScholarships/{scholarship.id}">
+                <a href='/donorScholarships/modify-{scholarship.id}'>
                     <button>Modify Scholarship</button>
+                </a>
+                <a href='/donorScholarships/applicants-{scholarship.id}'>
+                    <button>View Applicants</button>
                 </a>
             </div>
             <div class="big-box" id="description-box"></div>
         </div>
-    {/each}
+    {/each}    
 </section>
 
 <style>

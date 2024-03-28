@@ -1,26 +1,24 @@
 <script>
     export let data;
-    const scholarships = data.scholarships;
-    console.log(data);
+    const applicants = data.applicants;
 </script>
 
-<a href="/">Home</a>
-
 <section>
-    <h1>View Available Scholarships - Student POV</h1>
-    {#each scholarships as scholarship}
+    <h1>Applications</h1>
+    {#each applicants as applicant}
         <div class="container">
             <div>
-                <h3>Name: {scholarship.name}</h3>
-                <h3>Total Amount: ${scholarship.amount}</h3>
-                <a
-                    href="/studentViewScholarship/scholarship-{scholarship.id}">
-                    <button>View Scholarship</button>
+                <h3>Name: {applicant.firstName} {applicant.lastName}</h3>
+                <h3>GPA: {applicant.GPA}</h3>
+                <h3>Year: {applicant.year}</h3>
+                <h3>Majors: {applicant.majors}</h3>
+                <a href='/donorScholarships/applicant-{applicant.user}'>
+                    <button>Review Applicant</button>
                 </a>
             </div>
             <div class="big-box" id="description-box"></div>
         </div>
-    {/each}
+    {/each}    
 </section>
 
 <style>
@@ -30,6 +28,7 @@
         border: 1px solid #ccc;
         padding: 10px;
     }
+
     button {
         margin-top: 10px;
     }
