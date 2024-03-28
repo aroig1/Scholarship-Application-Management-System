@@ -1,20 +1,19 @@
 <script>
     export let data;
-    const scholarships = data.scholarships;
+    const applicants = data.applicants;
 </script>
 
 <section>
-    <h1>View My Scholarships</h1>
-    {#each scholarships as scholarship}
+    <h1>Applications</h1>
+    {#each applicants as applicant}
         <div class="container">
             <div>
-                <h3>Name: {scholarship.name}</h3>
-                <h3>Total Amount: ${scholarship.amount}</h3>
-                <a href='/donorScholarships/modify-{scholarship.id}'>
-                    <button>Modify Scholarship</button>
-                </a>
-                <a href='/donorScholarships/applicants-{scholarship.id}'>
-                    <button>View Applicants</button>
+                <h3>Name: {applicant.firstName} {applicant.lastName}</h3>
+                <h3>GPA: {applicant.GPA}</h3>
+                <h3>Year: {applicant.year}</h3>
+                <h3>Majors: {applicant.majors}</h3>
+                <a href='/donorScholarships/applicant-{applicant.user}'>
+                    <button>Review Applicant</button>
                 </a>
             </div>
             <div class="big-box" id="description-box"></div>
