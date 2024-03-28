@@ -1,7 +1,7 @@
-import type { D1Database } from "@cloudflare/workers-types";
-import type { PageServerLoad } from "../donorScholarships/$types";
+import type {PageServerLoad} from "./$types";
+import type {D1Database} from "@cloudflare/workers-types";
 
-export const load: PageServerLoad = async({locals, platform}) => {
+export const load: PageServerLoad = async ({locals, platform}) => {
     const db = platform?.env.DB as D1Database;
     const scholarships = await db
         .prepare("SELECT * FROM scholarships WHERE donorID = ?")
