@@ -1,7 +1,7 @@
 <script>
     import {MultiSelect} from "svelte-multiselect";
 
-    /** @type {import('../$types').PageData} */
+    /** @type {import('./$types').PageData} */
     export let data;
     /** @type {import('$lib/types').Scholarship} */
     // @ts-ignore
