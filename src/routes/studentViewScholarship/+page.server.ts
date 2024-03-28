@@ -7,8 +7,7 @@ export const load: PageServerLoad = async ({locals, platform}) => {
     await checkScholarshipTableExists(db);
 
     const scholarships = await db
-        .prepare("SELECT * FROM scholarships WHERE donorID = ?")
-        .bind(locals.user?.id)
+        .prepare("SELECT * FROM scholarships")
         .all();
 
     return {

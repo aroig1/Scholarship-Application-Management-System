@@ -4,8 +4,6 @@
     console.log(data);
 </script>
 
-<a href="/">Home</a>
-
 <section>
     <h1>View Available Scholarships - Student POV</h1>
     {#each scholarships as scholarship}

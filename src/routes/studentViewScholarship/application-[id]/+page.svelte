@@ -87,12 +87,13 @@
         </div>
         <div>
             <h3>Preferred Pronouns</h3>
-            <MultiSelect
-                bind:value={pronounsSelected}
-                options={Pronouns}
-                placeholder="Preferred Pronouns"
-                closeDropdownOnSelect={false}>
-            </MultiSelect>
+            <select name="pronouns">
+                <option value="He/Him">He/Him</option>
+                <option value="She/Her">She/Her</option>
+                <option value="They/Them">They/Them</option>
+                <option value="Ze/Zir/Hir">Ze/Zir/Hir</option>
+                <option value="Xe/Xem/Xyrs">Xe/Xem/Xyrs</option>
+            </select>
         </div>
         <div>
             <h3>Student ID</h3>
@@ -101,6 +102,7 @@
         <div>
             <h3>Select Majors</h3>
             <MultiSelect
+                name="majors"
                 bind:value={majorsSelected}
                 options={majors}
                 placeholder="Select Majors"
@@ -110,6 +112,7 @@
         <div>
             <h3>Select Minors</h3>
             <MultiSelect
+                name="minors"
                 bind:value={minorsSelected}
                 options={minors}
                 placeholder="Select minors"
@@ -118,11 +121,12 @@
         </div>
         <div>
             <h3>Cumulative GPA</h3>
-            <input type="number" placeholder="3.0" min="0" />
+            <input name="GPA" type="number" placeholder="3.0" step="0.01" min="0" />
         </div>
         <div>
             <h3>Current Year</h3>
             <MultiSelect
+                name="year"
                 bind:value={yearsSelected}
                 options={years}
                 placeholder="Select Current Year"
@@ -132,6 +136,7 @@
         <div>
             <h3>Ethnicity</h3>
             <MultiSelect
+                name="ethnicity"
                 bind:value={ethnicitySelected}
                 options={ethnicity}
                 placeholder="Select Ethnicity"
@@ -148,7 +153,7 @@
         </div>
         <div>
             <h3>Work Experience</h3>
-            <input type="text" placeholder="Work Experience" maxlength="1000" />
+            <input name="workExperience" type="text" placeholder="Work Experience" maxlength="1000" />
         </div>
         <button>Submit Application</button>
     </form>

@@ -12,13 +12,13 @@ export const load: PageServerLoad = async ({params, platform}) => {
     const result = await db.prepare(`
         SELECT *
         FROM applications
-        JOIN applicationInfo ON applications.applicant = applicantInfo.user
+        JOIN applicantInfo ON applications.applicant = applicantInfo.user
         JOIN users ON applications.applicant = users.id
         WHERE applications.applicant = ?
         LIMIT 1
     `).bind(params.id).all();
 
-    console.log(result.results)
+    // console.log(result.results)
 
     return {
         applicant: result.results
