@@ -12,8 +12,8 @@ export const actions: Actions = {
 
         const application: Application = {
             id: uuidv4(),
-            applicant: locals.user?.id as string, // not in form, loaded in from user data (DORIAN's COOKIES)
-            scholarship: params.scholarship as string, // not in form, loaded in somehow, changes based on dynamically loaded page
+            applicant: locals.user?.id as string, 
+            scholarship: params.id as string, 
             statement: data.get("statement") as string
         };
 

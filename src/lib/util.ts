@@ -69,7 +69,7 @@ async function checkApplicantInfoTableExists(db: D1Database) {
         .run();
 }
 
-async function checkScholarshipTableExists(db: D1Database) {
+export async function checkScholarshipTableExists(db: D1Database) {
     await db
         .prepare(
             `CREATE TABLE IF NOT EXISTS scholarships (

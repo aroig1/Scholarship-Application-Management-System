@@ -20,8 +20,5 @@
     <a href="/logoutPage">SIGN OUT</a>
 </li>
 <li>
-    <a href="/studentViewScholarship">View Scholarships</a>
-</li>
-<li>
-    <a href="/openScholarshipDetails">Scholarship Details</a>
+    <a href="/studentViewScholarship">Student Scholarships</a>
 </li>

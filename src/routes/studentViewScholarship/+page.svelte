@@ -7,14 +7,14 @@
 <a href="/">Home</a>
 
 <section>
-    <h1>View All Scholarships - Student POV</h1>
+    <h1>View Available Scholarships - Student POV</h1>
     {#each scholarships as scholarship}
         <div class="container">
             <div>
                 <h3>Name: {scholarship.name}</h3>
                 <h3>Total Amount: ${scholarship.amount}</h3>
                 <a
-                    href="/studentViewScholarship/openScholarship/{scholarship.id}">
+                    href="/studentViewScholarship/scholarship-{scholarship.id}">
                     <button>View Scholarship</button>
                 </a>
             </div>

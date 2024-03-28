@@ -1,8 +1,5 @@
 <script>
-    /**@type {import('./$types').PageData} */
-    /** @type {import('$lib/types').Scholarship} */
     export let data;
-    // @ts-ignore
     const scholarship = data.scholarship;
 </script>
 
@@ -19,7 +16,7 @@
             <h3>Required Minors: {scholarship.requiredMinors}</h3>
             <h3>Deadline: {scholarship.deadline}</h3>
             <a
-                href="/studentViewScholarship/studentApplication/{scholarship.id}">
+                href="/studentViewScholarship/application-{scholarship.id}">
                 <button>Apply</button>
             </a>
         </div>
