@@ -22,3 +22,6 @@
 <li>
     <a href="/logoutPage">SIGN OUT</a>
 </li>
+<li>
+    <a href="/studentViewScholarship">Student Scholarships</a>
+</li>
