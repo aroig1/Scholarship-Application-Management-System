@@ -51,10 +51,10 @@ export async function checkUserTableExists(db: D1Database) {
         .run();
 }
 
-async function checkApplicantInfoTableExists(db: D1Database) {
+export async function checkApplicantInfoTableExists(db: D1Database) {
     await db
         .prepare(
-            `CREATE TABLE IF NOT EXISTS applicationInfo (
+            `CREATE TABLE IF NOT EXISTS applicantInfo (
         user VARCHAR PRIMARY KEY, 
         majors VARCHAR, 
         minors VARCHAR, 
@@ -88,7 +88,7 @@ export async function checkScholarshipTableExists(db: D1Database) {
         .run();
 }
 
-async function checkApplicationTableExists(db: D1Database) {
+export async function checkApplicationTableExists(db: D1Database) {
     await db
         .prepare(
             `CREATE TABLE IF NOT EXISTS applications (
