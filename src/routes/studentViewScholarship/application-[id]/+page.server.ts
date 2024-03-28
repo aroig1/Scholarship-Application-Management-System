@@ -1,6 +1,6 @@
-import {saveApplication} from "$lib/util";
+import {saveApplicantInfo, saveApplication} from "$lib/util";
 import {v4 as uuidv4} from "uuid";
-import type {Application} from "$lib/types.js";
+import type {ApplicantInfo, Application, Ethnicity, Major, Minor, StudentYear} from "$lib/types.js";
 
 import type {Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
@@ -20,6 +20,7 @@ export const actions: Actions = {
         console.log(application)
 
         saveApplication(db, application);
+        saveApplicantInfo(db, applicantInfo);
 
         return {
             success: true

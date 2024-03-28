@@ -17,6 +17,8 @@ export const load: PageServerLoad = async ({params, platform}) => {
         WHERE applications.scholarship = ?
     `).bind(params.id).all();
 
+    console.log(result.results);
+
     return {
         applicants: result.results
     };
