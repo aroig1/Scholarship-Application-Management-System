@@ -48,7 +48,7 @@ export async function checkUserTableExists(db: D1Database) {
         .run();
 }
 
-async function checkApplicantInfoTableExists(db: D1Database) {
+export async function checkApplicantInfoTableExists(db: D1Database) {
     await db
         .prepare(
             `CREATE TABLE IF NOT EXISTS applicationInfo (
@@ -60,13 +60,14 @@ async function checkApplicantInfoTableExists(db: D1Database) {
         ethnicity VARCHAR, 
         prefferedPronouns VARCHAR, 
         workExperience TEXT,
-        netID VARCHAR(255)
+        netID VARCHAR(255),
+        studentID VARCHAR(255)
     );`
         )
         .run();
 }
 
-async function checkScholarshipTableExists(db: D1Database) {
+export async function checkScholarshipTableExists(db: D1Database) {
     await db
         .prepare(
             `CREATE TABLE IF NOT EXISTS scholarships (
@@ -85,7 +86,7 @@ async function checkScholarshipTableExists(db: D1Database) {
         .run();
 }
 
-async function checkApplicationTableExists(db: D1Database) {
+export async function checkApplicationTableExists(db: D1Database) {
     await db
         .prepare(
             `CREATE TABLE IF NOT EXISTS applications (
@@ -166,7 +167,7 @@ export async function saveApplicantInfo(
     applicant: ApplicantInfo
 ) {
     await checkApplicantInfoTableExists(db);
-    db.prepare("INSERT INTO applicantInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
+    db.prepare("INSERT INTO applicantInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
         .bind(
             applicant.user,
             applicant.majors,
@@ -176,7 +177,8 @@ export async function saveApplicantInfo(
             applicant.ethnicity,
             applicant.preferredPronouns,
             applicant.workExperience,
-            applicant.netID
+            applicant.netID,
+            applicant.studentID
         )
         .run();
 }
@@ -203,7 +205,7 @@ export async function updateApplicantInfo(
 ) {
     await checkApplicantInfoTableExists(db);
     db.prepare(
-        "UPDATE applicantInfo SET user = ?, majors = ?, minors = ?, GPA = ?, year = ?, ethnicity = ?, prefferedPronouns = ?, workExperience = ?, netID = ? WHERE user = ?"
+        "UPDATE applicantInfo SET user = ?, majors = ?, minors = ?, GPA = ?, year = ?, ethnicity = ?, prefferedPronouns = ?, workExperience = ?, netID = ? studentID = ? WHERE user = ?"
     )
         .bind(
             applicant.user,
@@ -214,6 +216,7 @@ export async function updateApplicantInfo(
             applicant.ethnicity,
             applicant.preferredPronouns,
             applicant.workExperience,
+            applicant.studentID,
             applicant.netID
         )
         .run();
