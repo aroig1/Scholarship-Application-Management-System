@@ -167,7 +167,9 @@ export async function saveApplicantInfo(
     applicant: ApplicantInfo
 ) {
     await checkApplicantInfoTableExists(db);
-    db.prepare("INSERT INTO applicantInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+    db.prepare(
+        "INSERT INTO applicantInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    )
         .bind(
             applicant.user,
             applicant.majors,
