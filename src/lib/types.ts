@@ -95,6 +95,7 @@ export type ApplicantInfo = {
     preferredPronouns: string;
     workExperience: string;
     netID: string;
+    studentID: string;
 };
 
 export type Scholarship = {

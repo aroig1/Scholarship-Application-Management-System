@@ -4,6 +4,9 @@
 </script>
 
 <section>
+    <a href="/donorScholarships">
+        <h3>Back</h3>
+    </a>
     <h1>Applications</h1>
     {#each applicants as applicant}
         <div class="container">
@@ -12,13 +15,14 @@
                 <h3>GPA: {applicant.GPA}</h3>
                 <h3>Year: {applicant.year}</h3>
                 <h3>Majors: {applicant.majors}</h3>
-                <a href='/donorScholarships/applicant-{applicant.user}'>
+                <a
+                    href="/donorScholarships/applicant-{applicant.user}-{applicant.scholarship}">
                     <button>Review Applicant</button>
                 </a>
             </div>
             <div class="big-box" id="description-box"></div>
         </div>
-    {/each}    
+    {/each}
 </section>
 
 <style>

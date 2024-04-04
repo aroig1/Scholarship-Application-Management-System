@@ -3,9 +3,10 @@
     const scholarship = data.scholarship;
 </script>
 
-<a href="/">Home</a>
-
 <section>
+    <a href="/studentViewScholarship">
+        <h3>Back</h3>
+    </a>
     <h1>Scholarship Information</h1>
     <div class="container">
         <div>
@@ -15,8 +16,7 @@
             <h3>Required Majors: {scholarship.requiredMajors}</h3>
             <h3>Required Minors: {scholarship.requiredMinors}</h3>
             <h3>Deadline: {scholarship.deadline}</h3>
-            <a
-                href="/studentViewScholarship/application-{scholarship.id}">
+            <a href="/studentViewScholarship/application-{scholarship.id}">
                 <button>Apply</button>
             </a>
         </div>

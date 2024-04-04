@@ -11,8 +11,7 @@
             <div>
                 <h3>Name: {scholarship.name}</h3>
                 <h3>Total Amount: ${scholarship.amount}</h3>
-                <a
-                    href="/studentViewScholarship/scholarship-{scholarship.id}">
+                <a href="/studentViewScholarship/scholarship-{scholarship.id}">
                     <button>View Scholarship</button>
                 </a>
             </div>

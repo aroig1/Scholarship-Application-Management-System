@@ -4,9 +4,6 @@
     </h2>
     <nav>
         <li>
-            <a href="/createScholarship">Create Scholarship</a>
-        </li>
-        <li>
             <a href="/donorScholarships">Donor Scholarships</a>
         </li>
         <li>

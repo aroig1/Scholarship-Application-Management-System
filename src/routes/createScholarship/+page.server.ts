@@ -2,7 +2,7 @@ import {saveScholarship, loadUser} from "$lib/util";
 import {v4 as uuidv4} from "uuid";
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 
-import type {Actions} from "@sveltejs/kit";
+import {redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
 export const actions: Actions = {
@@ -28,6 +28,8 @@ export const actions: Actions = {
         };
 
         saveScholarship(db, scholarship);
+
+        redirect(302, "/donorScholarships");
 
         return {
             success: true

@@ -43,6 +43,9 @@
 </script>
 
 <section>
+    <a href="/donorScholarships">
+        <h3>Back</h3>
+    </a>
     <h1>Create New Scholarship</h1>
     <form method="POST">
         <div>
