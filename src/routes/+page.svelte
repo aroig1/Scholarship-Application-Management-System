@@ -13,5 +13,8 @@
     <a href="/studentApplication">Student Application</a>
 </li>
 <li>
+    <a href="/applicantInfo">Applicant Info</a>
+</li>
+<li>
     <a href="/logoutPage">SIGN OUT</a>
 </li>
