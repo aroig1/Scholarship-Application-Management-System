@@ -13,7 +13,6 @@
     const form2 = useForm();
 </script>
 
-<a href="/">Home</a>
 <form use:form2 method="POST">
     <div class="info-container">
         <h1>Create Account</h1>

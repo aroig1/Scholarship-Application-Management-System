@@ -67,77 +67,91 @@
     let ethnicitySelected = [""];
 </script>
 
-<a href="/">Home</a>
-
 <section>
     <h1>Student Application</h1>
-    <div>
-        <h3>Full Name</h3>
-        <input type="text" placeholder="First Name(required)" maxlength="20" />
-        <input type="text" placeholder="Middle Name(optional)" maxlength="20" />
-        <input type="text" placeholder="Last Name(required)" maxlength="20" />
-    </div>
-    <div>
-        <h3>Preferred Pronouns</h3>
-        <MultiSelect
-            bind:value={pronounsSelected}
-            options={Pronouns}
-            placeholder="Preferred Pronouns"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-    </div>
-    <div>
-        <h3>Student ID</h3>
-        <input type="text" placeholder="Student ID" maxlength="20" />
-    </div>
-    <div>
-        <h3>Select Majors</h3>
-        <MultiSelect
-            bind:value={majorsSelected}
-            options={majors}
-            placeholder="Select Majors"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-    </div>
-    <div>
-        <h3>Select Minors</h3>
-        <MultiSelect
-            bind:value={minorsSelected}
-            options={minors}
-            placeholder="Select minors"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-    </div>
-    <div>
-        <h3>Cumulative GPA</h3>
-        <input type="number" placeholder="3.0" min="0" />
-    </div>
-    <div>
-        <h3>Current Year</h3>
-        <MultiSelect
-            bind:value={yearsSelected}
-            options={years}
-            placeholder="Select Current Year"
-            closeDropdownOnSelect={true}>
-        </MultiSelect>
-    </div>
-    <div>
-        <h3>Ethnicity</h3>
-        <MultiSelect
-            bind:value={ethnicitySelected}
-            options={ethnicity}
-            placeholder="Select Ethnicity"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-    </div>
-    <div>
-        <h3>Personal Statement</h3>
-        <input type="text" placeholder="Personal Statement" maxlength="5000" />
-    </div>
-    <div>
-        <h3>Work Experience</h3>
-        <input type="text" placeholder="Work Experience" maxlength="1000" />
-    </div>
+    <form method="POST">
+        <div>
+            <h3>Full Name</h3>
+            <input
+                type="text"
+                placeholder="First Name(required)"
+                maxlength="20" />
+            <input
+                type="text"
+                placeholder="Middle Name(optional)"
+                maxlength="20" />
+            <input
+                type="text"
+                placeholder="Last Name(required)"
+                maxlength="20" />
+        </div>
+        <div>
+            <h3>Preferred Pronouns</h3>
+            <MultiSelect
+                bind:value={pronounsSelected}
+                options={Pronouns}
+                placeholder="Preferred Pronouns"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+        </div>
+        <div>
+            <h3>Student ID</h3>
+            <input type="text" placeholder="Student ID" maxlength="20" />
+        </div>
+        <div>
+            <h3>Select Majors</h3>
+            <MultiSelect
+                bind:value={majorsSelected}
+                options={majors}
+                placeholder="Select Majors"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+        </div>
+        <div>
+            <h3>Select Minors</h3>
+            <MultiSelect
+                bind:value={minorsSelected}
+                options={minors}
+                placeholder="Select minors"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+        </div>
+        <div>
+            <h3>Cumulative GPA</h3>
+            <input type="number" placeholder="3.0" min="0" />
+        </div>
+        <div>
+            <h3>Current Year</h3>
+            <MultiSelect
+                bind:value={yearsSelected}
+                options={years}
+                placeholder="Select Current Year"
+                closeDropdownOnSelect={true}>
+            </MultiSelect>
+        </div>
+        <div>
+            <h3>Ethnicity</h3>
+            <MultiSelect
+                bind:value={ethnicitySelected}
+                options={ethnicity}
+                placeholder="Select Ethnicity"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+        </div>
+        <div>
+            <h3>Personal Statement</h3>
+            <input
+                name="statement"
+                type="text"
+                placeholder="Personal Statement"
+                maxlength="5000" />
+        </div>
+        <div>
+            <h3>Work Experience</h3>
+            <input type="text" placeholder="Work Experience" maxlength="1000" />
+        </div>
+        <button>Submit Application</button>
+    </form>
 </section>
 
 <style>

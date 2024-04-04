@@ -5,7 +5,10 @@ import type {
     Application,
     ApplicantInfo,
     UserID,
-    ScholarshipID
+    Password,
+    ApplicationID,
+    ScholarshipID,
+    Major
 } from "$lib/types";
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE
@@ -52,13 +55,13 @@ export async function checkApplicantInfoTableExists(db: D1Database) {
     await db
         .prepare(
             `CREATE TABLE IF NOT EXISTS applicationInfo (
-        user VARCHAR PRIMARY KEY, 
-        majors VARCHAR, 
-        minors VARCHAR, 
-        GPA FLOAT, 
-        year VARCHAR, 
-        ethnicity VARCHAR, 
-        prefferedPronouns VARCHAR, 
+        user VARCHAR PRIMARY KEY,
+        majors VARCHAR,
+        minors VARCHAR,
+        GPA FLOAT,
+        year VARCHAR,
+        ethnicity VARCHAR,
+        prefferedPronouns VARCHAR,
         workExperience TEXT,
         netID VARCHAR(255),
         studentID VARCHAR(255)
@@ -71,15 +74,15 @@ export async function checkScholarshipTableExists(db: D1Database) {
     await db
         .prepare(
             `CREATE TABLE IF NOT EXISTS scholarships (
-        id VARCHAR PRIMARY KEY, 
-        name VARCHAR, 
-        amount INTEGER, 
-        donorID VARCHAR, 
-        numAvailable INTEGER, 
-        requiredMajors VARCHAR, 
-        requiredMinors VARCHAR, 
-        requiredGPA FLOAT, 
-        deadline DATE, 
+        id VARCHAR PRIMARY KEY,
+        name VARCHAR,
+        amount INTEGER,
+        donorID VARCHAR,
+        numAvailable INTEGER,
+        requiredMajors VARCHAR,
+        requiredMinors VARCHAR,
+        requiredGPA FLOAT,
+        deadline VARCHAR,
         other TEXT
     );`
         )
@@ -91,8 +94,8 @@ export async function checkApplicationTableExists(db: D1Database) {
         .prepare(
             `CREATE TABLE IF NOT EXISTS applications (
         id VARCHAR PRIMARY KEY,
-        applicant VARCHAR, 
-        scholarship VARCHAR, 
+        applicant VARCHAR,
+        scholarship VARCHAR,
         statement TEXT
     );`
         )
@@ -123,11 +126,10 @@ export async function loadUser(
 ): Promise<User | null> {
     await checkUserTableExists(db);
     const result = await db
-        .prepare("SELECT * FROM users WHERE username = ?")
+        .prepare("SELECT * FROM users WHERE username = ? LIMIT 1")
         .bind(username)
         .all();
 
-    // const user: User = result.results as unknown as User;
     if (result.results.length > 0) {
         const user: User = result.results[0] as unknown as User;
 
@@ -137,6 +139,7 @@ export async function loadUser(
                 salt: result.results[0].salt as string
             };
         }
+
         return user;
     }
     return null;
@@ -172,8 +175,8 @@ export async function saveApplicantInfo(
     )
         .bind(
             applicant.user,
-            applicant.majors,
-            applicant.minors,
+            JSON.stringify(applicant.majors),
+            JSON.stringify(applicant.minors),
             applicant.GPA,
             applicant.year,
             applicant.ethnicity,
@@ -188,17 +191,31 @@ export async function saveApplicantInfo(
 export async function loadApplicantInfo(
     db: D1Database,
     user: UserID
-): Promise<ApplicantInfo> {
+): Promise<ApplicantInfo | null> {
     await checkApplicantInfoTableExists(db);
     const result = await db
-        .prepare("SELECT * FROM applicantInfo WHERE user = ?")
+        .prepare("SELECT * FROM applicantInfo WHERE user = ? LIMIT 1")
         .bind(user)
         .all();
 
-    const applicantInfo: ApplicantInfo =
-        result.results as unknown as ApplicantInfo;
+    if (result.results.length > 0) {
+        const applicantInfo: ApplicantInfo = result
+            .results[0] as unknown as ApplicantInfo;
 
-    return applicantInfo;
+        if ("majors" in result.results[0]) {
+            applicantInfo.majors = JSON.parse(
+                result.results[0].majors as string
+            ).map((s: string) => s as Major);
+        }
+        if ("minors" in result.results[0]) {
+            applicantInfo.minors = JSON.parse(
+                result.results[0].minors as string
+            ).map((s: string) => s as Major);
+        }
+
+        return applicantInfo;
+    }
+    return null;
 }
 
 export async function updateApplicantInfo(
@@ -211,8 +228,8 @@ export async function updateApplicantInfo(
     )
         .bind(
             applicant.user,
-            applicant.majors,
-            applicant.minors,
+            JSON.stringify(applicant.majors),
+            JSON.stringify(applicant.minors),
             applicant.GPA,
             applicant.year,
             applicant.ethnicity,
@@ -230,17 +247,17 @@ export async function saveScholarship(
 ) {
     await checkScholarshipTableExists(db);
     // id, donorID, major, minor, date have special types
-    db.prepare("INSERT INTO sholarships VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+    db.prepare("INSERT INTO scholarships VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
         .bind(
             scholarship.id,
             scholarship.name,
             scholarship.amount,
             scholarship.donorID,
             scholarship.numAvailable,
-            scholarship.requiredMajors,
-            scholarship.requiredMinors,
+            JSON.stringify(scholarship.requiredMajors),
+            JSON.stringify(scholarship.requiredMinors),
             scholarship.requiredGPA,
-            scholarship.deadline,
+            scholarship.deadline.toString(),
             scholarship.other
         )
         .run();
@@ -248,17 +265,37 @@ export async function saveScholarship(
 
 export async function loadScholarship(
     db: D1Database,
-    name: string
-): Promise<Scholarship> {
+    id: ScholarshipID
+): Promise<Scholarship | null> {
     await checkScholarshipTableExists(db);
     const result = await db
-        .prepare('SELECT * FROM scholarships WHERE name LIKE "?%"')
-        .bind(name)
+        .prepare("SELECT * FROM scholarships WHERE id == ? LIMIT 1")
+        .bind(id)
         .all();
 
-    const scholarship: Scholarship = result.results as unknown as Scholarship;
+    if (result.results.length > 0) {
+        const scholarship: Scholarship = result
+            .results[0] as unknown as Scholarship;
 
-    return scholarship;
+        if ("requiredMajors" in result.results[0]) {
+            scholarship.requiredMajors = JSON.parse(
+                result.results[0].requiredMajors as string
+            ).map((s: string) => s as Major);
+        }
+        if ("requiredMinors" in result.results[0]) {
+            scholarship.requiredMinors = JSON.parse(
+                result.results[0].requiredMinors as string
+            ).map((s: string) => s as Major);
+        }
+
+        // TODO fix date handling
+        // if ("deadline" in result.results[0]) {
+        //     scholarship.deadline = new Date()
+        // }
+
+        return scholarship;
+    }
+    return null;
 }
 
 export async function updateScholarship(
@@ -275,10 +312,10 @@ export async function updateScholarship(
             scholarship.amount,
             scholarship.donorID,
             scholarship.numAvailable,
-            scholarship.requiredMajors,
-            scholarship.requiredMinors,
+            JSON.stringify(scholarship.requiredMajors),
+            JSON.stringify(scholarship.requiredMinors),
             scholarship.requiredGPA,
-            scholarship.deadline,
+            scholarship.deadline.toString(),
             scholarship.other,
             scholarship.id
         )
@@ -304,7 +341,7 @@ export async function loadApplication(
     db: D1Database,
     applicant: UserID,
     scholarship: ScholarshipID
-): Promise<Application> {
+): Promise<Application | null> {
     await checkApplicationTableExists(db);
     const result = await db
         .prepare(
@@ -313,9 +350,13 @@ export async function loadApplication(
         .bind(applicant, scholarship)
         .all();
 
-    const application: Application = result.results as unknown as Application;
+    if (result.results.length > 0) {
+        const application: Application = result
+            .results[0] as unknown as Application;
 
-    return application;
+        return application;
+    }
+    return null;
 }
 
 export async function updateApplication(

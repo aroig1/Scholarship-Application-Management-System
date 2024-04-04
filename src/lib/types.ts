@@ -17,7 +17,7 @@ export const majors = [
     "Software Engineering",
     "Systems Engineering"
 ] as const;
-export type Major = (typeof majors)[number];
+export type Major = Readonly<(typeof majors)[number]>;
 
 export const minors = [
     "Aerospace Engineering",
@@ -36,7 +36,7 @@ export const minors = [
     "Sustainable Mineral Resources",
     "Systems Engineering"
 ] as const;
-export type Minor = (typeof minors)[number];
+export type Minor = Readonly<(typeof minors)[number]>;
 
 export type UserID = string;
 export type ScholarshipID = string;

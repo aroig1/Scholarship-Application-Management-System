@@ -1,112 +1,111 @@
 <script>
     import {MultiSelect} from "svelte-multiselect";
 
-    let majors = [
-        "Aerospace Engineering",
-        "Architectural Engineering",
-        "Biomedical Engineering",
-        "Biosystems Engineering",
-        "Chemical Engineering",
-        "Civil Engineering",
-        "Computer Science and Engineering",
-        "Electrical and Computer Engineering",
-        "Engineering Management",
-        "Environmental Engineering",
-        "Industrial Engineering",
-        "Materials Science and Engineering",
-        "Mechanical Engineering",
-        "Mining Engineering",
-        "Optical Sciences and Engineering",
-        "Software Engineering",
-        "Systems Engineering"
-    ];
-    let majorsSelected = [""];
+    /** @type {import('./$types').PageData} */
+    export let data;
 
-    let minors = [
-        "Aerospace Engineering",
-        "Biosystems Engineering",
-        "Chemical Engineering",
-        "Civil Engineering",
-        "Electrical and Computer Engineering",
-        "Engineering Management",
-        "Environmental Engineering",
-        "Industrial Engineering",
-        "Materials Science and Engineering",
-        "Mechanical Engineering",
-        "Mining Engineering",
-        "Optical Sciences and Engineering",
-        "Software Engineering",
-        "Sustainable Mineral Resources",
-        "Systems Engineering"
-    ];
-    let minorsSelected = [""];
+    /** @type {import('$lib/types').Major[]} */
+    let majorsSelected = [];
+    /** @type {import('$lib/types').Minor[]} */
+    let minorsSelected = [];
 </script>
 
-<a href="/">Home</a>
 <section>
     <h1>Create New Scholarship</h1>
-    <div>
-        <h3>Enter scholarship name</h3>
-        <input
-            type="text"
-            placeholder="super special scholarship"
-            maxlength="25" />
-    </div>
-    <div>
-        <h3>Enter scholarship amount</h3>
-        <input type="number" placeholder="1000" min="0" />
-    </div>
-    <div>
-        <h3>Enter scholarship donor/sponsor full name</h3>
-        <input type="text" placeholder="first name" maxlength="15" />
-        <input type="text" placeholder="last name" maxlength="15" />
-    </div>
-    <div>
-        <h3>Enter donor phone number</h3>
-        <input type="text" placeholder="(999) 999-9999" maxlength="20" />
-    </div>
-    <div>
-        <h3>Enter donor email address</h3>
-        <input type="email" placeholder="netID@arizona.edu" maxlength="25" />
-    </div>
-    <div>
-        <h3>Enter number of scholarships available</h3>
-        <input type="number" placeholder="3" min="0" />
-    </div>
-    <div>
-        <h3>Enter required majors (optional)</h3>
-        <MultiSelect
-            bind:value={majorsSelected}
-            options={majors}
-            placeholder="Pick required majors"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-    </div>
-    <div>
-        <h3>Enter required minor (optional)</h3>
-        <MultiSelect
-            bind:value={minorsSelected}
-            options={minors}
-            placeholder="Pick required minors"
-            closeDropdownOnSelect={false}>
-        </MultiSelect>
-    </div>
-    <div>
-        <h3>Enter minimum required GPA (optional)</h3>
-        <input type="number" placeholder="3.0" min="0" />
-    </div>
-    <div>
-        <h3>Enter application deadline</h3>
-        <input type="date" />
-    </div>
-    <div>
-        <h3>Enter any additional scholarship requirements (optional)</h3>
-        <input
-            class="other"
-            type="text"
-            placeholder="ex: Must be interested in IoT" />
-    </div>
-    <button>Create Scholarship</button>
+    <form method="POST">
+        <div>
+            <h3>Enter scholarship name</h3>
+            <input
+                name="name"
+                type="text"
+                placeholder="super special scholarship"
+                maxlength="25" />
+        </div>
+        <div>
+            <h3>Enter scholarship amount</h3>
+            <input
+                name="amount"
+                type="number"
+                step="0.01"
+                placeholder="1000"
+                min="0" />
+        </div>
+        <div>
+            <h3>Enter scholarship donor/sponsor full name</h3>
+            <input
+                name="firstName"
+                type="text"
+                placeholder="first name"
+                maxlength="15" />
+            <input
+                name="lastName"
+                type="text"
+                placeholder="last name"
+                maxlength="15" />
+        </div>
+        <div>
+            <h3>Enter donor phone number</h3>
+            <input
+                name="phoneNumber"
+                type="text"
+                placeholder="(999) 999-9999"
+                maxlength="20" />
+        </div>
+        <div>
+            <h3>Enter donor email address</h3>
+            <input
+                name="email"
+                type="email"
+                placeholder="netID@arizona.edu"
+                maxlength="25" />
+        </div>
+        <div>
+            <h3>Enter number of scholarships available</h3>
+            <input name="numAvailable" type="number" placeholder="3" min="0" />
+        </div>
+        <div>
+            <h3>Enter required majors (optional)</h3>
+            <MultiSelect
+                name="requiredMajors"
+                bind:value={majorsSelected}
+                options={data.majors}
+                placeholder="Pick required majors"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+        </div>
+        <div>
+            <h3>Enter required minor (optional)</h3>
+            <MultiSelect
+                name="requiredMinors"
+                bind:value={minorsSelected}
+                options={data.minors}
+                placeholder="Pick required minors"
+                closeDropdownOnSelect={false}>
+            </MultiSelect>
+        </div>
+        <div>
+            <h3>Enter minimum required GPA (optional)</h3>
+            <input
+                name="requiredGPA"
+                type="number"
+                step="0.01"
+                placeholder="3.0"
+                min="0" />
+        </div>
+        <div>
+            <h3>Enter application deadline</h3>
+            <input name="deadline" type="date" />
+        </div>
+        <div>
+            <h3>Enter any additional scholarship requirements (optional)</h3>
+            <input
+                name="other"
+                class="other"
+                type="text"
+                placeholder="ex: Must be interested in IoT" />
+        </div>
+        <button>Create Scholarship</button>
+    </form>
 </section>
 
 <style>
