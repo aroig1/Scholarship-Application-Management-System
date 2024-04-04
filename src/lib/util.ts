@@ -220,6 +220,12 @@ export async function loadApplicantInfo(
             ).map((s: string) => s as string);
         }
 
+        if ("workExperience" in result.results[0]) {
+            applicantInfo.workExperience = JSON.parse(
+                result.results[0].workExperience as string
+            ).map((s: string) => s as string);
+        }
+
         return applicantInfo;
     }
     return null;
@@ -368,11 +374,13 @@ export async function updateApplication(
     await checkApplicationTableExists(db);
     db.prepare(
         "UPDATE applications SET id = ?, applicant = ?, scholarship = ?, statement = ? WHERE id = ?"
-    ).bind(
-        application.id,
-        application.applicant,
-        application.scholarship,
-        application.statement,
-        application.id
-    );
+    )
+        .bind(
+            application.id,
+            application.applicant,
+            application.scholarship,
+            application.statement,
+            application.id
+        )
+        .run();
 }

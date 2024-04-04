@@ -4,7 +4,7 @@ import type {Major, Minor, Scholarship} from "$lib/types.js";
 import type {PageServerLoad} from "./$types";
 import {majors, minors} from "$lib/types";
 
-import type {Actions} from "@sveltejs/kit";
+import {redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
 export const load: PageServerLoad = async ({params, platform}) => {
@@ -39,6 +39,8 @@ export const actions: Actions = {
         console.log(scholarship);
 
         saveScholarship(db, scholarship);
+
+        redirect(302, "/donorScholarships");
 
         return {
             success: true
