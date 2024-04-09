@@ -93,7 +93,7 @@ export type ApplicantInfo = {
     year: StudentYear;
     ethnicity: Ethnicity;
     preferredPronouns: string;
-    workExperience: string;
+    workExperience: string[];
     netID: string;
     studentID: string;
 };
