@@ -1,7 +1,6 @@
 <script>
     export let data;
     const scholarships = data.scholarships;
-    console.log(data);
 </script>
 
 <section>
