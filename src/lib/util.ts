@@ -211,13 +211,7 @@ export async function loadApplicantInfo(
         if ("minors" in result.results[0]) {
             applicantInfo.minors = JSON.parse(
                 result.results[0].minors as string
-            ).map((s: string) => s as Minor);
-        }
-
-        if ("workExperience" in result.results[0]) {
-            applicantInfo.workExperience = JSON.parse(
-                result.results[0].workExperience as string
-            ).map((s: string) => s as string);
+            ).map((s: string) => s as Major);
         }
 
         if ("workExperience" in result.results[0]) {
