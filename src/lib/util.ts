@@ -54,7 +54,7 @@ export async function checkUserTableExists(db: D1Database) {
 export async function checkApplicantInfoTableExists(db: D1Database) {
     await db
         .prepare(
-            `CREATE TABLE IF NOT EXISTS applicationInfo (
+            `CREATE TABLE IF NOT EXISTS applicantInfo (
         user VARCHAR PRIMARY KEY,
         majors VARCHAR,
         minors VARCHAR,
@@ -181,7 +181,7 @@ export async function saveApplicantInfo(
             applicant.year,
             applicant.ethnicity,
             applicant.preferredPronouns,
-            applicant.workExperience,
+            JSON.stringify(applicant.workExperience),
             applicant.netID,
             applicant.studentID
         )
@@ -213,6 +213,12 @@ export async function loadApplicantInfo(
             ).map((s: string) => s as Major);
         }
 
+        if ("workExperience" in result.results[0]) {
+            applicantInfo.workExperience = JSON.parse(
+                result.results[0].workExperience as string
+            ).map((s: string) => s as string);
+        }
+
         return applicantInfo;
     }
     return null;
@@ -224,7 +230,7 @@ export async function updateApplicantInfo(
 ) {
     await checkApplicantInfoTableExists(db);
     db.prepare(
-        "UPDATE applicantInfo SET user = ?, majors = ?, minors = ?, GPA = ?, year = ?, ethnicity = ?, prefferedPronouns = ?, workExperience = ?, netID = ? studentID = ? WHERE user = ?"
+        "UPDATE applicantInfo SET user = ?, majors = ?, minors = ?, GPA = ?, year = ?, ethnicity = ?, prefferedPronouns = ?, workExperience = ?, netID = ?, studentID = ? WHERE user = ?"
     )
         .bind(
             applicant.user,
@@ -235,8 +241,8 @@ export async function updateApplicantInfo(
             applicant.ethnicity,
             applicant.preferredPronouns,
             applicant.workExperience,
-            applicant.studentID,
-            applicant.netID
+            applicant.netID,
+            applicant.studentID
         )
         .run();
 }
@@ -287,11 +293,6 @@ export async function loadScholarship(
                 result.results[0].requiredMinors as string
             ).map((s: string) => s as Major);
         }
-
-        // TODO fix date handling
-        // if ("deadline" in result.results[0]) {
-        //     scholarship.deadline = new Date()
-        // }
 
         return scholarship;
     }

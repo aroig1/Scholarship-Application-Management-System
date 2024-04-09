@@ -17,7 +17,7 @@ export const majors = [
     "Software Engineering",
     "Systems Engineering"
 ] as const;
-export type Major = Readonly<(typeof majors)[number]>;
+export type Major = (typeof majors)[number];
 
 export const minors = [
     "Aerospace Engineering",
@@ -36,7 +36,7 @@ export const minors = [
     "Sustainable Mineral Resources",
     "Systems Engineering"
 ] as const;
-export type Minor = Readonly<(typeof minors)[number]>;
+export type Minor = (typeof minors)[number];
 
 export type UserID = string;
 export type ScholarshipID = string;
@@ -63,10 +63,10 @@ export enum UserType {
 }
 
 export enum StudentYear {
-    Freshman,
-    Sophomore,
-    Junior,
-    Senior
+    Freshman = "Freshman",
+    Sophomore = "Sophomore",
+    Junior = "Junior",
+    Senior = "Senior"
 }
 
 export type Password = {
