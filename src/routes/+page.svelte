@@ -8,7 +8,9 @@
         >Shortcut Modify Scholarship</a>
 </li>
 <li>
-    <a href="/studentViewScholarship/application-6edf1e4c-2178-40a2-8825-7faadbb9f072">Shortcut Student Application</a>
+    <a
+        href="/studentViewScholarship/application-6edf1e4c-2178-40a2-8825-7faadbb9f072"
+        >Shortcut Student Application</a>
 </li>
 <li>
     <a href="/applicantInfo">Applicant Info</a>
