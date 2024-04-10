@@ -1,0 +1,19 @@
+<script>
+    export let data;
+    const applicant = data.applicant[0];
+</script>
+
+<section>
+    <a href="/donorScholarships/applicants-{applicant.scholarship}">
+        <h3>Back</h3>
+    </a>
+    <h2>{applicant.firstName} {applicant.lastName}</h2>
+    <p>Year: {applicant.year}</p>
+    <p>Majors: {applicant.majors}</p>
+    <p>Minors: {applicant.minors}</p>
+    <p>GPA: {applicant.GPA}</p>
+    <h3>Work Experience</h3>
+    <p>{applicant.workExperience}</p>
+    <h3>Statement</h3>
+    <p>{applicant.statement}</p>
+</section>

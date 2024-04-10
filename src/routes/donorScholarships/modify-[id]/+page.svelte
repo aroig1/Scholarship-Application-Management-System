@@ -4,7 +4,46 @@
     /** @type {import('./$types').PageData} */
     export let data;
     /** @type {import('$lib/types').Scholarship} */
+    // @ts-ignore
     const scholarship = data.scholarship;
+
+    let majors = [
+        "Aerospace Engineering",
+        "Architectural Engineering",
+        "Biomedical Engineering",
+        "Biosystems Engineering",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Computer Science and Engineering",
+        "Electrical and Computer Engineering",
+        "Engineering Management",
+        "Environmental Engineering",
+        "Industrial Engineering",
+        "Materials Science and Engineering",
+        "Mechanical Engineering",
+        "Mining Engineering",
+        "Optical Sciences and Engineering",
+        "Software Engineering",
+        "Systems Engineering"
+    ];
+
+    let minors = [
+        "Aerospace Engineering",
+        "Biosystems Engineering",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Electrical and Computer Engineering",
+        "Engineering Management",
+        "Environmental Engineering",
+        "Industrial Engineering",
+        "Materials Science and Engineering",
+        "Mechanical Engineering",
+        "Mining Engineering",
+        "Optical Sciences and Engineering",
+        "Software Engineering",
+        "Sustainable Mineral Resources",
+        "Systems Engineering"
+    ];
 
     let areaClicked = {
         name: false,
@@ -58,7 +97,6 @@
                 name="amount"
                 value={scholarship.amount}
                 type="number"
-                step="0.01"
                 placeholder="Enter scholarship amount here"
                 min="0" />
             <div class="buttons">
@@ -100,7 +138,7 @@
             <MultiSelect
                 name="requiredMajors"
                 value={scholarship.requiredMajors}
-                options={data.majors}
+                options={majors}
                 placeholder="Pick required majors"
                 closeDropdownOnSelect={false}>
             </MultiSelect>
@@ -122,7 +160,7 @@
             <MultiSelect
                 name="requiredMinors"
                 value={scholarship.requiredMinors}
-                options={data.minors}
+                options={minors}
                 placeholder="Pick required majors"
                 closeDropdownOnSelect={false}>
             </MultiSelect>
@@ -145,7 +183,6 @@
                 name="requiredGPA"
                 value={scholarship.requiredGPA}
                 type="number"
-                step="0.01"
                 placeholder="Enter minimum required GPA here"
                 min="0" />
             <div class="buttons">

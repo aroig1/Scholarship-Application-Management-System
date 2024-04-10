@@ -8,7 +8,8 @@ import type {
     Password,
     ApplicationID,
     ScholarshipID,
-    Major
+    Major,
+    Minor
 } from "$lib/types";
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE
@@ -367,11 +368,13 @@ export async function updateApplication(
     await checkApplicationTableExists(db);
     db.prepare(
         "UPDATE applications SET id = ?, applicant = ?, scholarship = ?, statement = ? WHERE id = ?"
-    ).bind(
-        application.id,
-        application.applicant,
-        application.scholarship,
-        application.statement,
-        application.id
-    );
+    )
+        .bind(
+            application.id,
+            application.applicant,
+            application.scholarship,
+            application.statement,
+            application.id
+        )
+        .run();
 }

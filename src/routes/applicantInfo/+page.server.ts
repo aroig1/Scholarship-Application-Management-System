@@ -3,7 +3,7 @@ import type {ApplicantInfo, Ethnicity, Major, Minor} from "$lib/types.js";
 import type {PageServerLoad} from "./$types";
 import {majors, minors, ethnicities, StudentYear} from "$lib/types.js";
 
-import type {Actions} from "@sveltejs/kit";
+import {redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
 export const load: PageServerLoad = async ({params, platform}) => {
@@ -38,6 +38,8 @@ export const actions: Actions = {
         };
 
         saveApplicantInfo(db, applicantInfo);
+
+        redirect(302, "/");
 
         return {
             success: true

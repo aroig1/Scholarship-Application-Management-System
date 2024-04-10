@@ -4,13 +4,13 @@
     </h2>
     <nav>
         <li>
-            <a href="/createScholarship">Create Scholarship</a>
-        </li>
-        <li>
-            <a href="/studentApplication">Create Student Application</a>
+            <a href="/studentViewScholarship">Student Scholarships</a>
         </li>
         <li>
             <a href="/donorScholarships">Donor Scholarships</a>
+        </li>
+        <li>
+            <a href="/applicantInfo">Applicant Information</a>
         </li>
         <li>
             <a href="/loginPage">Login Page</a>
