@@ -62,7 +62,7 @@ export async function checkApplicantInfoTableExists(db: D1Database) {
         GPA FLOAT,
         year VARCHAR,
         ethnicity VARCHAR,
-        prefferedPronouns VARCHAR,
+        preferredPronouns VARCHAR,
         workExperience TEXT,
         netID VARCHAR(255),
         studentID VARCHAR(255)
@@ -231,7 +231,7 @@ export async function updateApplicantInfo(
 ) {
     await checkApplicantInfoTableExists(db);
     db.prepare(
-        "UPDATE applicantInfo SET user = ?, majors = ?, minors = ?, GPA = ?, year = ?, ethnicity = ?, prefferedPronouns = ?, workExperience = ?, netID = ?, studentID = ? WHERE user = ?"
+        "UPDATE applicantInfo SET user = ?, majors = ?, minors = ?, GPA = ?, year = ?, ethnicity = ?, preferredPronouns = ?, workExperience = ?, netID = ?, studentID = ? WHERE user = ?"
     )
         .bind(
             applicant.user,
@@ -241,9 +241,10 @@ export async function updateApplicantInfo(
             applicant.year,
             applicant.ethnicity,
             applicant.preferredPronouns,
-            applicant.workExperience,
+            JSON.stringify(applicant.workExperience),
             applicant.netID,
-            applicant.studentID
+            applicant.studentID,
+            applicant.user
         )
         .run();
 }

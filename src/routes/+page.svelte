@@ -16,6 +16,9 @@
     <a href="/applicantInfo">Applicant Info</a>
 </li>
 <li>
+    <a href="/modifyApplicantInfo">Modify Applicant Info</a>
+</li>
+<li>
     <a href="/donorScholarships">Donor Scholarships</a>
 </li>
 <li>

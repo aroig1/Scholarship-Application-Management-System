@@ -13,6 +13,9 @@
             <a href="/applicantInfo">Applicant Information</a>
         </li>
         <li>
+            <a href="/modifyApplicantInfo">Modify Applicant Info</a>
+        </li>
+        <li>
             <a href="/loginPage">Login Page</a>
         </li>
         <li>
