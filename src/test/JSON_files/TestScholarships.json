@@ -1,0 +1,122 @@
+[
+    {
+        "id": "6d9391b7-2d43-4e68-a0c7-05d081a63b40",
+        "name": "Innovation Excellence Scholarship",
+        "amount": "1000",
+        "donorID": "s5g3m7h2x8z0b9",
+        "numAvailable": 10,
+        "requiredMajors": "Architectural Engineering, Mechanical Engineering, Industrial Engineering",
+        "requiredMinors": "Mechanical Engineering, Industrial Engineering",
+        "requiredGPA": 3.2,
+        "deadline": "2024-04-10",
+        "other": "none"
+    },
+    {
+        "id": "9f01da51-2655-4d60-bb27-44c498c08d71",
+        "name": "Future Engineers Grant",
+        "amount": "5000",
+        "numAvailable": 2,
+        "donorID": "s5g3m7h2x8z0b9",
+        "requiredMajors": "none",
+        "requiredMinors": "none",
+        "requiredGPA": 3.5,
+        "deadline": "2024-05-03",
+        "other": "none"
+    },
+    {
+        "id": "5aa2d7b5-7301-4b17-8d42-6c7b65b33aae",
+        "name": "STEM Leadership Award",
+        "amount": "2500",
+        "donorID": "s5g3m7h2x8z0b9",
+        "numAvailable": 4,
+        "requiredMajors": "none",
+        "requiredMinors": "none",
+        "requiredGPA": 2.5,
+        "deadline": "2024-06-15",
+        "other": "Must be Freshmen/Sophomore"
+    },
+    {
+        "id": "e07f5a8d-9518-4340-b04e-3dc6e60cc7f9",
+        "name": "Diversity in Engineering Scholarship",
+        "amount": "1000",
+        "donorID": "f8k2d6n9p3r4o1i",
+        "numAvailable": 5,
+        "requiredMajors": "Biomedical Engineering, Biosystems Engineering, Chemical Engineering, Environmental Engineering",
+        "requiredMinors": "none",
+        "requiredGPA": 3.0,
+        "deadline": "2024-07-07",
+        "other": "none"
+    },
+    {
+        "id": "2b1b0e8e-4e7b-49cf-8a7d-5ed2d1724971",
+        "name": "Sustainable Engineering Fellowship",
+        "amount": "500",
+        "donorID": "f8k2d6n9p3r4o1i",
+        "numAvailable": 10,
+        "requiredMajors": "Environmental Engineering",
+        "requiredMinors": "none",
+        "requiredGPA": 2.0,
+        "deadline": "2024-08-01",
+        "other": "none"
+    },
+    {
+        "id": "3a9c8be7-88ef-482f-bc39-5b5df17d0289",
+        "name": "Technology Advancement Scholarship",
+        "amount": "1500",
+        "donorID": "l1q4v9t3j6r2c0",
+        "numAvailable": 3,
+        "requiredMajors": "Computer Science and Engineering, Electrical and Computer Engineering, Software Engineering, Mining Engineering",
+        "requiredMinors": "Electrical and Computer Engineering, Software Engineering",
+        "requiredGPA": 3.3,
+        "deadline": "2024-04-22",
+        "other": "none"
+    },
+    {
+        "id": "87a352a3-04e6-47d2-9c1b-7a2e93d2d122",
+        "name": "Engineering Achievement Grant",
+        "amount": "7500",
+        "donorID": "l1q4v9t3j6r2c0",
+        "numAvailable": 2,
+        "requiredMajors": "Engineering Management",
+        "requiredMinors": "none",
+        "requiredGPA": 3.5,
+        "deadline": "2024-05-18",
+        "other": "none"
+    },
+    {
+        "id": "c5373328-831a-4c48-8b0a-63ccf36c53c5",
+        "name": "Super Special Engineering Scholarship",
+        "amount": "1000000",
+        "donorID": "l1q4v9t3j6r2c0",
+        "numAvailable": 1,
+        "requiredMajors": "Software Engineering",
+        "requiredMinors": "Software Engineering",
+        "requiredGPA": 4.0,
+        "deadline": "2024-06-05",
+        "other": "Must be apart of Dev Dynasty"
+    },
+    {
+        "id": "14e4b195-3dd8-4d18-8a7e-f924e7f156c3",
+        "name": "Global Engineering Excellence Award",
+        "amount": "10000",
+        "donorID": "s5g3m7h2x8z0b9",
+        "numAvailable": 1,
+        "requiredMajors": "none",
+        "requiredMinors": "none",
+        "requiredGPA": 3.7,
+        "deadline": "2024-07-21",
+        "other": "Must be a Junior"
+    },
+    {
+        "id": "7c4255f6-422b-4f45-bc65-6e80a151305e",
+        "name": "Renewable Energy Scholarship",
+        "amount": "1000",
+        "donorID": "f8k2d6n9p3r4o1i",
+        "numAvailable": 4,
+        "requiredMajors": "Computer Science and Engineering",
+        "requiredMinors": "Environmental Engineering",
+        "requiredGPA": 2.5,
+        "deadline": "2024-08-09",
+        "other": "none"
+    }
+]
