@@ -1,4 +1,4 @@
-import {saveScholarship, loadUser} from "$lib/util";
+import {saveScholarship} from "$lib/util";
 import {v4 as uuidv4} from "uuid";
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 import type {PageServerLoad} from "./$types";
@@ -39,9 +39,5 @@ export const actions: Actions = {
         saveScholarship(db, scholarship);
 
         redirect(302, "/donorScholarships");
-
-        return {
-            success: true
-        };
     }
 };

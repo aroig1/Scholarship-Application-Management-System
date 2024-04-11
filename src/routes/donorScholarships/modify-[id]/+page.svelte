@@ -8,44 +8,6 @@
     // @ts-ignore
     const scholarship = data.scholarship;
 
-    let majors = [
-        "Aerospace Engineering",
-        "Architectural Engineering",
-        "Biomedical Engineering",
-        "Biosystems Engineering",
-        "Chemical Engineering",
-        "Civil Engineering",
-        "Computer Science and Engineering",
-        "Electrical and Computer Engineering",
-        "Engineering Management",
-        "Environmental Engineering",
-        "Industrial Engineering",
-        "Materials Science and Engineering",
-        "Mechanical Engineering",
-        "Mining Engineering",
-        "Optical Sciences and Engineering",
-        "Software Engineering",
-        "Systems Engineering"
-    ];
-
-    let minors = [
-        "Aerospace Engineering",
-        "Biosystems Engineering",
-        "Chemical Engineering",
-        "Civil Engineering",
-        "Electrical and Computer Engineering",
-        "Engineering Management",
-        "Environmental Engineering",
-        "Industrial Engineering",
-        "Materials Science and Engineering",
-        "Mechanical Engineering",
-        "Mining Engineering",
-        "Optical Sciences and Engineering",
-        "Software Engineering",
-        "Sustainable Mineral Resources",
-        "Systems Engineering"
-    ];
-
     let areaClicked = {
         name: false,
         amount: false,
@@ -139,7 +101,7 @@
             <MultiSelect
                 name="requiredMajors"
                 value={scholarship.requiredMajors}
-                options={majors}
+                options={data.majors}
                 placeholder="Pick required majors"
                 closeDropdownOnSelect={false}>
             </MultiSelect>
@@ -161,7 +123,7 @@
             <MultiSelect
                 name="requiredMinors"
                 value={scholarship.requiredMinors}
-                options={minors}
+                options={data.minors}
                 placeholder="Pick required majors"
                 closeDropdownOnSelect={false}>
             </MultiSelect>
