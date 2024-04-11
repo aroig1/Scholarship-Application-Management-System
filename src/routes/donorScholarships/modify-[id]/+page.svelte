@@ -1,5 +1,6 @@
 <script>
     import {MultiSelect} from "svelte-multiselect";
+    import {dateToString} from "$lib/util";
 
     /** @type {import('./$types').PageData} */
     export let data;
@@ -196,11 +197,14 @@
     <form class="info-container" method="POST" action="?/deadline">
         <div on:click={() => (areaClicked.deadline = true)} class="preview">
             <h3>Deadline:</h3>
-            <h4>{scholarship.deadline}</h4>
+            <h4>{dateToString(scholarship.deadline)}</h4>
             <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.deadline}
-            <input name="deadline" value={scholarship.deadline} type="date" />
+            <input
+                name="deadline"
+                value={scholarship.deadline.toISOString().slice(0, 10)}
+                type="date" />
             <div class="buttons">
                 <button>Confirm</button>
                 <button on:click={() => (areaClicked.deadline = false)}

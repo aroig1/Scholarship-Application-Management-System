@@ -290,10 +290,17 @@ export async function loadScholarship(
                 result.results[0].requiredMajors as string
             ).map((s: string) => s as Major);
         }
+
         if ("requiredMinors" in result.results[0]) {
             scholarship.requiredMinors = JSON.parse(
                 result.results[0].requiredMinors as string
             ).map((s: string) => s as Major);
+        }
+
+        if ("deadline" in result.results[0]) {
+            scholarship.deadline = new Date(
+                result.results[0].deadline as string
+            );
         }
 
         return scholarship;
@@ -318,7 +325,7 @@ export async function updateScholarship(
             JSON.stringify(scholarship.requiredMajors),
             JSON.stringify(scholarship.requiredMinors),
             scholarship.requiredGPA,
-            scholarship.deadline.toString(),
+            scholarship.deadline.toISOString().slice(0, 10),
             scholarship.other,
             scholarship.id
         )
@@ -378,4 +385,10 @@ export async function updateApplication(
             application.id
         )
         .run();
+}
+
+export function dateToString(d: Date): string {
+    return (
+        d.getUTCMonth() + 1 + "/" + d.getUTCDate() + "/" + d.getUTCFullYear()
+    );
 }

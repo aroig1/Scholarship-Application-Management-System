@@ -1,4 +1,6 @@
 <script>
+    import {dateToString} from "$lib/util";
+
     export let data;
     const scholarship = data.scholarship;
 </script>
@@ -15,7 +17,7 @@
             <h3>Required GPA: {scholarship.requiredGPA}</h3>
             <h3>Required Majors: {scholarship.requiredMajors}</h3>
             <h3>Required Minors: {scholarship.requiredMinors}</h3>
-            <h3>Deadline: {scholarship.deadline}</h3>
+            <h3>Deadline: {dateToString(scholarship.deadline)}</h3>
             <a href="/studentViewScholarship/application-{scholarship.id}">
                 <button>Apply</button>
             </a>
