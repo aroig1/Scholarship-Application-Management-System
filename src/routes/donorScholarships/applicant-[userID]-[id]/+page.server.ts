@@ -27,8 +27,6 @@ export const load: PageServerLoad = async ({params, platform}) => {
         .bind(params.userID, params.id)
         .all();
 
-    // console.log(result.results)
-
     return {
         applicant: result.results
     };
