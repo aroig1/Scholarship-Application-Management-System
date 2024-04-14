@@ -109,6 +109,7 @@ export type Scholarship = {
     requiredGPA: number;
     deadline: Date;
     other: string;
+    description: string;
 };
 
 export type Application = {

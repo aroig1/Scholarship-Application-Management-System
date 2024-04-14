@@ -19,7 +19,8 @@
         minor: false,
         gpa: false,
         deadline: false,
-        other: false
+        other: false,
+        description: false
     };
 </script>
 
@@ -147,7 +148,9 @@
                 value={scholarship.requiredGPA}
                 type="number"
                 placeholder="Enter minimum required GPA here"
-                min="0" />
+                step="0.01"
+                min="0"
+                max="4" />
             <div class="buttons">
                 <button>Confirm</button>
                 <button on:click={() => (areaClicked.gpa = false)}
@@ -190,6 +193,26 @@
             <div class="buttons">
                 <button>Confirm</button>
                 <button on:click={() => (areaClicked.other = false)}
+                    >Cancel</button>
+            </div>
+        {/if}
+    </form>
+
+    <form class="info-container" method="POST" action="?/description">
+        <div on:click={() => (areaClicked.description = true)} class="preview">
+            <h3>Scholarship Description</h3>
+            <h4>{scholarship.description}</h4>
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
+        </div>
+        {#if areaClicked.description}
+            <input
+                name="description"
+                value={scholarship.description}
+                type="text"
+                placeholder="Enter any other scholarship requirements here" />
+            <div class="buttons">
+                <button>Confirm</button>
+                <button on:click={() => (areaClicked.description = false)}
                     >Cancel</button>
             </div>
         {/if}

@@ -107,6 +107,10 @@
                 type="text"
                 placeholder="ex: Must be interested in IoT" />
         </div>
+        <div>
+            <h3>Enter scholarship description and/or essay prompt.</h3>
+            <input name="description" class="other" type="text" />
+        </div>
         <button>Create Scholarship</button>
     </form>
 </section>
