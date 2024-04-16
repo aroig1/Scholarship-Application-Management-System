@@ -124,12 +124,12 @@ export async function saveUser(db: D1Database, user: User) {
 
 export async function loadUser(
     db: D1Database,
-    username: string
+    id: string
 ): Promise<User | null> {
     await checkUserTableExists(db);
     const result = await db
-        .prepare("SELECT * FROM users WHERE username = ? LIMIT 1")
-        .bind(username)
+        .prepare("SELECT * FROM users WHERE id = ? LIMIT 1")
+        .bind(id)
         .all();
 
     if (result.results.length > 0) {
@@ -150,18 +150,13 @@ export async function loadUser(
 export async function updateUser(db: D1Database, user: User) {
     await checkUserTableExists(db);
     db.prepare(
-        "UPDATE users SET id = ?, username = ?, hash = ?, salt = ?, firstName = ?, lastName = ?, phone = ?, email = ?, type = ? WHERE id = ?"
+        "UPDATE users SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE id = ?"
     )
         .bind(
-            user.id,
-            user.username,
-            user.password.hash,
-            user.password.salt,
             user.firstName,
             user.lastName,
             user.phone,
             user.email,
-            user.type,
             user.id
         )
         .run();

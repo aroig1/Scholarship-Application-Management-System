@@ -2,6 +2,7 @@ import {initializeLucia} from "$lib/server/auth";
 import type {Handle} from "@sveltejs/kit";
 import {dev} from "$app/environment";
 import type {D1Database} from "@cloudflare/workers-types";
+import type {User} from "$lib/types"
 
 let env = {};
 
@@ -59,7 +60,7 @@ export const handle: Handle = async ({event, resolve}) => {
             ...sessionCookie.attributes
         });
     }
-    event.locals.user = user;
+    event.locals.user = user as User;
     event.locals.session = session;
     return resolve(event);
 };
