@@ -12,9 +12,9 @@
     export let form;
     const form2 = useForm();
 
-     /** @type {import('./$types').PageData} */
-     export let data;
-     const user = data.user;
+    /** @type {import('./$types').PageData} */
+    export let data;
+    const user = data.user;
 </script>
 
 <form use:form2 method="POST">
@@ -96,11 +96,6 @@
         margin: 0 auto;
         padding: 10px;
         width: 150px;
-    }
-
-    .username,
-    .password {
-        width: 50%;
     }
 
     .info-container {

@@ -2,7 +2,7 @@ import {initializeLucia} from "$lib/server/auth";
 import type {Handle} from "@sveltejs/kit";
 import {dev} from "$app/environment";
 import type {D1Database} from "@cloudflare/workers-types";
-import type {User} from "$lib/types"
+import type {User} from "$lib/types";
 
 let env = {};
 

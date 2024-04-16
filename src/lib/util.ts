@@ -152,13 +152,7 @@ export async function updateUser(db: D1Database, user: User) {
     db.prepare(
         "UPDATE users SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE id = ?"
     )
-        .bind(
-            user.firstName,
-            user.lastName,
-            user.phone,
-            user.email,
-            user.id
-        )
+        .bind(user.firstName, user.lastName, user.phone, user.email, user.id)
         .run();
 }
 

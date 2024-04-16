@@ -73,10 +73,7 @@ export const load: PageServerLoad = async ({locals, platform}) => {
     const db = platform?.env.DB as D1Database;
 
     await checkUserTableExists(db);
-    const user = (await loadUser(
-        db,
-        locals.user?.id as string
-    )) as User;
+    const user = (await loadUser(db, locals.user?.id as string)) as User;
 
     return {
         user: user
@@ -117,7 +114,6 @@ export const actions: Actions = {
             // console.log(event.platform);
             await checkUserTableExists(event.platform?.env.DB);
             await updateUser(event.platform?.env.DB, user);
-
         } catch (error: any) {
             let message = error.message;
 
