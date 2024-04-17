@@ -93,12 +93,15 @@
         </div>
         <div class="center">
             <h3>User Type</h3>
-            <input
-                type="userType"
-                placeholder="Applicant"
-                maxlength="30"
+            <select
                 name="userType"
-                use:validators={[required, maxLength(30)]} />
+                use:validators={[required]}
+                class="userType">
+                <option value="">Select User Type</option>
+                <option value="0">Applicant</option>
+                <option value="1">Admin</option>
+                <option value="2">Donor</option>
+            </select>
             <Hint for="userType" on="required">This is a mandatory field</Hint>
         </div>
         <div class="center">

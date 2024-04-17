@@ -5,8 +5,7 @@ import {Argon2id} from "oslo/password";
 import {
     saveUser,
     checkUserTableExists,
-    checkSessionTableExists,
-    dropSession
+    checkSessionTableExists
 } from "$lib/util";
 import type {D1Database} from "@cloudflare/workers-types";
 import type {Actions} from "@sveltejs/kit";
@@ -15,14 +14,14 @@ import {UserType} from "$lib/types";
 
 const phoneNumberPattern = /^\(\d{3}\)-\d{3}-\d{4}$/;
 
-const normalizePhoneNumber = (phoneNumber: string) => {
+export const _normalizePhoneNumber = (phoneNumber: string) => {
     if (!phoneNumberPattern.test(phoneNumber)) {
         return phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, "($1)-$2-$3");
     }
     return phoneNumber;
 };
 
-const validateInput = (user: User, password: string) => {
+export const _validateInput = (user: User, password: string) => {
     const errors = [];
 
     if (
@@ -38,7 +37,7 @@ const validateInput = (user: User, password: string) => {
         typeof password !== "string" ||
         password.length < 6 ||
         password.length > 255 ||
-        !/^[a-zA-Z0-9+=!#$%^&*_-]+$/.test(password)
+        !/^[a-zA-Z0-9+=!@#$%^&*_-]+$/.test(password)
     ) {
         errors.push("Invalid password");
     }
@@ -75,7 +74,7 @@ const validateInput = (user: User, password: string) => {
         if (digitsOnly.length < 10) {
             errors.push("Phone number must have at least 10 digits");
         }
-        user.phone = normalizePhoneNumber(digitsOnly);
+        user.phone = _normalizePhoneNumber(digitsOnly);
     }
 
     if (errors.length > 0) {
@@ -84,7 +83,10 @@ const validateInput = (user: User, password: string) => {
     return null;
 };
 
-async function checkUsers(db: D1Database, user_id: string): Promise<boolean> {
+export async function _checkUsers(
+    db: D1Database,
+    user_id: string
+): Promise<boolean> {
     const errors = [];
 
     try {
@@ -108,13 +110,15 @@ async function checkUsers(db: D1Database, user_id: string): Promise<boolean> {
     return false;
 }
 
-function getUserTypeFromString(userTypeString: string): UserType | undefined {
-    switch (userTypeString.toLowerCase()) {
-        case "applicant":
+export function _getUserTypeFromValue(
+    userTypeString: number
+): UserType | undefined {
+    switch (userTypeString) {
+        case 0:
             return UserType.Applicant;
-        case "administrator":
+        case 1:
             return UserType.Administrator;
-        case "donor":
+        case 2:
             return UserType.Donor;
         default:
             return undefined; // Return undefined for invalid input
@@ -128,10 +132,8 @@ export const actions: Actions = {
         const tempPass = formData.get("password") as string;
         const salt = generateId(8);
         const hashedPassword = await new Argon2id().hash(salt + tempPass);
-        // console.log(formData);
-        const userTypeString = getUserTypeFromString(
-            formData.get("userType") as string
-        );
+        const userTypeValue = parseInt(formData.get("userType") as string);
+        const userType = _getUserTypeFromValue(userTypeValue);
         let user: User;
 
         try {
@@ -146,10 +148,10 @@ export const actions: Actions = {
                 lastName: formData.get("lastName") as string,
                 phone: formData.get("phoneNumber") as string,
                 email: formData.get("email") as string,
-                type: userTypeString as UserType
+                type: userType as UserType
             };
 
-            validateInput(user, tempPass);
+            _validateInput(user, tempPass);
 
             if (!event.platform?.env.DB) {
                 let message = "DB IS NULL";
@@ -162,7 +164,7 @@ export const actions: Actions = {
             // console.log(event.platform);
             await checkUserTableExists(event.platform?.env.DB);
 
-            if (await checkUsers(event.platform?.env.DB, user.username)) {
+            if (await _checkUsers(event.platform?.env.DB, user.username)) {
                 await saveUser(event.platform?.env.DB, user);
             }
         } catch (error: any) {

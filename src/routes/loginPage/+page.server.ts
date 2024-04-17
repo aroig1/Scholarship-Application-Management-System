@@ -1,13 +1,12 @@
-import {initializeLucia} from "$lib/server/auth";
 import type {D1Database} from "@cloudflare/workers-types";
-import {fail, redirect} from "@sveltejs/kit";
+import {fail, redirect, error} from "@sveltejs/kit";
 import {Argon2id} from "oslo/password";
 import {loadUser_by_username, checkUserTableExists} from "$lib/util";
 
 import type {Actions} from "./$types";
 import type {User} from "$lib/types";
 
-async function doesUsernameExist(db: D1Database, username: string) {
+export async function _doesUsernameExist(db: D1Database, username: string) {
     const errors = [];
 
     try {
@@ -71,7 +70,7 @@ export const actions: Actions = {
 
             await checkUserTableExists(event.platform?.env.DB);
 
-            await doesUsernameExist(event.platform?.env.DB, username);
+            await _doesUsernameExist(event.platform?.env.DB, username);
 
             existingUser = (await loadUser_by_username(
                 event.platform?.env.DB,
