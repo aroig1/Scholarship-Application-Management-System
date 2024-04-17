@@ -5,6 +5,7 @@ import {
     checkUserTableExists,
     checkApplicantInfoTableExists
 } from "$lib/util";
+import type {Actions} from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({params, platform}) => {
     const db = platform?.env.DB as D1Database;
@@ -30,4 +31,17 @@ export const load: PageServerLoad = async ({params, platform}) => {
     return {
         applicant: result.results
     };
+};
+
+export const actions: Actions = {
+    default: async ({params, locals, request, platform}) => {
+        const db = platform?.env.DB as D1Database;
+
+        await db
+            .prepare(
+                "UPDATE applications SET status = ? WHERE applicant = ? AND scholarship = ? LIMIT 1"
+            )
+            .bind("suggested", params.userID, params.id)
+            .run();
+    }
 };
