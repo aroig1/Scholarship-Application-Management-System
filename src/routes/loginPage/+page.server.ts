@@ -2,7 +2,7 @@ import {initializeLucia} from "$lib/server/auth";
 import type {D1Database} from "@cloudflare/workers-types";
 import {fail, redirect} from "@sveltejs/kit";
 import {Argon2id} from "oslo/password";
-import {loadUser, checkUserTableExists} from "$lib/util";
+import {loadUser_by_username, checkUserTableExists} from "$lib/util";
 
 import type {Actions} from "./$types";
 import type {User} from "$lib/types";
@@ -73,7 +73,7 @@ export const actions: Actions = {
 
             await doesUsernameExist(event.platform?.env.DB, username);
 
-            existingUser = (await loadUser(
+            existingUser = (await loadUser_by_username(
                 event.platform?.env.DB,
                 username
             )) as User;

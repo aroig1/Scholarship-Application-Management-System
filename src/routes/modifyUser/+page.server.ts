@@ -7,7 +7,7 @@ import {
     checkUserTableExists,
     checkSessionTableExists,
     dropSession,
-    loadUser,
+    loadUser_by_id,
     updateUser
 } from "$lib/util";
 import type {D1Database} from "@cloudflare/workers-types";
@@ -73,7 +73,7 @@ export const load: PageServerLoad = async ({locals, platform}) => {
     const db = platform?.env.DB as D1Database;
 
     await checkUserTableExists(db);
-    const user = (await loadUser(db, locals.user?.id as string)) as User;
+    const user = (await loadUser_by_id(db, locals.user?.id as string)) as User;
 
     return {
         user: user

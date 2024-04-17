@@ -122,7 +122,7 @@ export async function saveUser(db: D1Database, user: User) {
         .run();
 }
 
-export async function loadUser(
+export async function loadUser_by_id(
     db: D1Database,
     id: string
 ): Promise<User | null> {
@@ -130,6 +130,31 @@ export async function loadUser(
     const result = await db
         .prepare("SELECT * FROM users WHERE id = ? LIMIT 1")
         .bind(id)
+        .all();
+
+    if (result.results.length > 0) {
+        const user: User = result.results[0] as unknown as User;
+
+        if ("hash" in result.results[0] && "salt" in result.results[0]) {
+            user.password = {
+                hash: result.results[0].hash as string,
+                salt: result.results[0].salt as string
+            };
+        }
+
+        return user;
+    }
+    return null;
+}
+
+export async function loadUser_by_username(
+    db: D1Database,
+    username: string
+): Promise<User | null> {
+    await checkUserTableExists(db);
+    const result = await db
+        .prepare("SELECT * FROM users WHERE username = ? LIMIT 1")
+        .bind(username)
         .all();
 
     if (result.results.length > 0) {
