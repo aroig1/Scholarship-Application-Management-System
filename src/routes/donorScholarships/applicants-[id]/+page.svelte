@@ -11,7 +11,8 @@
     {#each applicants as applicant}
         <div class="container">
             <div>
-                <h3>Name: {applicant.firstName} {applicant.lastName}</h3>
+                <h3>(Application Status: {applicant.status})</h3>
+                <h2>{applicant.firstName} {applicant.lastName}</h2>
                 <h3>GPA: {applicant.GPA}</h3>
                 <h3>Year: {applicant.year}</h3>
                 <h3>Majors: {applicant.majors}</h3>
