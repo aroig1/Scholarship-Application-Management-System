@@ -3,54 +3,63 @@
         "id": "z5r2u8h1w4q0x9v3m7i6l2p5o8n1k4t0s",
         "applicant": "h6y4l3x0s2w8e",
         "scholarship": "6d9391b7-2d43-4e68-a0c7-05d081a63b40",
-        "statement": "STATMENT FOR APP 1"
+        "statement": "STATMENT FOR APP 1",
+        "status": "applied"
     },
     {
         "id": "y9t3r2q6w8z1x7n0m5o2k4p6l3i8j9h1g",
         "applicant": "h6y4l3x0s2w8e",
         "scholarship": "5aa2d7b5-7301-4b17-8d42-6c7b65b33aae",
-        "statement": "STATMENT FOR APP 2"
+        "statement": "STATMENT FOR APP 2",
+        "status": "applied"
     },
     {
         "id": "x7o3t5z8w1n2m6i0k4l7p3j9h2g5f8d1c",
         "applicant": "b7c5k1q9u3m2p",
         "scholarship": "9f01da51-2655-4d60-bb27-44c498c08d71",
-        "statement": "STATMENT FOR APP 3"
+        "statement": "STATMENT FOR APP 3",
+        "status": "applied"
     },
     {
         "id": "w1k4o7t3x8z5n2m0l6p9j2h5g7f4d1s3a",
         "applicant": "b7c5k1q9u3m2p",
         "scholarship": "5aa2d7b5-7301-4b17-8d42-6c7b65b33aae",
-        "statement": "STATMENT FOR APP 4"
+        "statement": "STATMENT FOR APP 4",
+        "status": "applied"
     },
     {
         "id": "v5p3w8o2x1z6n9m4l7j0h3g1f5d8s2a6b",
         "applicant": "o2i8e4g1f6r3n",
         "scholarship": "e07f5a8d-9518-4340-b04e-3dc6e60cc7f9",
-        "statement": "STATMENT FOR APP 5"
+        "statement": "STATMENT FOR APP 5",
+        "status": "suggested"
     },
     {
         "id": "u2j7v0p6o9x3z5n8m1l4k7h2g5f9d6s1b",
         "applicant": "o2i8e4g1f6r3n",
         "scholarship": "3a9c8be7-88ef-482f-bc39-5b5df17d0289",
-        "statement": "STATMENT FOR APP 6"
+        "statement": "STATMENT FOR APP 6",
+        "status": "suggested"
     },
     {
         "id": "t8h3j0u5p7o4x9z1n6m2l5k8g4f1d3s6b2",
         "applicant": "o2i8e4g1f6r3n",
         "scholarship": "5aa2d7b5-7301-4b17-8d42-6c7b65b33aae",
-        "statement": "STATMENT FOR APP 7"
+        "statement": "STATMENT FOR APP 7",
+        "status": "suggested"
     },
     {
         "id": "s4k1j7t0u8p5o2x6z9n3m1l8g5f7d2a4b",
         "applicant": "w5x9d7v4s3t6a",
         "scholarship": "7c4255f6-422b-4f45-bc65-6e80a151305e",
-        "statement": "STATMENT FOR APP 8"
+        "statement": "STATMENT FOR APP 8",
+        "status": "awarded"
     },
     {
         "id": "r9i3k1j7t2u5p8o0x4z6n2m7l1g3f5d9b8c",
         "applicant": "w5x9d7v4s3t6a",
         "scholarship": "5aa2d7b5-7301-4b17-8d42-6c7b65b33aae",
-        "statement": "STATMENT FOR APP 9"
+        "statement": "STATMENT FOR APP 9",
+        "status": "rejected"
     }
 ]
