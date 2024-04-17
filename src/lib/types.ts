@@ -117,4 +117,5 @@ export type Application = {
     applicant: UserID;
     scholarship: ScholarshipID;
     statement: string;
+    status: string;
 };

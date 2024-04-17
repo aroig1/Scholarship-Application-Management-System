@@ -55,7 +55,8 @@ export const actions: Actions = {
                 id: oldApp.results[0].id as string,
                 applicant: locals.user?.id as string,
                 scholarship: params.id as string,
-                statement: data.get("statement") as string
+                statement: data.get("statement") as string,
+                status: "applied"
             };
 
             updateApplication(db, application);
@@ -64,7 +65,8 @@ export const actions: Actions = {
                 id: uuidv4(),
                 applicant: locals.user?.id as string,
                 scholarship: params.id as string,
-                statement: data.get("statement") as string
+                statement: data.get("statement") as string,
+                status: "applied"
             };
 
             saveApplication(db, application);

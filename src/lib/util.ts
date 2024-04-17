@@ -98,7 +98,8 @@ export async function checkApplicationTableExists(db: D1Database) {
         id VARCHAR PRIMARY KEY,
         applicant VARCHAR,
         scholarship VARCHAR,
-        statement TEXT
+        statement TEXT,
+        status VARCHAR
     );`
         )
         .run();
@@ -356,12 +357,13 @@ export async function saveApplication(
     application: Application
 ) {
     await checkApplicationTableExists(db);
-    db.prepare("INSERT INTO applications VALUES (?, ?, ?, ?)")
+    db.prepare("INSERT INTO applications VALUES (?, ?, ?, ?, ?)")
         .bind(
             application.id,
             application.applicant,
             application.scholarship,
-            application.statement
+            application.statement,
+            application.status
         )
         .run();
 }
@@ -394,13 +396,14 @@ export async function updateApplication(
 ) {
     await checkApplicationTableExists(db);
     db.prepare(
-        "UPDATE applications SET id = ?, applicant = ?, scholarship = ?, statement = ? WHERE id = ?"
+        "UPDATE applications SET id = ?, applicant = ?, scholarship = ?, statement = ?, status = ? WHERE id = ?"
     )
         .bind(
             application.id,
             application.applicant,
             application.scholarship,
             application.statement,
+            application.status,
             application.id
         )
         .run();
