@@ -4,7 +4,7 @@ import {generateId} from "lucia";
 import("$lib/types");
 //variables
 export var users_array = require("./JSON_files/TestUsers.json");
-var apllications_array = require("./JSON_files/TestApplication.json");
+var applications_array = require("./JSON_files/TestApplication.json");
 var applicantInfo_array = require("./JSON_files/TestApplicantInfo.json");
 var scholarships_array = require("./JSON_files/TestScholarships.json");
 
@@ -231,12 +231,13 @@ export async function addApplicantInfo(applicantInfo) {
  */
 export async function addApplication(application) {
     (await db)
-        .prepare("INSERT INTO applications VALUES (?, ?, ?, ?)")
+        .prepare("INSERT INTO applications VALUES (?, ?, ?, ?, ?)")
         .bind(
             application.id,
             application.applicant,
             application.scholarship,
-            application.statement
+            application.statement,
+            application.status
         )
         .run();
 }
@@ -296,7 +297,8 @@ export async function setUpTestEnv() {
             {name: "id", type: "VARCHAR(255) PRIMARY KEY"},
             {name: "applicant", type: "VARCHAR(255)"},
             {name: "scholarship", type: "VARCHAR(255)"},
-            {name: "statement", type: "VARCHAR(65535)"}
+            {name: "statement", type: "VARCHAR(65535)"},
+            {name: "status", type: "VARCHAR(255)"}
         );
 
         for (const user of users_array) {
@@ -352,12 +354,13 @@ export async function setUpTestEnv() {
             await addScholarship(test_scholarship);
         }
 
-        for (const application of apllications_array) {
+        for (const application of applications_array) {
             const test_application = {
                 id: application.id,
                 applicant: application.applicant,
                 scholarship: application.scholarship,
-                statement: application.statement
+                statement: application.statement,
+                status: application.status
             };
 
             await addApplication(test_application);
