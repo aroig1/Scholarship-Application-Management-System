@@ -24,7 +24,9 @@
         <li>
             <a href="/logoutPage">SIGN OUT</a>
         </li>
-        <li></li>
+        <li>
+            <a href="/reportPage">REPORTS</a>
+        </li>
     </nav>
 </header>
 

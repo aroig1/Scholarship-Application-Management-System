@@ -17,6 +17,10 @@
             <div class="big-box" id="description-box"></div>
         </div>
     {/each}
+    <div class="button-container">
+        <button>Available Scholarship Report</button>
+        <button>Archived Scholarship Report</button>
+    </div>
 </section>
 
 <style>
@@ -36,5 +40,18 @@
         padding: 10px;
         border: 1px solid #ccc;
         margin-top: 10px;
+    }
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    .button-container button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
     }
 </style>
