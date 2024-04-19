@@ -43,6 +43,7 @@
         "node": "^21.6.2",
         "oslo": "^1.1.2",
         "svelte-multiselect": "^10.2.0",
-        "uuid": "^9.0.1"
+        "uuid": "^9.0.1",
+        "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
     }
 }
