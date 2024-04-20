@@ -13,7 +13,7 @@
                 <a href="/donorScholarships/modify-{scholarship.id}">
                     <button>Modify Scholarship</button>
                 </a>
-                <a href="/donorScholarships/applicants-{scholarship.id}">
+                <a href="/adminViewDonors/suggestedApps-{scholarship.id}">
                     <button>View Suggested Applicants</button>
                 </a>
                 <a href="/donorScholarships/applicants-{scholarship.id}">
@@ -35,11 +35,6 @@
 
     button {
         margin-top: 10px;
-    }
-
-    .createNew {
-        padding: 10px 20px;
-        margin: 5px;
     }
 
     .big-box {
