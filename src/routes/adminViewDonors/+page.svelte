@@ -10,7 +10,7 @@
             <div>
                 <h3>Name: {donor.firstName} {donor.lastName}</h3>
                 <h3>Phone Number: {donor.phone}</h3>
-                <h3>Email: {donor.email} </h3>
+                <h3>Email: {donor.email}</h3>
                 <a href="/adminViewDonors/scholarships-{donor.id}">
                     <button>View their Scholarships</button>
                 </a>

@@ -10,7 +10,8 @@ export const load: PageServerLoad = async (event) => {
         .bind(event.params.donorID)
         .all();
 
-    const donor = await db.prepare("SELECT firstName, lastName FROM users WHERE id = ? LIMIT 1")
+    const donor = await db
+        .prepare("SELECT firstName, lastName FROM users WHERE id = ? LIMIT 1")
         .bind(event.params.donorID)
         .all();
 

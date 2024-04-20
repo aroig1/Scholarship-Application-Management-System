@@ -14,7 +14,7 @@
                 <h3>Year: {applicant.year}</h3>
                 <h3>Majors: {applicant.majors}</h3>
                 <a
-                    href="/adminViewDonors/suggestedApp-{applicant.user}-{applicant.scholarship}">
+                    href="/adminViewDonors/applicant-{applicant.user}-{applicant.scholarship}">
                     <button>Review Applicant</button>
                 </a>
             </div>

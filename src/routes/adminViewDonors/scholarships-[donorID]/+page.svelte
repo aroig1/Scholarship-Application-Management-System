@@ -16,7 +16,7 @@
                 <a href="/adminViewDonors/suggestedApps-{scholarship.id}">
                     <button>View Suggested Applicants</button>
                 </a>
-                <a href="/donorScholarships/applicants-{scholarship.id}">
+                <a href="/adminViewDonors/allApps-{scholarship.id}">
                     <button>View All Applicants</button>
                 </a>
             </div>

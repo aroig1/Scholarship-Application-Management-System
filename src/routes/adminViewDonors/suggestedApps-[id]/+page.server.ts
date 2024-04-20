@@ -13,8 +13,6 @@ export const load: PageServerLoad = async ({params, platform}) => {
     await checkUserTableExists(db);
     await checkApplicantInfoTableExists(db);
 
-    // await db.prepare("DROP TABLE IF EXISTS applications").run();
-
     const result = await db
         .prepare(
             `

@@ -4,7 +4,7 @@
 </script>
 
 <section>
-    <a href="/adminViewDonors/allApps-{applicant.scholarship}">
+    <a href="/adminViewDonors/suggestedApps-{applicant.scholarship}">
         <h3>Back</h3>
     </a>
     <h3>Application status: {applicant.status}</h3>
