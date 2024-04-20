@@ -24,6 +24,14 @@ declare global {
             session: import("lucia").Session | null;
         }
     }
+    declare module "*.numbers" {
+        const data: string;
+        export default data;
+    }
+    declare module "*.xlsx" {
+        const data: string;
+        export default data;
+    }
 }
 
 export {};

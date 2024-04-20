@@ -1,14 +1,21 @@
-<script>
-    //ADD CALLS TO BACKEND ONCE MADE FOR EACH BUTTON
-    //BUTTONS DO NOTHING RIGHT NOW
-</script>
-
 <section>
     <h1>Report Generation</h1>
     <div class="button-container">
         <button>Awarded Scholarship Report</button>
-        <button>Student Demographic Report</button>
-        <button>Active Donor Report</button>
+        <button
+            on:click={async () =>
+                window.open(
+                    "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," +
+                        (await (
+                            await fetch("/api/reports/studentDemographic")
+                        ).text())
+                )}>Student Demographic Report</button>
+        <button
+            on:click={async () =>
+                window.open(
+                    "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," +
+                        (await (await fetch("/api/reports/activeDonor")).text())
+                )}>Active Donor Report</button>
     </div>
 </section>
 
