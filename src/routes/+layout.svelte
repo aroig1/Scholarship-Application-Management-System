@@ -10,6 +10,9 @@
             <a href="/donorScholarships">Donor Scholarships</a>
         </li>
         <li>
+            <a href="/adminViewDonors">View Donors</a>
+        </li>
+        <li>
             <a href="/applicantInfo">Applicant Information</a>
         </li>
         <li>

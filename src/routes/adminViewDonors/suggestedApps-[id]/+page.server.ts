@@ -20,10 +20,10 @@ export const load: PageServerLoad = async ({params, platform}) => {
         FROM applications
         JOIN applicantInfo ON applications.applicant = applicantInfo.user
         JOIN users ON applications.applicant = users.id
-        WHERE applications.scholarship = ?
+        WHERE applications.scholarship = ? AND applications.status = ?
     `
         )
-        .bind(params.id)
+        .bind(params.id, "suggested")
         .all();
 
     return {
