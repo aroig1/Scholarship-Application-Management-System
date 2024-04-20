@@ -1,4 +1,3 @@
-//import { initializeLucia } from "$lib/server/auth";
 import {fail, redirect} from "@sveltejs/kit";
 import {generateId} from "lucia";
 import {Argon2id} from "oslo/password";
@@ -83,7 +82,6 @@ export const load: PageServerLoad = async ({locals, platform}) => {
 export const actions: Actions = {
     default: async (event) => {
         const formData = await event.request.formData();
-        // console.log(formData);
         let user: User;
 
         try {
@@ -110,8 +108,6 @@ export const actions: Actions = {
                     message
                 });
             }
-            // console.log(user);
-            // console.log(event.platform);
             await checkUserTableExists(event.platform?.env.DB);
             await updateUser(event.platform?.env.DB, user);
         } catch (error: any) {
@@ -123,6 +119,6 @@ export const actions: Actions = {
             });
         }
 
-        redirect(302, "/"); //TODO:: SHOULD GO TO HOME PAGE
+        redirect(302, "/");
     }
 };

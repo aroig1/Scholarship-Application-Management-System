@@ -1,4 +1,3 @@
-//import { initializeLucia } from "$lib/server/auth";
 import {fail, redirect} from "@sveltejs/kit";
 import {generateId} from "lucia";
 import {Argon2id} from "oslo/password";
@@ -160,8 +159,6 @@ export const actions: Actions = {
                     message
                 });
             }
-            // console.log(user);
-            // console.log(event.platform);
             await checkUserTableExists(event.platform?.env.DB);
 
             if (await _checkUsers(event.platform?.env.DB, user.username)) {
@@ -186,6 +183,6 @@ export const actions: Actions = {
             ...sessionCookie.attributes
         });
 
-        redirect(302, "/"); //TODO:: SHOULD GO TO HOME PAGE
+        redirect(302, "/");
     }
 };

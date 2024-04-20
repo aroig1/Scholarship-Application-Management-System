@@ -8,7 +8,7 @@ import {
 import {generateId} from "lucia";
 import {isRedirect} from "@sveltejs/kit";
 import * as TestUtils from "./TestUtils";
-var password_array = require("./JSON_files/TestPasswords.json");
+let password_array = require("./JSON_files/TestPasswords.json");
 import {actions} from "../routes/createAccount/+page.server";
 import {UserType} from "$lib/types";
 

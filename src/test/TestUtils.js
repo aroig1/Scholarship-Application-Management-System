@@ -3,10 +3,10 @@ import {generateId} from "lucia";
 
 import("$lib/types");
 //variables
-export var users_array = require("./JSON_files/TestUsers.json");
-var applications_array = require("./JSON_files/TestApplication.json");
-var applicantInfo_array = require("./JSON_files/TestApplicantInfo.json");
-var scholarships_array = require("./JSON_files/TestScholarships.json");
+export const users_array = require("./JSON_files/TestUsers.json");
+const applications_array = require("./JSON_files/TestApplication.json");
+const applicantInfo_array = require("./JSON_files/TestApplicantInfo.json");
+const scholarships_array = require("./JSON_files/TestScholarships.json");
 
 const {Miniflare} = require("miniflare");
 
