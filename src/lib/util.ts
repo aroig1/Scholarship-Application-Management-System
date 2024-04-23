@@ -9,8 +9,10 @@ import type {
     ApplicationID,
     ScholarshipID,
     Major,
-    Minor
+    Minor,
+    UserType
 } from "$lib/types";
+import { error } from "@sveltejs/kit";
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE
 export async function dropSession(db: D1Database) {
@@ -416,4 +418,16 @@ export function dateToString(d: Date): string {
     return (
         d.getUTCMonth() + 1 + "/" + d.getUTCDate() + "/" + d.getUTCFullYear()
     );
+}
+
+export async function checkUserAccess(db: D1Database, type: UserType, id: string) {
+    await checkUserTableExists(db);
+    const user = await db
+            .prepare("SELECT type FROM users WHERE id = ? LIMIT 1")
+            .bind(id)
+            .all();
+
+    if (user.results[0].type != type) {
+        error(403);
+    }
 }
