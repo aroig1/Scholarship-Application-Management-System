@@ -7,11 +7,7 @@ import {majors, minors} from "$lib/types";
 import {redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
-export const load: PageServerLoad = async ({params, platform}) => {
-    // const db = platform?.env.DB as D1Database;
-    // await db.prepare("DROP TABLE IF EXISTS scholarships").run();
-    // await db.prepare("DROP TABLE IF EXISTS applications").run();
-
+export const load: PageServerLoad = async () => {
     return {
         majors: majors as unknown as Major[],
         minors: minors as unknown as Minor[]

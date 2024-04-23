@@ -223,9 +223,9 @@
         <div on:click={() => (areaClicked.archived = true)} class="preview">
             <h3>Scholarship Archived Status</h3>
             {#if scholarship.archived}
-            <h4>Archived</h4>
+                <h4>Archived</h4>
             {:else}
-            <h4>Not Archived</h4>
+                <h4>Not Archived</h4>
             {/if}
             <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
@@ -236,9 +236,9 @@
                 value={scholarship.archived} />
             <div class="buttons">
                 {#if scholarship.archived}
-                <button>Unarchive</button>
+                    <button>Unarchive</button>
                 {:else}
-                <button>Archive</button>
+                    <button>Archive</button>
                 {/if}
                 <button on:click={() => (areaClicked.archived = false)}
                     >Cancel</button>
@@ -298,5 +298,8 @@
         width: 100%;
         margin: 10px 0;
         padding: 10px;
+    }
+    .hidden {
+        visibility: hidden;
     }
 </style>

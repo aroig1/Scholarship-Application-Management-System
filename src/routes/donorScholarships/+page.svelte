@@ -11,24 +11,26 @@
         <button class="createNew">Create New Scholarship</button>
     </a>
     <div>
-        <h2>View Archived Scholarships</h2>
-        <input type="checkbox" bind:value={viewArchived}>
+        <h3>View Archived Scholarships</h3>
+        <input
+            type="checkbox"
+            on:click={() => (viewArchived = !viewArchived)} />
     </div>
 
     {#if viewArchived}
-    {#each archived as scholarship}
-        <div class="container">
-            <div>
-                <h3>This scholarship is Archived</h3>
-                <h3>Name: {scholarship.name}</h3>
-                <h3>Total Amount: ${scholarship.amount}</h3>
-                <a href="/donorScholarships/modify-{scholarship.id}">
-                    <button>Modify Scholarship</button>
-                </a>
+        {#each archived as scholarship}
+            <div class="container">
+                <div>
+                    <h3>This scholarship is Archived</h3>
+                    <h3>Name: {scholarship.name}</h3>
+                    <h3>Total Amount: ${scholarship.amount}</h3>
+                    <a href="/donorScholarships/modify-{scholarship.id}">
+                        <button>Modify Scholarship</button>
+                    </a>
+                </div>
+                <div class="big-box" id="description-box"></div>
             </div>
-            <div class="big-box" id="description-box"></div>
-        </div>
-    {/each}
+        {/each}
     {/if}
 
     {#each scholarships as scholarship}
