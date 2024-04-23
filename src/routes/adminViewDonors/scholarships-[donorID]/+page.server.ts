@@ -5,9 +5,19 @@ import {checkScholarshipTableExists} from "$lib/util";
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
     await checkScholarshipTableExists(db);
-    const scholarships = await db
-        .prepare("SELECT * FROM scholarships WHERE donorID = ?")
-        .bind(event.params.donorID)
+
+    const nonArchived = await db
+        .prepare(
+            "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
+        )
+        .bind(event.locals.user?.id, false)
+        .all();
+
+    const archived = await db
+        .prepare(
+            "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
+        )
+        .bind(event.locals.user?.id, true)
         .all();
 
     const donor = await db
@@ -16,7 +26,8 @@ export const load: PageServerLoad = async (event) => {
         .all();
 
     return {
-        scholarships: scholarships.results,
+        scholarships: nonArchived.results,
+        archived: archived.results,
         donor: donor.results[0]
     };
 };

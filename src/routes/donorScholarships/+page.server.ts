@@ -1,16 +1,30 @@
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
-import {checkScholarshipTableExists} from "$lib/util";
+import {
+    checkApplicationTableExists,
+    checkScholarshipTableExists
+} from "$lib/util";
 
 export const load: PageServerLoad = async ({locals, platform}) => {
     const db = platform?.env.DB as D1Database;
+
     await checkScholarshipTableExists(db);
-    const scholarships = await db
-        .prepare("SELECT * FROM scholarships WHERE donorID = ?")
-        .bind(locals.user?.id)
+    const nonArchived = await db
+        .prepare(
+            "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
+        )
+        .bind(locals.user?.id, false)
+        .all();
+
+    const archived = await db
+        .prepare(
+            "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
+        )
+        .bind(locals.user?.id, true)
         .all();
 
     return {
-        scholarships: scholarships.results
+        archived_scholarships: archived.results,
+        scholarships: nonArchived.results
     };
 };

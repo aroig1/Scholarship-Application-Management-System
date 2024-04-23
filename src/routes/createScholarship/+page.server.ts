@@ -7,10 +7,7 @@ import {majors, minors} from "$lib/types";
 import {redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
-export const load: PageServerLoad = async ({params, platform}) => {
-    // const db = platform?.env.DB as D1Database;
-    // await db.prepare("DROP TABLE IF EXISTS scholarships").run();
-
+export const load: PageServerLoad = async () => {
     return {
         majors: majors as unknown as Major[],
         minors: minors as unknown as Minor[]
@@ -37,7 +34,8 @@ export const actions: Actions = {
             requiredGPA: Number(data.get("requiredGPA") as string),
             deadline: new Date(data.get("deadline") as string),
             other: data.get("other") as string,
-            description: data.get("description") as string
+            description: data.get("description") as string,
+            archived: false
         };
 
         saveScholarship(db, scholarship);

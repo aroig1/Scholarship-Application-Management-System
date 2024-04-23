@@ -20,7 +20,8 @@
         gpa: false,
         deadline: false,
         other: false,
-        description: false
+        description: false,
+        archived: false
     };
 </script>
 
@@ -217,6 +218,33 @@
             </div>
         {/if}
     </form>
+
+    <form class="info-container" method="POST" action="?/archived">
+        <div on:click={() => (areaClicked.archived = true)} class="preview">
+            <h3>Scholarship Archived Status</h3>
+            {#if scholarship.archived}
+                <h4>Archived</h4>
+            {:else}
+                <h4>Not Archived</h4>
+            {/if}
+            <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
+        </div>
+        {#if areaClicked.archived}
+            <input
+                class="hidden"
+                name="archived"
+                value={scholarship.archived} />
+            <div class="buttons">
+                {#if scholarship.archived}
+                    <button>Unarchive</button>
+                {:else}
+                    <button>Archive</button>
+                {/if}
+                <button on:click={() => (areaClicked.archived = false)}
+                    >Cancel</button>
+            </div>
+        {/if}
+    </form>
 </section>
 
 <style>
@@ -270,5 +298,8 @@
         width: 100%;
         margin: 10px 0;
         padding: 10px;
+    }
+    .hidden {
+        visibility: hidden;
     }
 </style>

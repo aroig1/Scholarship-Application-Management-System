@@ -110,6 +110,7 @@ export type Scholarship = {
     deadline: Date;
     other: string;
     description: string;
+    archived: boolean;
 };
 
 export type Application = {
