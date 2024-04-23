@@ -183,6 +183,10 @@ export const actions: Actions = {
             ...sessionCookie.attributes
         });
 
-        redirect(302, "/");
+        if (userType == UserType.Applicant) {
+            redirect(302, "/applicantInfo");
+        } else {
+            redirect(302, "/");
+        }
     }
 };
