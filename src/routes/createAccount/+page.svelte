@@ -11,6 +11,16 @@
 
     export let form;
     const form2 = useForm();
+
+    let secQuestions = [
+        "What high school did you go to?",
+        "What was the name of your first pet?",
+        "What is your father's middle name?",
+        "What was your first car?"
+    ];
+
+    let secQuestion1 = "Choose a question";
+    let secQuestion2 = "Choose a question";
 </script>
 
 <form use:form2 method="POST">
@@ -105,6 +115,50 @@
             <Hint for="userType" on="required">This is a mandatory field</Hint>
         </div>
         <div class="center">
+            <h3>Security Question 1</h3>
+            <select
+                bind:value={secQuestion1}
+                class="question_answer"
+                use:validators={[required]}>
+                {#each secQuestions as question}
+                    <option value={question}>
+                        {question}
+                    </option>
+                {/each}
+            </select>
+            <Hint for="question_answer" on="required"
+                >This is a mandatory field</Hint>
+            <input
+                class="question_answer"
+                type="text"
+                placeholder="answer"
+                name="seqQ1"
+                use:validators={[required, maxLength(30)]} />
+            <Hint for="seqQ1" on="required">This is a mandatory field</Hint>
+        </div>
+        <div class="center">
+            <h3>Security Question 2</h3>
+            <select
+                bind:value={secQuestion2}
+                class="question_answer"
+                use:validators={[required]}>
+                {#each secQuestions as question}
+                    <option value={question}>
+                        {question}
+                    </option>
+                {/each}
+            </select>
+            <Hint for="question_answer" on="required"
+                >This is a mandatory field</Hint>
+            <input
+                class="question_answer"
+                type="text"
+                placeholder="answer"
+                name="seqQ2"
+                use:validators={[required, maxLength(30)]} />
+            <Hint for="seqQ2" on="required">This is a mandatory field</Hint>
+        </div>
+        <div class="center">
             <button disabled={!$form2.valid}>Create Account</button>
         </div>
         <div class="center">
@@ -148,7 +202,7 @@
         padding: 20px;
         margin: 25px;
         width: 600px;
-        height: 780px;
+        height: 1000px;
         flex-direction: column;
         text-align: center;
     }
