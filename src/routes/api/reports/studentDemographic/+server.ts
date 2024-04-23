@@ -11,11 +11,11 @@ async function getStudents(db: D1Database) {
         const {results} = await stmt.all();
         const rows = results.map((student) => ({
             name: student.firstName + " " + student.lastName,
-            preferredProunouns: student.preferredPronouns,
+            preferredPronouns: student.preferredPronouns,
             StudentID: student.studentID,
             Major: student.majors,
             Minor: student.minors,
-            CumalativeGPA: student.GPA,
+            CumulativeGPA: student.GPA,
             CurrentYear: student.year,
             Ethnicity: student.ethnicity,
             WorkExperience: student.workExperience
