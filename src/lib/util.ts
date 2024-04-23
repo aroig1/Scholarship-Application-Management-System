@@ -85,7 +85,8 @@ export async function checkScholarshipTableExists(db: D1Database) {
         requiredGPA FLOAT,
         deadline VARCHAR,
         other TEXT,
-        description TEXT
+        description TEXT,
+        archived BOOLEAN
     );`
         )
         .run();
@@ -272,7 +273,7 @@ export async function saveScholarship(
     await checkScholarshipTableExists(db);
     // id, donorID, major, minor, date have special types
     db.prepare(
-        "INSERT INTO scholarships VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO scholarships VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     )
         .bind(
             scholarship.id,
@@ -285,7 +286,8 @@ export async function saveScholarship(
             scholarship.requiredGPA,
             scholarship.deadline.toString(),
             scholarship.other,
-            scholarship.description
+            scholarship.description,
+            scholarship.archived
         )
         .run();
 }
@@ -333,7 +335,7 @@ export async function updateScholarship(
 ) {
     await checkScholarshipTableExists(db);
     db.prepare(
-        "UPDATE scholarships SET id = ?, name = ?, amount = ?, donorID = ?, numAvailable = ?, requiredMajors = ?, requiredMinors = ?, requiredGPA = ?, deadline = ?, other = ?, description = ? WHERE id = ?"
+        "UPDATE scholarships SET id = ?, name = ?, amount = ?, donorID = ?, numAvailable = ?, requiredMajors = ?, requiredMinors = ?, requiredGPA = ?, deadline = ?, other = ?, description = ?, archived = ? WHERE id = ?"
     )
         .bind(
             scholarship.id,
@@ -347,6 +349,7 @@ export async function updateScholarship(
             scholarship.deadline.toISOString().slice(0, 10),
             scholarship.other,
             scholarship.description,
+            scholarship.archived,
             scholarship.id
         )
         .run();

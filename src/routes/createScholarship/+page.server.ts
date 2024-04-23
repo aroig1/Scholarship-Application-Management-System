@@ -10,6 +10,7 @@ import type {D1Database} from "@cloudflare/workers-types";
 export const load: PageServerLoad = async ({params, platform}) => {
     // const db = platform?.env.DB as D1Database;
     // await db.prepare("DROP TABLE IF EXISTS scholarships").run();
+    // await db.prepare("DROP TABLE IF EXISTS applications").run();
 
     return {
         majors: majors as unknown as Major[],
@@ -37,7 +38,8 @@ export const actions: Actions = {
             requiredGPA: Number(data.get("requiredGPA") as string),
             deadline: new Date(data.get("deadline") as string),
             other: data.get("other") as string,
-            description: data.get("description") as string
+            description: data.get("description") as string,
+            archived: false
         };
 
         saveScholarship(db, scholarship);

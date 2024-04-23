@@ -136,5 +136,17 @@ export const actions: Actions = {
         return {
             success: true
         };
+    },
+    archived: async ({params, request, platform}) => {
+        const data = await request.formData();
+        const db = platform?.env.DB as D1Database;
+        const scholarship = await loadDBScholarship(params.id, db);
+
+        scholarship.archived = !scholarship.archived;
+        updateScholarship(db, scholarship);
+
+        return {
+            success: true
+        };
     }
 };
