@@ -30,6 +30,9 @@
         <li>
             <a href="/ReportEngine/UserReportPage">REPORTS</a>
         </li>
+        <li>
+            <a href="/FindUsers">ADMIN--UpdateUsers</a>
+        </li>
     </nav>
 </header>
 
