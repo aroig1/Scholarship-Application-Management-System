@@ -1,19 +1,15 @@
+<script lang="ts">
+    export let data;
+</script>
+
 <header>
     <h2>
-        <a href="/">The University of Arizona</a>
+        The University of Arizona
     </h2>
+    {#if data.user_type == data.types.Applicant && data.applicantInfo > 0}
     <nav>
         <li>
             <a href="/studentViewScholarship">Student Scholarships</a>
-        </li>
-        <li>
-            <a href="/donorScholarships">Donor Scholarships</a>
-        </li>
-        <li>
-            <a href="/adminViewDonors">View Donors</a>
-        </li>
-        <li>
-            <a href="/applicantInfo">Applicant Information</a>
         </li>
         <li>
             <a href="/modifyApplicantInfo">Modify Applicant Info</a>
@@ -22,7 +18,32 @@
             <a href="/modifyUser">Modify User</a>
         </li>
         <li>
-            <a href="/loginPage">Login Page</a>
+            <a href="/logoutPage">SIGN OUT</a>
+        </li>
+    </nav>
+    {/if}
+
+    {#if data.user_type == data.types.Donor}
+    <nav>
+        <li>
+            <a href="/donorScholarships">Donor Scholarships</a>
+        </li>
+        <li>
+            <a href="/modifyUser">Modify User</a>
+        </li>
+        <li>
+            <a href="/logoutPage">SIGN OUT</a>
+        </li>
+    </nav>
+    {/if}
+
+    {#if data.user_type == data.types.Administrator}
+    <nav>
+        <li>
+            <a href="/adminViewDonors">View Donors</a>
+        </li>
+        <li>
+            <a href="/modifyUser">Modify User</a>
         </li>
         <li>
             <a href="/logoutPage">SIGN OUT</a>
@@ -34,6 +55,7 @@
             <a href="/FindUsers">ADMIN--UpdateUsers</a>
         </li>
     </nav>
+    {/if}
 </header>
 
 <slot />
