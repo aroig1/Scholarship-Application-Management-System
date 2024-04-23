@@ -6,7 +6,7 @@ import {
     checkApplicantInfoTableExists,
     checkUserAccess
 } from "$lib/util";
-import {UserType} from "$lib/types";
+import { UserType } from "$lib/types";
 
 export const load: PageServerLoad = async (event: any) => {
     const db = event.platform?.env.DB as D1Database;

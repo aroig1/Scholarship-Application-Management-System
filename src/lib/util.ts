@@ -12,7 +12,11 @@ import type {
     Minor,
     UserType
 } from "$lib/types";
+<<<<<<< HEAD
 import {error} from "@sveltejs/kit";
+=======
+import { error } from "@sveltejs/kit";
+>>>>>>> 076546d (User roles and structure for admins pages)
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE
 export async function dropSession(db: D1Database) {
@@ -420,6 +424,7 @@ export function dateToString(d: Date): string {
     );
 }
 
+<<<<<<< HEAD
 export async function checkUserAccess(
     db: D1Database,
     type: UserType,
@@ -430,6 +435,14 @@ export async function checkUserAccess(
         .prepare("SELECT type FROM users WHERE id = ? LIMIT 1")
         .bind(id)
         .all();
+=======
+export async function checkUserAccess(db: D1Database, type: UserType, id: string) {
+    await checkUserTableExists(db);
+    const user = await db
+            .prepare("SELECT type FROM users WHERE id = ? LIMIT 1")
+            .bind(id)
+            .all();
+>>>>>>> 076546d (User roles and structure for admins pages)
 
     if (user.results[0].type != type) {
         error(403);
