@@ -1,4 +1,5 @@
 <script>
+    // import { Scholarship } from './../../../lib/types.ts';
     import {onMount} from "svelte";
     import {read, utils, writeFileXLSX} from "xlsx";
 
@@ -29,6 +30,18 @@
      * }>} */
     let students = [];
 
+    /** @type {Array<{
+     *   ScholarshipName: string,
+     *   Amount: string,
+     *   name: string,
+     *   email: string,
+     *   NetID: string,
+     *   Major: string,
+     *   CumulativeGPA: string,
+     *   Ethnicity: string,
+     * }>} */
+    let awards = [];
+
     onMount(async () => {
         const fetch_donors = await (
             await fetch("/api/reports/activeDonor")
@@ -43,6 +56,13 @@
         const wb_students = read(fetch_students);
         const ws_students = wb_students.Sheets[wb_students.SheetNames[0]];
         students = utils.sheet_to_json(ws_students);
+
+        const fetch_awards = await (
+            await fetch("/api/reports/ScholarshipAwardReprot")
+        ).text();
+        const wb_awards = read(fetch_awards);
+        const ws_awards = wb_awards.Sheets[wb_awards.SheetNames[0]];
+        awards = utils.sheet_to_json(ws_awards);
     });
 
     function exportFileDonors() {
@@ -56,16 +76,20 @@
         const ws = utils.json_to_sheet(students);
         const wb = utils.book_new();
         utils.book_append_sheet(wb, ws, "Data");
-        writeFileXLSX(wb, "ActiveDonorReport.xlsx");
+        writeFileXLSX(wb, "StudentDemographicReport.xlsx");
+    }
+
+    function exportFileAwards() {
+        const ws = utils.json_to_sheet(awards);
+        const wb = utils.book_new();
+        utils.book_append_sheet(wb, ws, "Data");
+        writeFileXLSX(wb, "AwardedStudentReport.xlsx");
     }
 </script>
 
 <section>
     <h1>Report Generation</h1>
     <div class="button-container">
-        <button>Awarded Scholarship Report</button>
-        <!-- FIXME: DOES NOTHING -->
-
         <button on:click={exportFileStudents}>
             Student Demographic Report
             <br />
@@ -74,6 +98,12 @@
 
         <button on:click={exportFileDonors}>
             Active Donor Report
+            <br />
+            <span style="font-size: 0.8em;">(download)</span>
+        </button>
+
+        <button on:click={exportFileAwards}>
+            Awarded Scholarship Report
             <br />
             <span style="font-size: 0.8em;">(download)</span>
         </button>
@@ -111,6 +141,40 @@
                         <td>{p.RequiredMinor}</td>
                         <td>{p.RequiredGPA}</td>
                         <td>{p.Deadline}</td>
+                    </tr>
+                {/each}
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<main>
+    <div class="table-container">
+        <h2 class="report-title">Awarded Scholarship Report</h2>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>ScholarshipName</th>
+                    <th>Amount</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>NetID</th>
+                    <th>Major</th>
+                    <th>GPA</th>
+                    <th>Ethnicity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {#each awards as p}
+                    <tr>
+                        <td>{p.ScholarshipName}</td>
+                        <td>{p.Amount}</td>
+                        <td>{p.name}</td>
+                        <td>{p.email}</td>
+                        <td>{p.NetID}</td>
+                        <td>{p.Major}</td>
+                        <td>{p.CumulativeGPA}</td>
+                        <td>{p.Ethnicity}</td>
                     </tr>
                 {/each}
             </tbody>

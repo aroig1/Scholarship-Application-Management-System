@@ -5,6 +5,12 @@
 
 <section>
     <h1>View Available Scholarships - Student POV</h1>
+    <div class="button-container">
+        <a href="/ReportEngine/ScholarshipReportsPage"
+            ><button>Available Scholarship Report</button></a>
+        <a href="/ReportEngine/ScholarshipReportsPage"
+            ><button>Archived Scholarship Report</button></a>
+    </div>
     {#each scholarships as scholarship}
         <div class="container">
             <div>
@@ -17,10 +23,6 @@
             <div class="big-box" id="description-box"></div>
         </div>
     {/each}
-    <div class="button-container">
-        <button>Available Scholarship Report</button>
-        <button>Archived Scholarship Report</button>
-    </div>
 </section>
 
 <style>

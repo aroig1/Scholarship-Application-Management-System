@@ -28,7 +28,7 @@
             <a href="/logoutPage">SIGN OUT</a>
         </li>
         <li>
-            <a href="/reportPage">REPORTS</a>
+            <a href="/ReportEngine/UserReportPage">REPORTS</a>
         </li>
     </nav>
 </header>
