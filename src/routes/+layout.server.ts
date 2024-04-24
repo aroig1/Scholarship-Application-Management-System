@@ -1,5 +1,5 @@
-import { UserType } from "$lib/types";
-import { checkUserTableExists } from "$lib/util";
+import {UserType} from "$lib/types";
+import {checkUserTableExists} from "$lib/util";
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
 
@@ -17,12 +17,15 @@ export const load: PageServerLoad = async (event: any) => {
             .all();
 
         if (user.results[0].type == UserType.Applicant) {
-            const applicantInfo = await db.prepare("SELECT user FROM applicantInfo WHERE user = ? LIMIT 1")
+            const applicantInfo = await db
+                .prepare(
+                    "SELECT user FROM applicantInfo WHERE user = ? LIMIT 1"
+                )
                 .bind(event.locals.user?.id as string)
                 .all();
             applicantInfoLength = applicantInfo.results.length;
         }
-    } 
+    }
 
     return {
         user_type: user?.results[0].type,

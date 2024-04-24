@@ -5,7 +5,11 @@ import {UserType} from "$lib/types";
 
 export const load: PageServerLoad = async (event: any) => {
     const db = event.platform?.env.DB as D1Database;
-    await checkUserAccess(db, UserType.Administrator, event.locals.user?.id as string);
+    await checkUserAccess(
+        db,
+        UserType.Administrator,
+        event.locals.user?.id as string
+    );
     await checkScholarshipTableExists(db);
     const donors = await db
         .prepare("SELECT * FROM users WHERE type = ?")

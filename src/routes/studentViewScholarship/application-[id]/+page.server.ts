@@ -3,17 +3,19 @@ import {
     saveApplication,
     loadScholarship,
     updateApplication,
-    checkApplicationTableExists
+    checkApplicationTableExists,
+    checkUserAccess
 } from "$lib/util";
 import {v4 as uuidv4} from "uuid";
-import type {
-    ApplicantInfo,
-    Application,
-    Ethnicity,
-    Major,
-    Minor,
-    StudentYear,
-    Scholarship
+import {
+    type ApplicantInfo,
+    type Application,
+    type Ethnicity,
+    type Major,
+    type Minor,
+    type StudentYear,
+    type Scholarship,
+    UserType
 } from "$lib/types.js";
 
 import {redirect, type Actions} from "@sveltejs/kit";
@@ -27,9 +29,14 @@ async function loadDBScholarship(id: string | undefined, db: D1Database) {
     )) as Scholarship;
 }
 
-export const load: PageServerLoad = async ({params, platform}) => {
-    const db = platform?.env.DB as D1Database;
-    const scholarship = await loadDBScholarship(params.id, db);
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+    await checkUserAccess(
+        db,
+        UserType.Applicant,
+        event.locals.user?.id as string
+    );
+    const scholarship = await loadDBScholarship(event.params.id, db);
 
     return {
         scholarship: scholarship
