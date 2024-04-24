@@ -16,34 +16,3 @@
 
 <h1>Welcome to UASAMS {data.user.firstName} {data.user.lastName}</h1>
 <h3>({userType})</h3>
-<h3>Temporary home for navigating</h3>
-<li>
-    <a href="/createScholarship">Shortcut Create Scholarship</a>
-</li>
-<li>
-    <a href="/donorScholarships/modify-6edf1e4c-2178-40a2-8825-7faadbb9f072"
-        >Shortcut Modify Scholarship</a>
-</li>
-<li>
-    <a
-        href="/studentViewScholarship/application-6edf1e4c-2178-40a2-8825-7faadbb9f072"
-        >Shortcut Student Application</a>
-</li>
-<li>
-    <a href="/applicantInfo">Applicant Info</a>
-</li>
-<li>
-    <a href="/modifyApplicantInfo">Modify Applicant Info</a>
-</li>
-<li>
-    <a href="/donorScholarships">Donor Scholarships</a>
-</li>
-<li>
-    <a href="/studentViewScholarship">Student Scholarships</a>
-</li>
-<li>
-    <a href="/loginPage">Login Page</a>
-</li>
-<li>
-    <a href="/logoutPage">SIGN OUT</a>
-</li>

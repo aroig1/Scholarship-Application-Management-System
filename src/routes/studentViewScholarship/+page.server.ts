@@ -7,7 +7,7 @@ import {error} from "@sveltejs/kit";
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
     // @ts-ignore
-    if (event.locals.user?.type != UserType.Administrator) {
+    if (event.locals.user?.type != UserType.Applicant) {
         error(403);
     }
 
