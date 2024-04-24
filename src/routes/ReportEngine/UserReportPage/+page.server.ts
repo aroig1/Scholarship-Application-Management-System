@@ -1,12 +1,11 @@
-import {checkUserAccess} from "$lib/util";
 import type {D1Database} from "@cloudflare/workers-types";
 import type {PageServerLoad} from "./$types";
 import {UserType} from "$lib/types";
+import {error} from "@sveltejs/kit";
 
 export const load: PageServerLoad = async (event) => {
-    await checkUserAccess(
-        event.platform?.env.DB as D1Database,
-        UserType.Administrator,
-        event.locals.user?.id as string
-    );
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Administrator) {
+        error(403);
+    }
 };

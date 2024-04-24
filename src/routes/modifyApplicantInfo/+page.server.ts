@@ -1,6 +1,5 @@
 import {
     checkApplicantInfoTableExists,
-    checkUserAccess,
     loadApplicantInfo,
     updateApplicantInfo
 } from "$lib/util";
@@ -14,16 +13,15 @@ import {
     UserType
 } from "$lib/types.js";
 
-import {redirect, type Actions} from "@sveltejs/kit";
+import {error, redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
-    await checkUserAccess(
-        db,
-        UserType.Applicant,
-        event.locals.user?.id as string
-    );
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Applicant) {
+        error(403);
+    }
 
     await checkApplicantInfoTableExists(db);
     const applicantInfo = (await loadApplicantInfo(

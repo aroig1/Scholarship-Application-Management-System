@@ -1,7 +1,6 @@
 import {
     updateScholarship,
     loadScholarship,
-    checkUserAccess,
     checkUserTableExists
 } from "$lib/util";
 import type {Major, Minor, Scholarship} from "$lib/types";
@@ -21,14 +20,11 @@ async function loadDBScholarship(id: string | undefined, db: D1Database) {
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
 
-    // Check if user has access
-    await checkUserTableExists(db);
-    const user = await db
-        .prepare("SELECT type FROM users WHERE id = ? LIMIT 1")
-        .bind(event.locals.user?.id as string)
-        .all();
-    const type = user.results[0].type as UserType;
-    if (type != UserType.Administrator && type != UserType.Donor) {
+    // @ts-ignore
+    if (
+        event.locals.user?.type != UserType.Administrator &&
+        event.locals.user?.type != UserType.Donor
+    ) {
         error(403);
     }
 

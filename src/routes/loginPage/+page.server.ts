@@ -1,11 +1,7 @@
 import type {D1Database} from "@cloudflare/workers-types";
 import {fail, redirect, error} from "@sveltejs/kit";
 import {Argon2id} from "oslo/password";
-import {
-    loadUser_by_username,
-    checkUserTableExists,
-    checkUserAccess
-} from "$lib/util";
+import {loadUser_by_username, checkUserTableExists} from "$lib/util";
 
 import type {Actions, PageServerLoad} from "./$types";
 import {UserType, type User} from "$lib/types";
