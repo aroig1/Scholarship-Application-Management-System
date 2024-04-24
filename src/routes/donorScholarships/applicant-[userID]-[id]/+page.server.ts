@@ -5,10 +5,15 @@ import {
     checkUserTableExists,
     checkApplicantInfoTableExists
 } from "$lib/util";
-import type {Actions} from "@sveltejs/kit";
+import {error, type Actions} from "@sveltejs/kit";
+import {UserType} from "$lib/types";
 
-export const load: PageServerLoad = async ({params, platform}) => {
-    const db = platform?.env.DB as D1Database;
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Donor) {
+        error(403, "You are not authorized to view this page");
+    }
 
     await checkApplicationTableExists(db);
     await checkUserTableExists(db);
@@ -25,7 +30,7 @@ export const load: PageServerLoad = async ({params, platform}) => {
         LIMIT 1
     `
         )
-        .bind(params.userID, params.id)
+        .bind(event.params.userID, event.params.id)
         .all();
 
     return {

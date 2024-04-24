@@ -6,17 +6,18 @@ import {
     checkApplicationTableExists
 } from "$lib/util";
 import {v4 as uuidv4} from "uuid";
-import type {
-    ApplicantInfo,
-    Application,
-    Ethnicity,
-    Major,
-    Minor,
-    StudentYear,
-    Scholarship
+import {
+    type ApplicantInfo,
+    type Application,
+    type Ethnicity,
+    type Major,
+    type Minor,
+    type StudentYear,
+    type Scholarship,
+    UserType
 } from "$lib/types.js";
 
-import {redirect, type Actions} from "@sveltejs/kit";
+import {error, redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 import type {PageServerLoad} from "./$types";
 
@@ -27,9 +28,14 @@ async function loadDBScholarship(id: string | undefined, db: D1Database) {
     )) as Scholarship;
 }
 
-export const load: PageServerLoad = async ({params, platform}) => {
-    const db = platform?.env.DB as D1Database;
-    const scholarship = await loadDBScholarship(params.id, db);
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Applicant) {
+        error(403, "You are not authorized to view this page");
+    }
+
+    const scholarship = await loadDBScholarship(event.params.id, db);
 
     return {
         scholarship: scholarship

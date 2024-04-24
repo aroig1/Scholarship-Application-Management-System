@@ -5,11 +5,8 @@ import type {
     Application,
     ApplicantInfo,
     UserID,
-    Password,
-    ApplicationID,
     ScholarshipID,
-    Major,
-    Minor
+    Major
 } from "$lib/types";
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE

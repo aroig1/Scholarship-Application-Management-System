@@ -1,8 +1,12 @@
-import {updateScholarship, loadScholarship} from "$lib/util";
+import {
+    updateScholarship,
+    loadScholarship,
+    checkUserTableExists
+} from "$lib/util";
 import type {Major, Minor, Scholarship} from "$lib/types";
-import {majors, minors} from "$lib/types";
+import {UserType, majors, minors} from "$lib/types";
 
-import type {Actions} from "@sveltejs/kit";
+import {error, type Actions} from "@sveltejs/kit";
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
 
@@ -13,9 +17,19 @@ async function loadDBScholarship(id: string | undefined, db: D1Database) {
     )) as Scholarship;
 }
 
-export const load: PageServerLoad = async ({params, platform}) => {
-    const db = platform?.env.DB as D1Database;
-    const scholarship = await loadDBScholarship(params.id, db);
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+
+    if (
+        // @ts-ignore
+        event.locals.user?.type != UserType.Administrator &&
+        // @ts-ignore
+        event.locals.user?.type != UserType.Donor
+    ) {
+        error(403, "You are not authorized to view this page");
+    }
+
+    const scholarship = await loadDBScholarship(event.params.id, db);
 
     return {
         majors: majors as unknown as Major[],

@@ -1,12 +1,24 @@
-import {checkApplicationTableExists, saveApplicantInfo} from "$lib/util";
+import {saveApplicantInfo} from "$lib/util";
 import type {ApplicantInfo, Ethnicity, Major, Minor} from "$lib/types.js";
 import type {PageServerLoad} from "./$types";
-import {majors, minors, ethnicities, StudentYear} from "$lib/types.js";
+import {
+    majors,
+    minors,
+    ethnicities,
+    StudentYear,
+    UserType
+} from "$lib/types.js";
 
-import {redirect, type Actions} from "@sveltejs/kit";
+import {error, redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
-export const load: PageServerLoad = async ({params, platform}) => {
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Applicant) {
+        error(403, "You are not authorized to view this page");
+    }
+
     return {
         majors: majors as unknown as Major[],
         minors: minors as unknown as Minor[],

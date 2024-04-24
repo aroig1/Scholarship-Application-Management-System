@@ -68,16 +68,6 @@
             <Hint for="lastName" on="required">This is a mandatory field</Hint>
         </div>
         <div class="center">
-            <h3>Net ID (if applicable)</h3>
-            <input
-                type="text"
-                placeholder="netID"
-                maxlength="15"
-                name="netID"
-                use:validators={[required, maxLength(30)]} />
-            <Hint for="netID" on="required">This is a mandatory field</Hint>
-        </div>
-        <div class="center">
             <h3>Phone Number</h3>
             <input
                 type="text"

@@ -2,12 +2,18 @@ import {saveScholarship} from "$lib/util";
 import {v4 as uuidv4} from "uuid";
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 import type {PageServerLoad} from "./$types";
-import {majors, minors} from "$lib/types";
+import {UserType, majors, minors} from "$lib/types";
 
-import {redirect, type Actions} from "@sveltejs/kit";
+import {error, redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Donor) {
+        error(403, "You are not authorized to view this page");
+    }
+
     return {
         majors: majors as unknown as Major[],
         minors: minors as unknown as Minor[]

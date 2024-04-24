@@ -1,8 +1,9 @@
 import {loadScholarship} from "$lib/util";
-import type {Scholarship} from "$lib/types.js";
+import {UserType, type Scholarship} from "$lib/types.js";
 
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
+import {error} from "@sveltejs/kit";
 
 async function loadDBScholarship(id: string | undefined, db: D1Database) {
     return (await loadScholarship(
@@ -11,9 +12,14 @@ async function loadDBScholarship(id: string | undefined, db: D1Database) {
     )) as Scholarship;
 }
 
-export const load: PageServerLoad = async ({params, platform}) => {
-    const db = platform?.env.DB as D1Database;
-    const scholarship = await loadDBScholarship(params.id, db);
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Applicant) {
+        error(403, "You are not authorized to view this page");
+    }
+
+    const scholarship = await loadDBScholarship(event.params.id, db);
 
     return {
         scholarship: scholarship
