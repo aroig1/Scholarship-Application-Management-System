@@ -20,9 +20,10 @@ async function loadDBScholarship(id: string | undefined, db: D1Database) {
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
 
-    // @ts-ignore
     if (
+        // @ts-ignore
         event.locals.user?.type != UserType.Administrator &&
+        // @ts-ignore
         event.locals.user?.type != UserType.Donor
     ) {
         error(403);
