@@ -10,14 +10,14 @@ export const load: PageServerLoad = async (event) => {
         .prepare(
             "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
         )
-        .bind(event.locals.user?.id, false)
+        .bind(event.params.donorID, false)
         .all();
 
     const archived = await db
         .prepare(
             "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
         )
-        .bind(event.locals.user?.id, true)
+        .bind(event.params.donorID, true)
         .all();
 
     const donor = await db
