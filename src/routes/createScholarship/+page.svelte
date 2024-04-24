@@ -22,7 +22,7 @@
                 name="name"
                 type="text"
                 placeholder="super special scholarship"
-                maxlength="25" />
+                maxlength="100" />
         </div>
         <div>
             <h3>Enter scholarship amount</h3>

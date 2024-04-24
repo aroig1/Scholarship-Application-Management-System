@@ -1,13 +1,22 @@
-import {checkApplicationTableExists, checkUserAccess, saveApplicantInfo} from "$lib/util";
+import {
+    checkApplicationTableExists,
+    checkUserAccess,
+    saveApplicantInfo
+} from "$lib/util";
 import type {ApplicantInfo, Ethnicity, Major, Minor} from "$lib/types.js";
 import type {PageServerLoad} from "./$types";
-import {majors, minors, ethnicities, StudentYear, UserType} from "$lib/types.js";
+import {
+    majors,
+    minors,
+    ethnicities,
+    StudentYear,
+    UserType
+} from "$lib/types.js";
 
 import {redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
 export const load: PageServerLoad = async ({params, platform, locals}) => {
-
     const db = platform?.env.DB as D1Database;
     await checkUserAccess(db, UserType.Applicant, locals.user?.id as string);
 

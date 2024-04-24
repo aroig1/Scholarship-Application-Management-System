@@ -1,4 +1,4 @@
-import {fail, redirect} from "@sveltejs/kit";
+import {error, fail, redirect} from "@sveltejs/kit";
 import {generateId} from "lucia";
 import {Argon2id} from "oslo/password";
 import {
@@ -68,11 +68,18 @@ const validateInput = (user: User) => {
     return null;
 };
 
-export const load: PageServerLoad = async ({locals, platform}) => {
-    const db = platform?.env.DB as D1Database;
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+
+    if (event.locals.user?.id == null) {
+        error(403);
+    }
 
     await checkUserTableExists(db);
-    const user = (await loadUser_by_id(db, locals.user?.id as string)) as User;
+    const user = (await loadUser_by_id(
+        db,
+        event.locals.user?.id as unknown as string
+    )) as User;
 
     return {
         user: user

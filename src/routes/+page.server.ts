@@ -1,4 +1,4 @@
-import { redirect } from "@sveltejs/kit";
+import {redirect} from "@sveltejs/kit";
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
 
