@@ -3,11 +3,14 @@ import type {PageServerLoad} from "./$types";
 import {
     checkApplicationTableExists,
     checkUserTableExists,
-    checkApplicantInfoTableExists
+    checkApplicantInfoTableExists,
+    checkUserAccess
 } from "$lib/util";
+import {UserType} from "$lib/types";
 
-export const load: PageServerLoad = async ({params, platform}) => {
-    const db = platform?.env.DB as D1Database;
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+    await checkUserAccess(db, UserType.Donor, event.locals.user?.id as string);
 
     await checkApplicationTableExists(db);
     await checkUserTableExists(db);
@@ -23,7 +26,7 @@ export const load: PageServerLoad = async ({params, platform}) => {
         WHERE applications.scholarship = ?
     `
         )
-        .bind(params.id)
+        .bind(event.params.id)
         .all();
 
     return {

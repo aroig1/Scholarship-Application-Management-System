@@ -2,25 +2,28 @@ import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
 import {
     checkApplicationTableExists,
-    checkScholarshipTableExists
+    checkScholarshipTableExists,
+    checkUserAccess
 } from "$lib/util";
+import {UserType} from "$lib/types";
 
-export const load: PageServerLoad = async ({locals, platform}) => {
-    const db = platform?.env.DB as D1Database;
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+    await checkUserAccess(db, UserType.Donor, event.locals.user?.id as string);
 
     await checkScholarshipTableExists(db);
     const nonArchived = await db
         .prepare(
             "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
         )
-        .bind(locals.user?.id, false)
+        .bind(event.locals.user?.id, false)
         .all();
 
     const archived = await db
         .prepare(
             "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
         )
-        .bind(locals.user?.id, true)
+        .bind(event.locals.user?.id, true)
         .all();
 
     return {

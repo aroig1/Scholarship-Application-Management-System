@@ -1,8 +1,13 @@
-import {updateScholarship, loadScholarship} from "$lib/util";
+import {
+    updateScholarship,
+    loadScholarship,
+    checkUserAccess,
+    checkUserTableExists
+} from "$lib/util";
 import type {Major, Minor, Scholarship} from "$lib/types";
-import {majors, minors} from "$lib/types";
+import {UserType, majors, minors} from "$lib/types";
 
-import type {Actions} from "@sveltejs/kit";
+import {error, type Actions} from "@sveltejs/kit";
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
 
@@ -13,9 +18,21 @@ async function loadDBScholarship(id: string | undefined, db: D1Database) {
     )) as Scholarship;
 }
 
-export const load: PageServerLoad = async ({params, platform}) => {
-    const db = platform?.env.DB as D1Database;
-    const scholarship = await loadDBScholarship(params.id, db);
+export const load: PageServerLoad = async (event) => {
+    const db = event.platform?.env.DB as D1Database;
+
+    // Check if user has access
+    await checkUserTableExists(db);
+    const user = await db
+        .prepare("SELECT type FROM users WHERE id = ? LIMIT 1")
+        .bind(event.locals.user?.id as string)
+        .all();
+    const type = user.results[0].type as UserType;
+    if (type != UserType.Administrator && type != UserType.Donor) {
+        error(403);
+    }
+
+    const scholarship = await loadDBScholarship(event.params.id, db);
 
     return {
         majors: majors as unknown as Major[],
