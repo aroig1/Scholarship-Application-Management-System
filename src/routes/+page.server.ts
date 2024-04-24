@@ -1,6 +1,7 @@
 import {redirect} from "@sveltejs/kit";
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
+import {checkUserTableExists} from "$lib/util";
 
 export const load: PageServerLoad = async (event: any) => {
     const db = event.platform?.env.DB as D1Database;
@@ -9,6 +10,7 @@ export const load: PageServerLoad = async (event: any) => {
         redirect(302, "/loginPage");
     }
 
+    await checkUserTableExists(db);
     const user = await db
         .prepare(
             "SELECT firstName, lastName, type FROM users WHERE id = ? LIMIT 1"

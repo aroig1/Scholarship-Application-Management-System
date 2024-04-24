@@ -3,19 +3,17 @@ import type {PageServerLoad} from "./$types";
 import {
     checkApplicationTableExists,
     checkUserTableExists,
-    checkApplicantInfoTableExists,
-    checkUserAccess
+    checkApplicantInfoTableExists
 } from "$lib/util";
-import type {Actions} from "@sveltejs/kit";
+import {error, type Actions} from "@sveltejs/kit";
 import {UserType} from "$lib/types";
 
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
-    await checkUserAccess(
-        db,
-        UserType.Administrator,
-        event.locals.user?.id as string
-    );
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Administrator) {
+        error(403);
+    }
 
     await checkApplicationTableExists(db);
     await checkUserTableExists(db);

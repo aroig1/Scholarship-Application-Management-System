@@ -430,6 +430,7 @@ export function dateToString(d: Date): string {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b5c72c0 (Added roles and page permission verification)
 export async function checkUserAccess(
@@ -458,8 +459,20 @@ export async function checkUserAccess(db: D1Database, type: UserType, id: string
         .bind(id)
         .all();
 >>>>>>> b5c72c0 (Added roles and page permission verification)
+=======
+// export async function checkUserAccess(
+//     db: D1Database,
+//     type: UserType,
+//     id: string
+// ) {
+//     await checkUserTableExists(db);
+//     const user = await db
+//         .prepare("SELECT type FROM users WHERE id = ? LIMIT 1")
+//         .bind(id)
+//         .all();
+>>>>>>> 3ddf049 (using cookies to verify page access)
 
-    if (user.results[0].type != type) {
-        error(403);
-    }
-}
+//     if (user.results[0].type != type) {
+//         error(403);
+//     }
+// }

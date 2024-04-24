@@ -1,15 +1,18 @@
-import {checkUserAccess, saveScholarship} from "$lib/util";
+import {saveScholarship} from "$lib/util";
 import {v4 as uuidv4} from "uuid";
 import type {Major, Minor, Scholarship} from "$lib/types.js";
 import type {PageServerLoad} from "./$types";
 import {UserType, majors, minors} from "$lib/types";
 
-import {redirect, type Actions} from "@sveltejs/kit";
+import {error, redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
-    await checkUserAccess(db, UserType.Donor, event.locals.user?.id as string);
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Donor) {
+        error(403);
+    }
 
     return {
         majors: majors as unknown as Major[],

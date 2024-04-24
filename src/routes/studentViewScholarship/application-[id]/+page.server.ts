@@ -3,8 +3,7 @@ import {
     saveApplication,
     loadScholarship,
     updateApplication,
-    checkApplicationTableExists,
-    checkUserAccess
+    checkApplicationTableExists
 } from "$lib/util";
 import {v4 as uuidv4} from "uuid";
 import {
@@ -18,7 +17,7 @@ import {
     UserType
 } from "$lib/types.js";
 
-import {redirect, type Actions} from "@sveltejs/kit";
+import {error, redirect, type Actions} from "@sveltejs/kit";
 import type {D1Database} from "@cloudflare/workers-types";
 import type {PageServerLoad} from "./$types";
 
@@ -31,11 +30,11 @@ async function loadDBScholarship(id: string | undefined, db: D1Database) {
 
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
-    await checkUserAccess(
-        db,
-        UserType.Applicant,
-        event.locals.user?.id as string
-    );
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Applicant) {
+        error(403);
+    }
+
     const scholarship = await loadDBScholarship(event.params.id, db);
 
     return {

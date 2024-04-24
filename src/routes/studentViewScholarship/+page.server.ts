@@ -1,15 +1,16 @@
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
-import {checkScholarshipTableExists, checkUserAccess} from "$lib/util";
+import {checkScholarshipTableExists} from "$lib/util";
 import {UserType} from "$lib/types";
+import {error} from "@sveltejs/kit";
 
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
-    await checkUserAccess(
-        db,
-        UserType.Applicant,
-        event.locals.user?.id as string
-    );
+    // @ts-ignore
+    if (event.locals.user?.type != UserType.Administrator) {
+        error(403);
+    }
+
     await checkScholarshipTableExists(db);
 
     const scholarships = await db
