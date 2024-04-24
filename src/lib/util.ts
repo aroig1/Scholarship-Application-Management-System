@@ -14,6 +14,7 @@ import type {
 } from "$lib/types";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {error} from "@sveltejs/kit";
 =======
 import { error } from "@sveltejs/kit";
@@ -21,6 +22,9 @@ import { error } from "@sveltejs/kit";
 =======
 import {error} from "@sveltejs/kit";
 >>>>>>> b5c72c0 (Added roles and page permission verification)
+=======
+import {error} from "@sveltejs/kit";
+>>>>>>> 1b200dd068ee720f6f0626b1918079473e93e9ae
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE
 export async function dropSession(db: D1Database) {
@@ -431,6 +435,7 @@ export function dateToString(d: Date): string {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b5c72c0 (Added roles and page permission verification)
 export async function checkUserAccess(
@@ -460,6 +465,8 @@ export async function checkUserAccess(db: D1Database, type: UserType, id: string
         .all();
 >>>>>>> b5c72c0 (Added roles and page permission verification)
 =======
+=======
+>>>>>>> 1b200dd068ee720f6f0626b1918079473e93e9ae
 // export async function checkUserAccess(
 //     db: D1Database,
 //     type: UserType,
@@ -470,7 +477,10 @@ export async function checkUserAccess(db: D1Database, type: UserType, id: string
 //         .prepare("SELECT type FROM users WHERE id = ? LIMIT 1")
 //         .bind(id)
 //         .all();
+<<<<<<< HEAD
 >>>>>>> 3ddf049 (using cookies to verify page access)
+=======
+>>>>>>> 1b200dd068ee720f6f0626b1918079473e93e9ae
 
 //     if (user.results[0].type != type) {
 //         error(403);
