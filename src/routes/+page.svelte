@@ -1,4 +1,21 @@
-<h1>Welcome to UASAMS</h1>
+<script>
+    export let data;
+
+    /**
+     * @type {string}
+     */
+    let userType;
+    if (data.user.type == 0) {
+        userType = "Applicant";
+    } else if (data.user.type == 1) {
+        userType = "Administrator";
+    } else {
+        userType = "Donor";
+    }
+</script>
+
+<h1>Welcome to UASAMS {data.user.firstName} {data.user.lastName}</h1>
+<h3>({userType})</h3>
 <h3>Temporary home for navigating</h3>
 <li>
     <a href="/createScholarship">Shortcut Create Scholarship</a>

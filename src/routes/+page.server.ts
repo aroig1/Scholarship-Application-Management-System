@@ -9,7 +9,14 @@ export const load: PageServerLoad = async (event: any) => {
         redirect(302, "/loginPage");
     }
 
+    const user = await db
+        .prepare(
+            "SELECT firstName, lastName, type FROM users WHERE id = ? LIMIT 1"
+        )
+        .bind(event.locals.user?.id)
+        .all();
+
     return {
-        scholarships: true
+        user: user.results[0]
     };
 };
