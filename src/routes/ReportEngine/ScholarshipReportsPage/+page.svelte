@@ -3,7 +3,7 @@
     import {read, utils, writeFileXLSX} from "xlsx";
 
     /** @type {Array<{
-     *   Name: string
+     *   name: string
      *   amount: string
      *   donor_name: string
      *   donor_phone: string
@@ -15,7 +15,19 @@
      *   other: string
      * }>} */
     let active = [];
-    //let archived = [];
+    /** @type {Array<{
+     *   name: string
+     *   amount: string
+     *   donor_name: string
+     *   donor_phone: string
+     *   donor_email: string
+     *   major: string
+     *   minor: string
+     *   cumalativeGPA: string
+     *   deadline: string
+     *   other: string
+     * }>} */
+    let archived = [];
 
     onMount(async () => {
         const fetch_active = await (
@@ -25,12 +37,12 @@
         const ws_active = wb_active.Sheets[wb_active.SheetNames[0]];
         active = utils.sheet_to_json(ws_active);
 
-        // const fetch_archived = await (
-        //     await fetch("/api/reports/ScholarshipArchived")
-        // ).text();
-        // const wb_archived = read(fetch_archived);
-        // const ws_archived = wb_archived.Sheets[wb_archived.SheetNames[0]];
-        // archived = utils.sheet_to_json(ws_archived);
+        const fetch_archived = await (
+            await fetch("/api/reports/ScholarshipArchived")
+        ).text();
+        const wb_archived = read(fetch_archived);
+        const ws_archived = wb_archived.Sheets[wb_archived.SheetNames[0]];
+        archived = utils.sheet_to_json(ws_archived);
     });
 
     function exportFileActive() {
@@ -40,12 +52,12 @@
         writeFileXLSX(wb, "ActiveScholarshipReport.xlsx");
     }
 
-    // function exportFileArchived() {
-    //     const ws = utils.json_to_sheet(archived);
-    //     const wb = utils.book_new();
-    //     utils.book_append_sheet(wb, ws, "Data");
-    //     writeFileXLSX(wb, "ArchivedScholarshipReport.xlsx");
-    // }
+    function exportFileArchived() {
+        const ws = utils.json_to_sheet(archived);
+        const wb = utils.book_new();
+        utils.book_append_sheet(wb, ws, "Data");
+        writeFileXLSX(wb, "ArchivedScholarshipReport.xlsx");
+    }
 </script>
 
 <section>
@@ -57,17 +69,17 @@
             <span style="font-size: 0.8em;">(download)</span>
         </button>
 
-        <!-- <button on:click={exportFileArchived}>
+        <button on:click={exportFileArchived}>
             Archived Scholarships Report
             <br />
             <span style="font-size: 0.8em;">(download)</span>
-        </button> -->
+        </button>
     </div>
 </section>
 
 <main>
     <div class="table-container">
-        <h2 class="report-title">Active Donor Report Preview</h2>
+        <h2 class="report-title">Active Scholarships Preview</h2>
         <table class="report-table">
             <thead>
                 <tr>
@@ -86,7 +98,7 @@
             <tbody>
                 {#each active as p}
                     <tr>
-                        <td>{p.Name}</td>
+                        <td>{p.name}</td>
                         <td>{p.amount}</td>
                         <td>{p.donor_name}</td>
                         <td>{p.donor_phone}</td>
@@ -103,9 +115,9 @@
     </div>
 </main>
 
-<!-- <main>
+<main>
     <div class="table-container">
-        <h2 class="report-title">Active Donor Report Preview</h2>
+        <h2 class="report-title">Archived Scholarships Preview</h2>
         <table class="report-table">
             <thead>
                 <tr>
@@ -124,7 +136,7 @@
             <tbody>
                 {#each archived as p}
                     <tr>
-                        <td>{p.Name}</td>
+                        <td>{p.name}</td>
                         <td>{p.amount}</td>
                         <td>{p.donor_name}</td>
                         <td>{p.donor_phone}</td>
@@ -139,7 +151,7 @@
             </tbody>
         </table>
     </div>
-</main> -->
+</main>
 
 <style>
     .button-container {

@@ -7,9 +7,7 @@
     <h1>View Available Scholarships - Student POV</h1>
     <div class="button-container">
         <a href="/ReportEngine/ScholarshipReportsPage"
-            ><button>Available Scholarship Report</button></a>
-        <a href="/ReportEngine/ScholarshipReportsPage"
-            ><button>Archived Scholarship Report</button></a>
+            ><button>Available/Archived Scholarship Reports</button></a>
     </div>
     {#each scholarships as scholarship}
         <div class="container">

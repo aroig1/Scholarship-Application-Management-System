@@ -2,12 +2,12 @@ import type {D1Database} from "@cloudflare/workers-types";
 import {error} from "@sveltejs/kit";
 import * as XLSX from "xlsx";
 
-async function getActiveScholarships(db: D1Database) {
+async function getArchivedScholarships(db: D1Database) {
     const errors = [];
     try {
         const stmt = db.prepare(
             `SELECT scholarships.*, users.* FROM scholarships JOIN users ON users.id = scholarships.donorID
-            WHERE scholarships.archived = false;`
+            WHERE scholarships.archived = true;`
         );
         const {results} = await stmt.all();
         const rows = results.map((scholarship) => ({
@@ -22,14 +22,16 @@ async function getActiveScholarships(db: D1Database) {
             deadline: scholarship.deadline,
             other: scholarship.other
         }));
-        const scholarshipSheet = XLSX.utils.json_to_sheet(rows, {dense: true});
-        const scholarshipWB = XLSX.utils.book_new();
+        const archivedScholarshipSheet = XLSX.utils.json_to_sheet(rows, {
+            dense: true
+        });
+        const archivedScholarshipWB = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(
-            scholarshipWB,
-            scholarshipSheet,
-            "Available Scholarships "
+            archivedScholarshipWB,
+            archivedScholarshipSheet,
+            "Archived Scholarships "
         );
-        const data = XLSX.writeXLSX(scholarshipWB, {
+        const data = XLSX.writeXLSX(archivedScholarshipWB, {
             type: "base64",
             compression: true
         });
@@ -48,5 +50,5 @@ export async function GET(event) {
             message
         });
     }
-    return new Response(await getActiveScholarships(event.platform?.env.DB));
+    return new Response(await getArchivedScholarships(event.platform?.env.DB));
 }
