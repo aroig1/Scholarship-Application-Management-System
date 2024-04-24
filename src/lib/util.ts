@@ -13,10 +13,14 @@ import type {
     UserType
 } from "$lib/types";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {error} from "@sveltejs/kit";
 =======
 import { error } from "@sveltejs/kit";
 >>>>>>> 076546d (User roles and structure for admins pages)
+=======
+import {error} from "@sveltejs/kit";
+>>>>>>> b5c72c0 (Added roles and page permission verification)
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE
 export async function dropSession(db: D1Database) {
@@ -425,11 +429,15 @@ export function dateToString(d: Date): string {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b5c72c0 (Added roles and page permission verification)
 export async function checkUserAccess(
     db: D1Database,
     type: UserType,
     id: string
 ) {
+<<<<<<< HEAD
     await checkUserTableExists(db);
     const user = await db
         .prepare("SELECT type FROM users WHERE id = ? LIMIT 1")
@@ -443,6 +451,13 @@ export async function checkUserAccess(db: D1Database, type: UserType, id: string
             .bind(id)
             .all();
 >>>>>>> 076546d (User roles and structure for admins pages)
+=======
+    await checkUserTableExists(db);
+    const user = await db
+        .prepare("SELECT type FROM users WHERE id = ? LIMIT 1")
+        .bind(id)
+        .all();
+>>>>>>> b5c72c0 (Added roles and page permission verification)
 
     if (user.results[0].type != type) {
         error(403);
