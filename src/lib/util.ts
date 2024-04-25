@@ -180,6 +180,22 @@ export async function updateUser(db: D1Database, user: User) {
         .run();
 }
 
+export async function adminUpdateUser(db: D1Database, user: User) {
+    await checkUserTableExists(db);
+    db.prepare(
+        "UPDATE users SET firstName = ?, lastName = ?, phone = ?, email = ?, type = ? WHERE id = ?"
+    )
+        .bind(
+            user.firstName,
+            user.lastName,
+            user.phone,
+            user.email,
+            user.type,
+            user.id
+        )
+        .run();
+}
+
 export async function saveApplicantInfo(
     db: D1Database,
     applicant: ApplicantInfo
