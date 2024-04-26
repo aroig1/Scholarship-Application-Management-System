@@ -32,6 +32,7 @@ export const load: PageServerLoad = async (event: any) => {
         .all();
 
     return {
-        applicants: result.results
+        applicants: result.results,
+        scholarship: event.params.id
     };
 };
