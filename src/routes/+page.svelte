@@ -158,9 +158,10 @@
     }
 
     .intro {
-        margin: 0 15%;
-        padding: 25px 0;
+        margin: 25px 15%;
+        padding: 10px 25px;
         background-color: white;
+        border-radius: 50px;
     }
 
     h3 {

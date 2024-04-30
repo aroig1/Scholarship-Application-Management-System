@@ -2,6 +2,7 @@ import {UserType} from "$lib/types";
 import {checkApplicantInfoTableExists, checkUserTableExists} from "$lib/util";
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
+import {enhance} from "$app/forms";
 
 export const load: PageServerLoad = async (event: any) => {
     const db = event.platform?.env.DB as D1Database;

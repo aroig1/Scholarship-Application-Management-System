@@ -17,9 +17,9 @@
     const user = data.user;
 </script>
 
-<form use:form2 method="POST">
-    <div class="info-container">
-        <h1>Modify Profile</h1>
+<section>
+    <h1>Modify Profile</h1>
+    <form use:form2 method="POST" class="container">
         <div class="center">
             <h3>Full Name</h3>
             <input
@@ -71,8 +71,8 @@
         <div class="center">
             {#if form?.error}<pre class="error">{form?.message}</pre>{/if}
         </div>
-    </div>
-</form>
+    </form>
+</section>
 
 <style>
     :global(.touched:invalid) {
@@ -82,6 +82,8 @@
     h1 {
         width: 100%;
         text-align: center;
+        font-size: 40px;
+        margin-top: 30px;
     }
     h3 {
         padding: 0;
@@ -91,26 +93,32 @@
         padding: 0;
         margin: 20px;
     }
-    button {
-        /* figure out how to center */
-        margin: 0 auto;
-        padding: 10px;
-        width: 150px;
+
+    .container {
+        border: 1px solid #ccc;
+        padding: 35px;
+        margin: 25px 25%;
+        background-color: white;
+        border-radius: 50px;
     }
 
-    .info-container {
-        background-color: lightgray;
-        border: 50px;
-        padding: 20px;
-        margin: 25px;
-        width: 600px;
-        height: 780px;
-        flex-direction: column;
-        text-align: center;
-    }
     .center {
         flex-direction: column;
         text-align: center;
         padding: 2px;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 10px 25px;
+        border-radius: 25px;
+        border-style: none;
+        background-color: rgb(13, 35, 75);
+        color: white;
+    }
+
+    button:hover {
+        background-color: rgb(55, 141, 189);
+        cursor: pointer;
     }
 </style>

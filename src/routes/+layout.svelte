@@ -1,4 +1,5 @@
 <script lang="ts">
+    import {enhance} from "$app/forms";
     export let data;
 </script>
 
@@ -124,8 +125,13 @@
         margin: 0;
     }
 
+    :global(body) {
+        background-color: rgb(244, 244, 244);
+    }
+
     header {
         width: 100%;
+        background-color: white;
     }
 
     h3 {
@@ -142,6 +148,7 @@
         padding: 10px 8%;
         border-bottom-style: groove;
         border-bottom-width: 1.5px;
+        background-color: white;
     }
 
     .left {
