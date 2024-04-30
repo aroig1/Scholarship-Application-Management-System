@@ -4,54 +4,82 @@
 </script>
 
 <section>
-    <h1>View Available Scholarships - Student POV</h1>
-    <div class="button-container">
-        <a href="/ReportEngine/ScholarshipReportsPage"
-            ><button>Available/Archived Scholarship Reports</button></a>
+    <div class="page_title">
+        <h1>Available Scholarships</h1>
+        <a href="/ReportEngine/ScholarshipReportsPage">
+            <button>Available/Archived Scholarship Reports</button>
+        </a>
+    </div>
+    <div class="header">
+        <h3 class="name">Scholarship Name</h3>
+        <h3 class="amount">Total Amount</h3>
     </div>
     {#each scholarships as scholarship}
         <div class="container">
-            <div>
-                <h3>Name: {scholarship.name}</h3>
-                <h3>Total Amount: ${scholarship.amount}</h3>
-                <a href="/studentViewScholarship/scholarship-{scholarship.id}">
-                    <button>View Scholarship</button>
-                </a>
-            </div>
-            <div class="big-box" id="description-box"></div>
+            <h3 class="name">{scholarship.name}</h3>
+            <h3 class="amount">${scholarship.amount}</h3>
+            <a
+                class="view"
+                href="/studentViewScholarship/scholarship-{scholarship.id}">
+                <button>View Scholarship</button>
+            </a>
         </div>
     {/each}
 </section>
 
 <style>
-    .container {
-        display: block;
-        flex-wrap: nowrap;
-        border: 1px solid #ccc;
-        padding: 10px;
-    }
-    button {
-        margin-top: 10px;
-    }
-
-    .big-box {
-        display: none;
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        margin-top: 10px;
-    }
-    .button-container {
+    .page_title {
+        margin: 50px 100px;
         display: flex;
         justify-content: center;
-        gap: 16px;
-        margin-top: 40px;
-        margin-bottom: 20px;
+        align-items: center;
+        flex-direction: column;
     }
 
-    .button-container button {
-        padding: 10px 20px;
-        font-size: 16px;
+    h1 {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+    }
+
+    .container {
+        display: flex;
+        border: 1px solid #ccc;
+        padding: 50px 0;
+        align-items: center;
+        margin: 25px 5%;
+        background-color: white;
+    }
+
+    .name {
+        position: absolute;
+        left: 10%;
+    }
+
+    .amount {
+        position: absolute;
+        left: 45%;
+    }
+
+    .view {
+        position: absolute;
+        right: 10%;
+    }
+
+    button {
+        padding: 10px 25px;
+        border-radius: 20px;
+        border-style: none;
+        background-color: rgb(13, 35, 75);
+        color: white;
+    }
+
+    button:hover {
+        background-color: rgb(55, 141, 189);
         cursor: pointer;
     }
 </style>

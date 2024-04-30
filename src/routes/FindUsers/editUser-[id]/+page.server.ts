@@ -93,8 +93,6 @@ export const actions: Actions = {
         const formData = await event.request.formData();
         let user: User;
 
-        console.log("FORM", formData);
-
         try {
             user = {
                 id: event.params?.id as string,
@@ -109,7 +107,6 @@ export const actions: Actions = {
                 email: formData.get("email") as string,
                 type: formData.get("userType") as unknown as UserType
             };
-            console.log("USER", user);
             validateInput(user);
 
             if (!event.platform?.env.DB) {

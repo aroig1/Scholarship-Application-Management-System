@@ -6,7 +6,8 @@ import type {
     ApplicantInfo,
     UserID,
     ScholarshipID,
-    Major
+    Major,
+    Minor
 } from "$lib/types";
 
 // INTEGER, FLOAT, VARCHAR, TEXT, DATE
@@ -241,7 +242,7 @@ export async function loadApplicantInfo(
         if ("minors" in result.results[0]) {
             applicantInfo.minors = JSON.parse(
                 result.results[0].minors as string
-            ).map((s: string) => s as Major);
+            ).map((s: string) => s as Minor);
         }
 
         if ("workExperience" in result.results[0]) {

@@ -32,7 +32,7 @@
 
 <section>
     <h1>Applicant Information</h1>
-    <form method="POST">
+    <form method="POST" class="container">
         <div>
             <h3>Preferred Pronouns</h3>
             <select name="pronouns" value={applicantInfo.preferredPronouns}>
@@ -109,10 +109,10 @@
         <div>
             <h3>Work Experience</h3>
             {#each workExperience as w}
-                <input
+                <textarea
                     class="work_experience"
                     bind:value={w}
-                    placeholder="Work Experience" />
+                    placeholder="Work Experience"></textarea>
             {/each}
             <button on:click|preventDefault={addField}>Add</button>
             {#if workExperience.length >= 2}
@@ -124,21 +124,31 @@
                 name="workExperience"
                 value={workExperience} />
         </div>
-        <button>Save</button>
+        <div class="button">
+            <button class="save">Save</button>
+        </div>
     </form>
 </section>
 
 <style>
     section {
-        margin: 0 auto;
-        width: 90%;
-        max-width: 700px;
         /* Styling for MultiSelect */
         --sms-options-max-height: 200px;
     }
+
+    .container {
+        border: 1px solid #ccc;
+        padding: 35px 50px;
+        margin: 25px 20%;
+        background-color: white;
+        border-radius: 50px;
+    }
+
     h1 {
         width: 100%;
         text-align: center;
+        font-size: 40px;
+        margin-top: 30px;
     }
     h3 {
         padding: 0;
@@ -148,10 +158,37 @@
         padding: 0;
         margin: 20px;
     }
+    input {
+        height: 20px;
+    }
     .work_experience {
         width: 100%;
-        height: 60px;
+        height: 80px;
         margin: 5px 0;
+    }
+    .button {
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+    }
+    button {
+        padding: 5px 15px;
+        border-radius: 20px;
+        border-style: none;
+        background-color: rgb(13, 35, 75);
+        color: white;
+    }
+    .save {
+        margin-top: 10px;
+        padding: 15px 30px;
+        border-radius: 25px;
+        border-style: none;
+        background-color: rgb(13, 35, 75);
+        color: white;
+    }
+    button:hover {
+        background-color: rgb(55, 141, 189);
+        cursor: pointer;
     }
     .hidden {
         visibility: hidden;

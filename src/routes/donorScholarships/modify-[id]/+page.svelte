@@ -186,11 +186,11 @@
             <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.other}
-            <input
+            <textarea
                 name="other"
                 value={scholarship.other}
-                type="text"
-                placeholder="Enter any other scholarship requirements here" />
+                placeholder="Enter any other scholarship requirements here"
+            ></textarea>
             <div class="buttons">
                 <button>Confirm</button>
                 <button on:click={() => (areaClicked.other = false)}
@@ -206,11 +206,11 @@
             <img class="down-arrow" src="/down_arrow.webp" alt="down arrow" />
         </div>
         {#if areaClicked.description}
-            <input
+            <textarea
                 name="description"
                 value={scholarship.description}
-                type="text"
-                placeholder="Enter any other scholarship requirements here" />
+                placeholder="Enter any other scholarship requirements here"
+            ></textarea>
             <div class="buttons">
                 <button>Confirm</button>
                 <button on:click={() => (areaClicked.description = false)}
@@ -263,7 +263,8 @@
         --sms-bg: white;
     }
     h1 {
-        width: 100%;
+        font-size: 40px;
+        margin: 40px;
         text-align: center;
     }
     .info-container {
@@ -291,13 +292,27 @@
         justify-content: space-evenly;
     }
     .buttons button {
-        width: 100px;
-        height: 30px;
+        padding: 10px 25px;
+        border-radius: 20px;
+        border-style: none;
+        background-color: rgb(13, 35, 75);
+        color: white;
+    }
+
+    button:hover {
+        background-color: rgb(55, 141, 189);
+        cursor: pointer;
     }
     input {
         width: 100%;
         margin: 10px 0;
         padding: 10px;
+    }
+    textarea {
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+        height: 100px;
     }
     .hidden {
         visibility: hidden;

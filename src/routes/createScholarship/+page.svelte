@@ -11,11 +11,8 @@
 </script>
 
 <section>
-    <a href="/donorScholarships">
-        <h3>Back</h3>
-    </a>
     <h1>Create New Scholarship</h1>
-    <form method="POST">
+    <form method="POST" class="container">
         <div>
             <h3>Enter scholarship name</h3>
             <input
@@ -101,48 +98,66 @@
         </div>
         <div>
             <h3>Enter any additional scholarship requirements (optional)</h3>
-            <input
+            <textarea
                 name="other"
                 class="other"
-                type="text"
-                placeholder="ex: Must be interested in IoT" />
+                placeholder="ex: Must be interested in IoT"></textarea>
         </div>
         <div>
             <h3>Enter scholarship description and/or essay prompt.</h3>
-            <input name="description" class="other" type="text" />
+            <textarea name="description" class="other"></textarea>
         </div>
-        <button>Create Scholarship</button>
+        <div class="button">
+            <button>Create Scholarship</button>
+        </div>
     </form>
 </section>
 
 <style>
     section {
-        margin: 0 auto;
-        width: 90%;
-        max-width: 700px;
         /* Styling for MultiSelect */
         --sms-options-max-height: 200px;
     }
     h1 {
-        width: 100%;
         text-align: center;
+        font-size: 40px;
+        margin: 25px;
+    }
+    .container {
+        border: 1px solid #ccc;
+        padding: 35px;
+        margin: 0 20%;
+        background-color: white;
+        border-radius: 50px;
     }
     h3 {
-        padding: 0;
-        margin: 0;
+        margin: 5px 0;
+    }
+    input {
+        height: 20px;
     }
     div {
         padding: 0;
         margin: 20px;
     }
-    button {
-        /* figure out how to center */
-        margin: 0 35%;
-        padding: 10px;
-        width: 150px;
+    .button {
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
     }
-    .other {
+    button {
+        padding: 10px 25px;
+        border-radius: 20px;
+        border-style: none;
+        background-color: rgb(13, 35, 75);
+        color: white;
+    }
+    button:hover {
+        background-color: rgb(55, 141, 189);
+        cursor: pointer;
+    }
+    textarea {
         width: 100%;
-        height: 50px;
+        height: 100px;
     }
 </style>

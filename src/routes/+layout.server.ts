@@ -24,6 +24,8 @@ export const load: PageServerLoad = async (event: any) => {
 
     return {
         user_type: event.locals.user?.type,
+        user_name:
+            event.locals.user?.firstName + " " + event.locals.user?.lastName,
         types: UserType,
         applicantInfo: applicantInfoLength
     };
