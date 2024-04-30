@@ -39,7 +39,7 @@
                 <a href="/modifyUser">Modify User</a>
             </li>
             <li>
-                <a href="/logoutPage">SIGN OUT</a>
+                <a href="/logoutPage">Sign Out</a>
             </li>
         </nav>
     {:else if data.user_type == data.types.Donor}
@@ -71,7 +71,7 @@
                 <a href="/modifyUser">Modify User</a>
             </li>
             <li>
-                <a href="/logoutPage">SIGN OUT</a>
+                <a href="/logoutPage">Sign Out</a>
             </li>
         </nav>
     {:else if data.user_type == data.types.Administrator}
@@ -100,16 +100,16 @@
                 <a href="/adminViewDonors">View Donors</a>
             </li>
             <li>
+                <a href="/FindUsers">Search Users</a>
+            </li>
+            <li>
+                <a href="/ReportEngine/UserReportPage">Reports</a>
+            </li>
+            <li>
                 <a href="/modifyUser">Modify User</a>
             </li>
             <li>
-                <a href="/FindUsers">ADMIN--UpdateUsers</a>
-            </li>
-            <li>
-                <a href="/ReportEngine/UserReportPage">REPORTS</a>
-            </li>
-            <li>
-                <a href="/logoutPage">SIGN OUT</a>
+                <a href="/logoutPage">Sign Out</a>
             </li>
         </nav>
     {:else}

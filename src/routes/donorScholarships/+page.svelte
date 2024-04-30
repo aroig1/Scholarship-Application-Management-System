@@ -102,17 +102,17 @@
     }
 
     .name {
-        position: fixed;
+        position: absolute;
         left: 10%;
     }
 
     .amount {
-        position: fixed;
+        position: absolute;
         left: 45%;
     }
 
     .buttons {
-        position: fixed;
+        position: absolute;
         right: 10%;
     }
 

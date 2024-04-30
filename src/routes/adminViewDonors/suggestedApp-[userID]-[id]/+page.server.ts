@@ -6,7 +6,7 @@ import {
     checkApplicantInfoTableExists
 } from "$lib/util";
 import {error, type Actions} from "@sveltejs/kit";
-import {UserType} from "$lib/types";
+import {UserType, type Major, type Minor} from "$lib/types";
 
 export const load: PageServerLoad = async (event) => {
     const db = event.platform?.env.DB as D1Database;
@@ -33,8 +33,26 @@ export const load: PageServerLoad = async (event) => {
         .bind(event.params.userID, event.params.id)
         .all();
 
+    let applicant = result.results[0];
+
+    if ("majors" in result.results[0]) {
+        applicant.majors = JSON.parse(result.results[0].majors as string).map(
+            (s: string) => s as Major
+        );
+    }
+    if ("minors" in result.results[0]) {
+        applicant.minors = JSON.parse(result.results[0].minors as string).map(
+            (s: string) => s as Minor
+        );
+    }
+    if ("workExperience" in result.results[0]) {
+        applicant.workExperience = JSON.parse(
+            result.results[0].workExperience as string
+        ).map((s: string) => s as string);
+    }
+
     return {
-        applicant: result.results
+        applicant: applicant
     };
 };
 

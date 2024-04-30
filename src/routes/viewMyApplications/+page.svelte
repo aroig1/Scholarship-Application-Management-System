@@ -67,7 +67,7 @@
     }
 
     .name {
-        position: fixed;
+        position: absolute;
         left: 15%;
     }
 
@@ -75,7 +75,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        position: fixed;
+        position: absolute;
         left: 65%;
     }
 

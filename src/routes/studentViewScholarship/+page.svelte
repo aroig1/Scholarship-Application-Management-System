@@ -56,17 +56,17 @@
     }
 
     .name {
-        position: fixed;
+        position: absolute;
         left: 10%;
     }
 
     .amount {
-        position: fixed;
+        position: absolute;
         left: 45%;
     }
 
     .view {
-        position: fixed;
+        position: absolute;
         right: 10%;
     }
 

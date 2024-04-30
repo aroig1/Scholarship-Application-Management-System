@@ -78,7 +78,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        position: fixed;
+        position: absolute;
         left: 10%;
     }
 
@@ -119,22 +119,22 @@
     }
 
     .name {
-        position: fixed;
+        position: absolute;
         left: 25%;
     }
 
     .gpa {
-        position: fixed;
+        position: absolute;
         left: 50%;
     }
 
     .year {
-        position: fixed;
+        position: absolute;
         left: 65%;
     }
 
     .review {
-        position: fixed;
+        position: absolute;
         right: 15%;
     }
 
