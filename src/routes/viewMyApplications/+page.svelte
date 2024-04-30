@@ -9,6 +9,11 @@
         <h3 class="name">Scholarship Name</h3>
         <h3 class="status">Application Status</h3>
     </div>
+    {#if applications.length == 0}
+        <h2 class="empty">
+            Looks like you haven't submitted any applications yet.
+        </h2>
+    {/if}
     {#each applications as application}
         <div class="container">
             <h2 class="name">{application.name}</h2>
@@ -44,6 +49,10 @@
         margin-top: 25px;
         margin-bottom: 40px;
     }
+    .empty {
+        text-align: center;
+        margin: 50px;
+    }
     .header {
         display: flex;
         align-items: center;
@@ -70,7 +79,7 @@
         left: 65%;
     }
 
-    .status .blue {
+    .blue {
         height: 15px;
         width: 15px;
         margin-right: 10px;

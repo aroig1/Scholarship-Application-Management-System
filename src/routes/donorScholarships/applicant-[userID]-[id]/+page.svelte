@@ -1,23 +1,87 @@
 <script>
+    // @ts-nocheck
+
     export let data;
-    const applicant = data.applicant[0];
+    const applicant = data.applicant;
 </script>
 
 <section>
-    <a href="/donorScholarships/applicants-{applicant.scholarship}">
-        <h3>Back</h3>
-    </a>
-    <h3>Application status: {applicant.status}</h3>
-    <h2>{applicant.firstName} {applicant.lastName}</h2>
-    <p>Year: {applicant.year}</p>
-    <p>Majors: {applicant.majors}</p>
-    <p>Minors: {applicant.minors}</p>
-    <p>GPA: {applicant.GPA}</p>
-    <h3>Work Experience</h3>
-    <p>{applicant.workExperience}</p>
-    <h3>Statement</h3>
-    <p>{applicant.statement}</p>
-    <form method="POST">
-        <button>Suggest This Applicant</button>
-    </form>
+    <h1>{applicant.firstName} {applicant.lastName}</h1>
+    <div class="container">
+        <h3>Application status: {applicant.status}</h3>
+        <h3>GPA: {applicant.GPA}</h3>
+        <h3>Year: {applicant.year}</h3>
+        <h3>Majors:</h3>
+        {#each applicant.majors as major}
+            <li>{major}</li>
+        {/each}
+        <h3>Minors:</h3>
+        {#each applicant.minors as minor}
+            <li>{minor}</li>
+        {/each}
+        <h3>Work Experience</h3>
+        {#each applicant.workExperience as work}
+            <p>{work}</p>
+        {/each}
+        <h3>Statement</h3>
+        <p>{applicant.statement}</p>
+        <div class="buttons">
+            <form method="POST">
+                <button class="suggest">Suggest This Applicant</button>
+            </form>
+            <a href="/donorScholarships/applicants-{applicant.scholarship}">
+                <button>Back</button>
+            </a>
+        </div>
+    </div>
 </section>
+
+<style>
+    h1 {
+        text-align: center;
+        font-size: 40px;
+        margin: 25px;
+    }
+    .container {
+        border: 1px solid #ccc;
+        padding: 35px;
+        margin: 0 20%;
+        background-color: white;
+        border-radius: 50px;
+    }
+
+    h3 {
+        margin: 10px 0;
+    }
+
+    li {
+        margin: 5px 0;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+    .suggest {
+        padding: 15px 30px;
+    }
+    button {
+        padding: 10px 25px;
+        margin: 10px 0;
+        border-radius: 20px;
+        border-style: none;
+        background-color: rgb(13, 35, 75);
+        color: white;
+    }
+    button:hover {
+        background-color: rgb(55, 141, 189);
+        cursor: pointer;
+    }
+</style>

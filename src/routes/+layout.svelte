@@ -65,7 +65,7 @@
         </div>
         <nav>
             <li>
-                <a href="/donorScholarships">Donor Scholarships</a>
+                <a href="/donorScholarships">My Scholarships</a>
             </li>
             <li>
                 <a href="/modifyUser">Modify User</a>

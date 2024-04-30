@@ -109,10 +109,10 @@
         <div>
             <h3>Work Experience</h3>
             {#each workExperience as w}
-                <input
+                <textarea
                     class="work_experience"
                     bind:value={w}
-                    placeholder="Work Experience" />
+                    placeholder="Work Experience"></textarea>
             {/each}
             <button on:click|preventDefault={addField}>Add</button>
             {#if workExperience.length >= 2}
@@ -163,7 +163,7 @@
     }
     .work_experience {
         width: 100%;
-        height: 60px;
+        height: 80px;
         margin: 5px 0;
     }
     .button {
