@@ -1,6 +1,6 @@
 import type {D1Database} from "@cloudflare/workers-types";
 import {fail, redirect, error} from "@sveltejs/kit";
-import {Argon2id} from "oslo/password";
+import {Argon2id} from "$lib/server/Argon2id.min";
 import {loadUser_by_username, checkUserTableExists} from "$lib/util";
 
 import type {Actions, PageServerLoad} from "./$types";
@@ -83,9 +83,10 @@ export const actions: Actions = {
                 username
             )) as User;
             // if(existingUser === null)
-            const validPassword = await new Argon2id().verify(
+
+            const validPassword = await Argon2id.verify(
                 existingUser?.password.hash,
-                existingUser?.password.salt + password
+                password
             );
 
             if (!validPassword) {

@@ -1,6 +1,6 @@
 import {fail, redirect} from "@sveltejs/kit";
 import {generateId} from "lucia";
-import {Argon2id} from "oslo/password";
+import {Argon2id} from "$lib/server/Argon2id.min";
 import {
     saveUser,
     checkUserTableExists,
@@ -129,8 +129,7 @@ export const actions: Actions = {
         const formData = await event.request.formData();
         const id: UserID = generateId(15);
         const tempPass = formData.get("password") as string;
-        const salt = generateId(8);
-        const hashedPassword = await new Argon2id().hash(salt + tempPass);
+        const hashedPassword = await Argon2id.hashEncoded(tempPass);
         const userTypeValue = parseInt(formData.get("userType") as string);
         const userType = _getUserTypeFromValue(userTypeValue);
         let user: User;
@@ -140,7 +139,7 @@ export const actions: Actions = {
                 id: id,
                 password: {
                     hash: hashedPassword,
-                    salt: salt
+                    salt: ""
                 },
                 username: formData.get("username") as string,
                 firstName: formData.get("firstName") as string,

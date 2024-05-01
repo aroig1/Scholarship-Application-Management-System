@@ -1,6 +1,4 @@
 import {error, fail, redirect} from "@sveltejs/kit";
-import {generateId} from "lucia";
-import {Argon2id} from "oslo/password";
 import {
     saveUser,
     checkUserTableExists,
