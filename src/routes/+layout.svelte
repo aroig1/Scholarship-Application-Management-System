@@ -9,7 +9,7 @@
             <div class="left">
                 <a href="/">
                     <img
-                        src="/homeicon.png"
+                        src="/homeicon.webp"
                         alt="home button"
                         class="home_icon" />
                 </a>
@@ -19,7 +19,7 @@
             <div class="right">
                 <h3 class="name">{data.user_name}</h3>
                 <img
-                    src="/settingsicon.png"
+                    src="/settingsicon.webp"
                     alt="settings button"
                     class="settings_icon" />
             </div>

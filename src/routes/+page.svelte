@@ -141,7 +141,7 @@
 <style>
     .main_picture {
         height: 300px;
-        background-image: url("/homepicture.png");
+        background-image: url("/homepicture.webp");
         background-size: 100%;
         background-position: bottom;
         align-content: center;
