@@ -43,7 +43,7 @@
             <h3>Password</h3>
             <input
                 class="password"
-                type="text"
+                type="password"
                 placeholder="must include number and special character"
                 maxlength="255"
                 name="password"
@@ -190,9 +190,9 @@
         background-color: lightgray;
         border: 50px;
         padding: 20px;
-        margin: 25px;
+        margin: 25px auto;
         width: 600px;
-        height: 1000px;
+        height: 700px;
         flex-direction: column;
         text-align: center;
     }

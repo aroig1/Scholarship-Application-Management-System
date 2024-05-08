@@ -66,7 +66,7 @@
         background-color: lightgray;
         border: 50px;
         padding: 20px;
-        margin: 25px;
+        margin: 10% auto;
         width: 400px;
         height: 200px;
         flex-direction: column;

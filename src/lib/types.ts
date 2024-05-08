@@ -120,3 +120,6 @@ export type Application = {
     statement: string;
     status: string;
 };
+
+export type FullApplication = Application &
+    ApplicantInfo & {firstName: string; lastName: string};

@@ -1,4 +1,5 @@
 <script>
+    import ScholarshipList from "$lib/components/ScholarshipList.svelte";
     export let data;
     const scholarships = data.scholarships;
 </script>
@@ -10,21 +11,14 @@
             <button>Available/Archived Scholarship Reports</button>
         </a>
     </div>
-    <div class="header">
-        <h3 class="name">Scholarship Name</h3>
-        <h3 class="amount">Total Amount</h3>
-    </div>
-    {#each scholarships as scholarship}
-        <div class="container">
-            <h3 class="name">{scholarship.name}</h3>
-            <h3 class="amount">${scholarship.amount}</h3>
-            <a
-                class="view"
-                href="/studentViewScholarship/scholarship-{scholarship.id}">
+    <ScholarshipList {scholarships}>
+        <span class="buttons" slot="buttons" let:scholarship>
+            <a href="/studentViewScholarship/scholarship-{scholarship.id}">
                 <button>View Scholarship</button>
             </a>
-        </div>
-    {/each}
+        </span>
+        <h2 class="page_title" slot="empty">No Scholarships Found</h2>
+    </ScholarshipList>
 </section>
 
 <style>
@@ -35,41 +29,14 @@
         align-items: center;
         flex-direction: column;
     }
-
     h1 {
         font-size: 40px;
         margin-bottom: 10px;
     }
-
-    .header {
-        display: flex;
-        align-items: center;
+    .buttons {
+        margin-right: 5%;
+        margin-left: auto;
     }
-
-    .container {
-        display: flex;
-        border: 1px solid #ccc;
-        padding: 50px 0;
-        align-items: center;
-        margin: 25px 5%;
-        background-color: white;
-    }
-
-    .name {
-        position: absolute;
-        left: 10%;
-    }
-
-    .amount {
-        position: absolute;
-        left: 45%;
-    }
-
-    .view {
-        position: absolute;
-        right: 10%;
-    }
-
     button {
         padding: 10px 25px;
         border-radius: 20px;

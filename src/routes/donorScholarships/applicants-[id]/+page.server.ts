@@ -1,10 +1,7 @@
 import type {D1Database} from "@cloudflare/workers-types";
 import type {PageServerLoad} from "./$types";
-import {
-    checkApplicationTableExists,
-    checkUserTableExists,
-    checkApplicantInfoTableExists
-} from "$lib/util";
+import {loadApplications, loadScholarship} from "$lib/util";
+import {rankApplicants} from "$lib/matching";
 import {UserType} from "$lib/types";
 import {error} from "@sveltejs/kit";
 
@@ -15,24 +12,14 @@ export const load: PageServerLoad = async (event) => {
         error(403, "You are not authorized to view this page");
     }
 
-    await checkApplicationTableExists(db);
-    await checkUserTableExists(db);
-    await checkApplicantInfoTableExists(db);
-
-    const result = await db
-        .prepare(
-            `
-        SELECT *
-        FROM applications
-        JOIN applicantInfo ON applications.applicant = applicantInfo.user
-        JOIN users ON applications.applicant = users.id
-        WHERE applications.scholarship = ?
-    `
-        )
-        .bind(event.params.id)
-        .all();
-
+    const applications = await loadApplications(db, event.params.id);
+    console.log(applications);
+    const ranked = await rankApplicants(
+        await loadScholarship(db, event.params.id),
+        applications
+    );
+    console.log(ranked);
     return {
-        applicants: result.results
+        applicants: ranked
     };
 };

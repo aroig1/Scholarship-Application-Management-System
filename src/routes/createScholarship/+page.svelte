@@ -22,6 +22,10 @@
                 maxlength="100" />
         </div>
         <div>
+            <h3>Enter scholarship description and/or essay prompt.</h3>
+            <textarea name="description" class="other"></textarea>
+        </div>
+        <div>
             <h3>Enter scholarship amount</h3>
             <input
                 name="amount"
@@ -29,35 +33,6 @@
                 step="0.01"
                 placeholder="1000"
                 min="0" />
-        </div>
-        <div>
-            <h3>Enter scholarship donor/sponsor full name</h3>
-            <input
-                name="firstName"
-                type="text"
-                placeholder="first name"
-                maxlength="15" />
-            <input
-                name="lastName"
-                type="text"
-                placeholder="last name"
-                maxlength="15" />
-        </div>
-        <div>
-            <h3>Enter donor phone number</h3>
-            <input
-                name="phoneNumber"
-                type="text"
-                placeholder="(999) 999-9999"
-                maxlength="20" />
-        </div>
-        <div>
-            <h3>Enter donor email address</h3>
-            <input
-                name="email"
-                type="email"
-                placeholder="netID@arizona.edu"
-                maxlength="25" />
         </div>
         <div>
             <h3>Enter number of scholarships available</h3>
@@ -102,10 +77,6 @@
                 name="other"
                 class="other"
                 placeholder="ex: Must be interested in IoT"></textarea>
-        </div>
-        <div>
-            <h3>Enter scholarship description and/or essay prompt.</h3>
-            <textarea name="description" class="other"></textarea>
         </div>
         <div class="button">
             <button>Create Scholarship</button>

@@ -14,13 +14,6 @@ export default defineConfig({
             }
         }
     ],
-    optimizeDeps: {
-        esbuildOptions: {
-            loader: {
-                ".node": "copy"
-            }
-        }
-    },
     test: {
         include: ["src/**/*.{test,spec}.{js,ts}"]
     },

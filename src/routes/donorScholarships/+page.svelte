@@ -1,8 +1,9 @@
 <script>
+    import ScholarshipList from "$lib/components/ScholarshipList.svelte";
     export let data;
     const scholarships = data.scholarships;
-    const archived = data.archived_scholarships;
-    let viewArchived = false;
+    // const archived = data.archived_scholarships;
+    // let viewArchived = false;
 </script>
 
 <section>
@@ -12,52 +13,19 @@
             <button class="createNew">Create New Scholarship</button>
         </a>
     </div>
-    <div class="archived">
-        <h3>Include Archived Scholarships</h3>
-        <input
-            class="checkbox"
-            type="checkbox"
-            on:click={() => (viewArchived = !viewArchived)} />
-    </div>
-    <div class="header">
-        <h3 class="name">Scholarship Name</h3>
-        <h3 class="amount">Total Amount</h3>
-    </div>
-
-    {#if scholarships.length == 0 && archived.length == 0}
-        <h2 class="empty">
+    <ScholarshipList {scholarships}>
+        <div class="buttons" slot="buttons" let:scholarship>
+            <a href="/donorScholarships/modify-{scholarship.id}">
+                <button>Modify Scholarship</button>
+            </a>
+            <a href="/donorScholarships/applicants-{scholarship.id}">
+                <button>View Applicants</button>
+            </a>
+        </div>
+        <h2 class="empty" slot="empty">
             Looks like you haven't created any scholarships yet.
         </h2>
-    {/if}
-
-    {#if viewArchived}
-        {#each archived as scholarship}
-            <div class="container">
-                <h3 class="name">{scholarship.name} (archived)</h3>
-                <h3 class="amount">${scholarship.amount}</h3>
-                <a
-                    href="/donorScholarships/modify-{scholarship.id}"
-                    class="buttons">
-                    <button>Modify Scholarship</button>
-                </a>
-            </div>
-        {/each}
-    {/if}
-
-    {#each scholarships as scholarship}
-        <div class="container">
-            <h3 class="name">{scholarship.name}</h3>
-            <h3 class="amount">${scholarship.amount}</h3>
-            <div class="buttons">
-                <a href="/donorScholarships/modify-{scholarship.id}">
-                    <button>Modify Scholarship</button>
-                </a>
-                <a href="/donorScholarships/applicants-{scholarship.id}">
-                    <button>View Applicants</button>
-                </a>
-            </div>
-        </div>
-    {/each}
+    </ScholarshipList>
 </section>
 
 <style>
@@ -76,39 +44,6 @@
     .empty {
         text-align: center;
         margin: 50px;
-    }
-
-    .archived {
-        display: flex;
-        margin: 25px 5%;
-    }
-
-    .header {
-        display: flex;
-        align-items: center;
-    }
-
-    .checkbox {
-        margin-left: 10px;
-    }
-
-    .container {
-        display: flex;
-        border: 1px solid #ccc;
-        padding: 50px 0;
-        align-items: center;
-        margin: 25px 5%;
-        background-color: white;
-    }
-
-    .name {
-        position: absolute;
-        left: 10%;
-    }
-
-    .amount {
-        position: absolute;
-        left: 45%;
     }
 
     .buttons {

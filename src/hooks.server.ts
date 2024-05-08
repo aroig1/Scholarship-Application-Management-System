@@ -3,6 +3,7 @@ import type {Handle} from "@sveltejs/kit";
 import {dev} from "$app/environment";
 import type {D1Database} from "@cloudflare/workers-types";
 import type {User} from "$lib/types";
+import {checkSessionTableExists, checkUserTableExists} from "$lib/util";
 
 let env = {};
 
@@ -31,8 +32,19 @@ export const handle: Handle = async ({event, resolve}) => {
             env
         };
     }
+
     //function returns a lucia type for authentication purposes.
-    event.locals.lucia = initializeLucia(event.platform?.env.DB as D1Database);
+    try {
+        event.locals.lucia = initializeLucia(
+            event.platform?.env.DB as D1Database
+        );
+    } catch (e: any) {
+        checkSessionTableExists(event.platform?.env.DB as D1Database);
+        checkUserTableExists(event.platform?.env.DB as D1Database);
+        event.locals.lucia = initializeLucia(
+            event.platform?.env.DB as D1Database
+        );
+    }
 
     const sessionId = event.cookies.get(event.locals.lucia.sessionCookieName);
     if (!sessionId) {

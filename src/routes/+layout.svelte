@@ -38,7 +38,7 @@
                 <a href="/modifyUser">Modify User</a>
             </li>
             <li>
-                <a href="/logoutPage">Sign Out</a>
+                <a data-sveltekit-reload href="/logoutPage">Sign Out</a>
             </li>
         </nav>
     {:else if data.user_type == data.types.Donor}

@@ -4,6 +4,7 @@ import type {
     Scholarship,
     Application,
     ApplicantInfo,
+    FullApplication,
     UserID,
     ScholarshipID,
     Major,
@@ -107,7 +108,7 @@ export async function checkApplicationTableExists(db: D1Database) {
 export async function saveUser(db: D1Database, user: User) {
     await checkUserTableExists(db);
     // password, id, and type have special types
-    db.prepare("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
+    db.prepare("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);")
         .bind(
             user.id,
             user.username,
@@ -128,7 +129,7 @@ export async function loadUser_by_id(
 ): Promise<User | null> {
     await checkUserTableExists(db);
     const result = await db
-        .prepare("SELECT * FROM users WHERE id = ? LIMIT 1")
+        .prepare("SELECT * FROM users WHERE id = ? LIMIT 1;")
         .bind(id)
         .all();
 
@@ -153,7 +154,7 @@ export async function loadUser_by_username(
 ): Promise<User | null> {
     await checkUserTableExists(db);
     const result = await db
-        .prepare("SELECT * FROM users WHERE username = ? LIMIT 1")
+        .prepare("SELECT * FROM users WHERE username = ? LIMIT 1;")
         .bind(username)
         .all();
 
@@ -175,7 +176,7 @@ export async function loadUser_by_username(
 export async function updateUser(db: D1Database, user: User) {
     await checkUserTableExists(db);
     db.prepare(
-        "UPDATE users SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE id = ?"
+        "UPDATE users SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE id = ?;"
     )
         .bind(user.firstName, user.lastName, user.phone, user.email, user.id)
         .run();
@@ -184,7 +185,7 @@ export async function updateUser(db: D1Database, user: User) {
 export async function adminUpdateUser(db: D1Database, user: User) {
     await checkUserTableExists(db);
     db.prepare(
-        "UPDATE users SET firstName = ?, lastName = ?, phone = ?, email = ?, type = ? WHERE id = ?"
+        "UPDATE users SET firstName = ?, lastName = ?, phone = ?, email = ?, type = ? WHERE id = ?;"
     )
         .bind(
             user.firstName,
@@ -203,7 +204,7 @@ export async function saveApplicantInfo(
 ) {
     await checkApplicantInfoTableExists(db);
     db.prepare(
-        "INSERT INTO applicantInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO applicantInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
     )
         .bind(
             applicant.user,
@@ -226,7 +227,7 @@ export async function loadApplicantInfo(
 ): Promise<ApplicantInfo | null> {
     await checkApplicantInfoTableExists(db);
     const result = await db
-        .prepare("SELECT * FROM applicantInfo WHERE user = ? LIMIT 1")
+        .prepare("SELECT * FROM applicantInfo WHERE user = ? LIMIT 1;")
         .bind(user)
         .all();
 
@@ -262,7 +263,7 @@ export async function updateApplicantInfo(
 ) {
     await checkApplicantInfoTableExists(db);
     db.prepare(
-        "UPDATE applicantInfo SET user = ?, majors = ?, minors = ?, GPA = ?, year = ?, ethnicity = ?, preferredPronouns = ?, workExperience = ?, netID = ?, studentID = ? WHERE user = ?"
+        "UPDATE applicantInfo SET user = ?, majors = ?, minors = ?, GPA = ?, year = ?, ethnicity = ?, preferredPronouns = ?, workExperience = ?, netID = ?, studentID = ? WHERE user = ?;"
     )
         .bind(
             applicant.user,
@@ -287,7 +288,7 @@ export async function saveScholarship(
     await checkScholarshipTableExists(db);
     // id, donorID, major, minor, date have special types
     db.prepare(
-        "INSERT INTO scholarships VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO scholarships VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
     )
         .bind(
             scholarship.id,
@@ -298,7 +299,7 @@ export async function saveScholarship(
             JSON.stringify(scholarship.requiredMajors),
             JSON.stringify(scholarship.requiredMinors),
             scholarship.requiredGPA,
-            scholarship.deadline.toString(),
+            scholarship.deadline.toISOString().slice(0, 10),
             scholarship.other,
             scholarship.description,
             scholarship.archived
@@ -312,7 +313,7 @@ export async function loadScholarship(
 ): Promise<Scholarship | null> {
     await checkScholarshipTableExists(db);
     const result = await db
-        .prepare("SELECT * FROM scholarships WHERE id == ? LIMIT 1")
+        .prepare("SELECT * FROM scholarships WHERE id == ? LIMIT 1;")
         .bind(id)
         .all();
 
@@ -343,13 +344,54 @@ export async function loadScholarship(
     return null;
 }
 
+export async function loadScholarships(
+    db: D1Database,
+    donor: UserID | undefined = undefined
+): Promise<Scholarship[]> {
+    await checkScholarshipTableExists(db);
+    let result;
+    if (donor) {
+        result = await db
+            .prepare("SELECT * FROM scholarships WHERE donorID = ?;")
+            .bind(donor)
+            .all();
+    } else {
+        result = await db.prepare("SELECT * FROM scholarships;").all();
+    }
+
+    let output = [];
+
+    for (const s of result.results) {
+        const scholarship: Scholarship = s as unknown as Scholarship;
+
+        if ("requiredMajors" in s) {
+            scholarship.requiredMajors = JSON.parse(
+                s.requiredMajors as string
+            ).map((m: string) => m as Major);
+        }
+
+        if ("requiredMinors" in s) {
+            scholarship.requiredMinors = JSON.parse(
+                s.requiredMinors as string
+            ).map((m: string) => m as Major);
+        }
+
+        if ("deadline" in s) {
+            scholarship.deadline = new Date(s.deadline as string);
+        }
+        output.push(scholarship);
+    }
+
+    return output;
+}
+
 export async function updateScholarship(
     db: D1Database,
     scholarship: Scholarship
 ) {
     await checkScholarshipTableExists(db);
     db.prepare(
-        "UPDATE scholarships SET id = ?, name = ?, amount = ?, donorID = ?, numAvailable = ?, requiredMajors = ?, requiredMinors = ?, requiredGPA = ?, deadline = ?, other = ?, description = ?, archived = ? WHERE id = ?"
+        "UPDATE scholarships SET id = ?, name = ?, amount = ?, donorID = ?, numAvailable = ?, requiredMajors = ?, requiredMinors = ?, requiredGPA = ?, deadline = ?, other = ?, description = ?, archived = ? WHERE id = ?;"
     )
         .bind(
             scholarship.id,
@@ -374,7 +416,7 @@ export async function saveApplication(
     application: Application
 ) {
     await checkApplicationTableExists(db);
-    db.prepare("INSERT INTO applications VALUES (?, ?, ?, ?, ?)")
+    db.prepare("INSERT INTO applications VALUES (?, ?, ?, ?, ?);")
         .bind(
             application.id,
             application.applicant,
@@ -393,7 +435,7 @@ export async function loadApplication(
     await checkApplicationTableExists(db);
     const result = await db
         .prepare(
-            "SELECT * FROM applications WHERE applicant = ? AND scholarship = ?"
+            "SELECT * FROM applications WHERE applicant = ? AND scholarship = ?;"
         )
         .bind(applicant, scholarship)
         .all();
@@ -407,13 +449,63 @@ export async function loadApplication(
     return null;
 }
 
+export async function loadApplications(
+    db: D1Database,
+    scholarship: ScholarshipID
+): Promise<FullApplication[]> {
+    await checkApplicationTableExists(db);
+    await checkUserTableExists(db);
+    await checkApplicantInfoTableExists(db);
+
+    const result = await db
+        .prepare(
+            `
+        SELECT applications.*,
+        users.firstName,
+        users.lastName,
+        applicantInfo.*
+        FROM applications
+        JOIN applicantInfo ON applications.applicant = applicantInfo.user
+        JOIN users ON applications.applicant = users.id
+        WHERE applications.scholarship = ?;
+    `
+        )
+        .bind(scholarship)
+        .all();
+
+    const output: FullApplication[] = [];
+
+    for (const a of result.results) {
+        const application: FullApplication = a as unknown as FullApplication;
+        console.log;
+        if ("majors" in a) {
+            application.majors = JSON.parse(a.majors as string).map(
+                (s: string) => s as Major
+            );
+        }
+        if ("minors" in a) {
+            application.minors = JSON.parse(a.minors as string).map(
+                (s: string) => s as Minor
+            );
+        }
+
+        if ("workExperience" in result.results[0]) {
+            application.workExperience = JSON.parse(
+                a.workExperience as string
+            ).map((s: string) => s as string);
+        }
+        output.push(application);
+    }
+    return output;
+}
+
 export async function updateApplication(
     db: D1Database,
     application: Application
 ) {
     await checkApplicationTableExists(db);
     db.prepare(
-        "UPDATE applications SET id = ?, applicant = ?, scholarship = ?, statement = ?, status = ? WHERE id = ?"
+        "UPDATE applications SET id = ?, applicant = ?, scholarship = ?, statement = ?, status = ? WHERE id = ?;"
     )
         .bind(
             application.id,

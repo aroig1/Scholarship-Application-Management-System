@@ -1,9 +1,6 @@
 import type {PageServerLoad} from "./$types";
 import type {D1Database} from "@cloudflare/workers-types";
-import {
-    checkApplicationTableExists,
-    checkScholarshipTableExists
-} from "$lib/util";
+import {loadScholarships} from "$lib/util";
 import {UserType} from "$lib/types";
 import {error} from "@sveltejs/kit";
 
@@ -14,23 +11,9 @@ export const load: PageServerLoad = async (event) => {
         error(403, "You are not authorized to view this page");
     }
 
-    await checkScholarshipTableExists(db);
-    const nonArchived = await db
-        .prepare(
-            "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
-        )
-        .bind(event.locals.user?.id, false)
-        .all();
-
-    const archived = await db
-        .prepare(
-            "SELECT * FROM scholarships WHERE donorID = ? AND archived = ?"
-        )
-        .bind(event.locals.user?.id, true)
-        .all();
+    const scholarships = await loadScholarships(db, event.locals.user?.id);
 
     return {
-        archived_scholarships: archived.results,
-        scholarships: nonArchived.results
+        scholarships: scholarships
     };
 };
