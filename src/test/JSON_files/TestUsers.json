@@ -1,0 +1,112 @@
+[
+    {
+        "id": "f8k2d6n9p3r4o1i",
+        "username": "midnightRider43",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$G0z74SnC0f8gj1u8DwzJVw$ruX9weidtvcyqaZjxgW5/JZmWycRG6EQmuMWijd8m5I",
+        "salt": "45o8rpv7",
+        "firstName": "Sophia",
+        "lastName": "Moore",
+        "phone": "8888888888",
+        "email": "sophia.stellarNinja82@example.com",
+        "type": "2"
+    },
+    {
+        "id": "s5g3m7h2x8z0b9",
+        "username": "blazingPhoenix17",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$2LlgLJGEZxxGmnxCVK3gyA$Q1u0znejtrpB2nmi+BdtUg1b0yZ8aoeRYLldwx5Rfas",
+        "salt": "ptfuazy5",
+        "firstName": "Liam",
+        "lastName": "Wilson",
+        "phone": "7777777777",
+        "email": "liam.midnightRider43@gmail.com",
+        "type": "2"
+    },
+    {
+        "id": "l1q4v9t3j6r2c0",
+        "username": "aquaDreamer96",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$DQgcIDkhqkNXofVP+q72hg$BYhXnaabvKVK2U/Fq0ol5k4GZwWoAVQIqdKbcuAGHh8",
+        "salt": "8py42p4q",
+        "firstName": "Olivia",
+        "lastName": "Miller",
+        "phone": "3141592653",
+        "email": "olivia.blazingPhoenix17@hotmail.com",
+        "type": "2"
+    },
+    {
+        "id": "e9u7o4w6a5k1y3",
+        "username": "stellarNinja82",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$iDfEIeBaYcOp8ckhuONR5Q$vf97nX0igrQJ6r+0qq0dyQuBvVzw1sGJjIAhvYoCRug",
+        "salt": "g8v9fbtr",
+        "firstName": "Noah",
+        "lastName": "Davis",
+        "phone": "2468013579",
+        "email": "noah.aquaDreamer96@yahoo.com",
+        "type": "1"
+    },
+    {
+        "id": "d2i8n5j4p0g9m",
+        "username": "shadowWhisperer55",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$A6xOrU+0yEcrNgNPIs6VSw$+06Y0OjBSSQs0azUD/NX4qEturSW+GwXYUcAyPpocxg",
+        "salt": "f8hvdapc",
+        "firstName": "Emma",
+        "lastName": "Brown",
+        "phone": "8675309864",
+        "email": "emma.shadowWhisperer55@outlook.com",
+        "type": "1"
+    },
+    {
+        "id": "a3t9r7v6o1f5z",
+        "username": "cosmicExplorer78",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$cFm4MqPg6EGkhEQ8lWUXOA$1+t+yTcrW64mmP1QlEqWK3w5bh0AAfK3t9rI9wXMGpg",
+        "salt": "60wnv3kh",
+        "firstName": "Jackson",
+        "lastName": "Taylor",
+        "phone": "1239876540",
+        "email": "jackson.cosmicExplorer78@icloud.com",
+        "type": "1"
+    },
+    {
+        "id": "h6y4l3x0s2w8e",
+        "username": "neonSpectre21",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$ttzfJxoLFcgKaAPwf3sGZw$zQ9U5lsU+/C6LNx8IhoaMPL6+M1YpzIIfHoHnQXSjhA",
+        "salt": "tljvhp0y",
+        "firstName": "Ava",
+        "lastName": "Jones",
+        "phone": "9998887776",
+        "email": "ava.neonSpectre21@gmail.com",
+        "type": "0"
+    },
+    {
+        "id": "b7c5k1q9u3m2p",
+        "username": "lunarWanderer39",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$U2WD3FHP4Fkh65ygMPi2YA$hLAP+LDZkV71NidlUxIdRdRRe1dNs+Qlteedu65Rg9Y",
+        "salt": "t5ns5yhk",
+        "firstName": "Lucas",
+        "lastName": "Williams",
+        "phone": "5551234567",
+        "email": "lucas.lunarWanderer39@example.org",
+        "type": "0"
+    },
+    {
+        "id": "o2i8e4g1f6r3n",
+        "username": "emeraldSeeker64",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$K1H9BJh31e34wp3attuCKQ$wIDSGJoNb/3cRbjtcNy/EuZw1wYiAE3Q1b+HnJaS9YI",
+        "salt": "1v7o7l0l",
+        "firstName": "Isabella",
+        "lastName": "Johnson",
+        "phone": "9876543210",
+        "email": "isabella.emeraldSeeker64@company.com",
+        "type": "0"
+    },
+    {
+        "id": "w5x9d7v4s3t6a",
+        "username": "goldenVoyager80",
+        "password": "$argon2id$v=19$m=19456,t=2,p=1$r5Y/uOasJ7fGbBcnSwlWNA$bfzoDnjXJTDpM4H5VcqfQ7d6d/IaaoIC7GKaD788HjQ",
+        "salt": "23xd3dwd",
+        "firstName": "Oliver",
+        "lastName": "Smith",
+        "phone": "1234567890",
+        "email": "oliver.goldenVoyager80@website.net",
+        "type": "0"
+    }
+]

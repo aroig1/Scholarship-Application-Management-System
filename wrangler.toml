@@ -1,0 +1,11 @@
+name = "uasams"
+main = "src/index.js"
+compatibility_date = "2023-08-23"
+compatibility_flags = [ "nodejs_compat" ]
+
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "uasams-db"
+database_id = "237994da-661c-47d5-bd79-30194378f954"
+preview_database_id = "6349ff16-532a-448a-98c1-ea4b84a9fe1d"

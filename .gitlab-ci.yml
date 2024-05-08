@@ -16,9 +16,18 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
+workflow:
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+        - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+          when: never
+        - if: $CI_COMMIT_BRANCH
+
 stages: # List of stages for jobs, and their order of execution
     - build
     - test
+    - sonarqube-check
+    - sonarqube-vulnerability-report
     - deploy
 
 default:
@@ -36,6 +45,9 @@ default:
 
 build-job: # This job runs in the build stage, which runs first.
     stage: build
+    artifacts:
+        paths:
+            - .svelte-kit/cloudflare/
     script:
         - npm run build
 
@@ -56,7 +68,41 @@ check-job:
 
 deploy-job: # This job runs in the deploy stage.
     stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
-    environment: development
     script:
-        - echo "Deploying application..."
-        - echo "Application successfully deployed."
+        - npm install wrangler
+        - npx wrangler pages deploy .svelte-kit/cloudflare/ --project-name "uasams" --branch  "$CI_COMMIT_BRANCH"
+
+sonarqube-check:
+    stage: sonarqube-check
+    image:
+        name: sonarsource/sonar-scanner-cli:5.0
+        entrypoint: [""]
+    variables:
+        SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Defines the location of the analysis task cache
+        GIT_DEPTH: "0" # Tells git to fetch all the branches of the project, required by the analysis task
+    cache:
+        key: "${CI_JOB_NAME}"
+        paths:
+            - .sonar/cache
+    script:
+        - sonar-scanner
+    before_script:
+        - keytool -import -alias sonar -cacerts -file certificate.der -storepass changeit
+    allow_failure: true
+    only:
+        - develop
+
+sonarqube-vulnerability-report:
+    stage: sonarqube-vulnerability-report
+    script:
+        - 'curl --cacert certificate.pem -u "${SONAR_TOKEN}:" "${SONAR_HOST_URL}/api/issues/gitlab_sast_export?projectKey=Dev-Dynasty-UASAMS&branch=${CI_COMMIT_BRANCH}&pullRequest=${CI_MERGE_REQUEST_IID}" -o gl-sast-sonar-report.json'
+    allow_failure: true
+    only:
+        - develop
+    artifacts:
+        expire_in: 1 day
+        reports:
+            sast: gl-sast-sonar-report.json
+    before_script: []
+    dependencies:
+        - sonarqube-check

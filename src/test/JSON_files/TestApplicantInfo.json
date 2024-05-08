@@ -1,0 +1,46 @@
+[
+    {
+        "user": "w5x9d7v4s3t6a",
+        "majors": "Computer Science and Engineering",
+        "minors": "",
+        "GPA": "2.5",
+        "year": 0,
+        "ethnicity": "Caucasian",
+        "preferredPronouns": "he/him/his",
+        "workExperience": "Retail Associate",
+        "netID": "oliver.goldenVoyager80"
+    },
+    {
+        "user": "o2i8e4g1f6r3n",
+        "majors": "Mining Engineering, Biomedical Engineering",
+        "minors": "Software Engineering, Systems Engineering",
+        "GPA": "4.0",
+        "year": 1,
+        "ethnicity": "Hispanic",
+        "preferredPronouns": "she/her/hers",
+        "workExperience": "Camp Counselor, Tutor",
+        "netID": "isabella.emeraldSeeker64"
+    },
+    {
+        "user": "b7c5k1q9u3m2p",
+        "majors": "",
+        "minors": "",
+        "GPA": "3.7",
+        "year": 2,
+        "ethnicity": "Other",
+        "preferredPronouns": "they/them/theirs",
+        "workExperience": "",
+        "netID": "lucas.lunarWanderer39"
+    },
+    {
+        "user": "h6y4l3x0s2w8e",
+        "majors": "Industrial Engineering",
+        "minors": "Software Engineering, Biosystems Engineering, Mechanical Engineering",
+        "GPA": "3.3",
+        "year": 3,
+        "ethnicity": "Black",
+        "preferredPronouns": "she/her/hers",
+        "workExperience": "Lifeguard",
+        "netID": "ava.neonSpectre21"
+    }
+]
